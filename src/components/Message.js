@@ -12,9 +12,9 @@ class Message extends React.Component {
     handleRemove = () => this.props.removeMessage(this.props.id);
     render(){
         return (
-            <div className="message">
+            <div className={`message is_${this.props.type}`}>
                 <div className="message__header">
-                    {this.props.type}
+                    <p>{this.props.type}</p>
                     <button onClick={this.handleRemove}>x</button>
                 </div>
                 <div className="message__content">
