@@ -38,7 +38,7 @@ class LoginForm extends React.Component {
         return(
             <div>
                 {this.state.toDashboard === true && <Redirect to='/' /> }
-                <form onSubmit={this.handleLoginSubmission}>
+                <form onSubmit={this.handleLoginSubmission} className="form">
                     <label>
                         Email:
                             <input
@@ -62,7 +62,7 @@ class LoginForm extends React.Component {
                             autoComplete="password"
                         />
                     </label>
-                    <button>Login</button>
+                    <button className="is_info">Sign In</button>
                 </form>
             </div>
         )

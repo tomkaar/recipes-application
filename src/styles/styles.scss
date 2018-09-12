@@ -1,9 +1,12 @@
 @import './base/settings';
 @import './base/base';
 
+@import './base/Form';
+
 @import './components/Header';
 @import './components/Page';
 
 @import './components/Messages';
 @import './components/Message';
+@import './components/LoginRegister';
 

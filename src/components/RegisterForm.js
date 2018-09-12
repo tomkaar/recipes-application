@@ -20,7 +20,7 @@ class RegisterForm extends React.Component {
     render() {
         return(
             <div>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit} className="form">
                     <label>
                         Email:
                         <input 
@@ -44,7 +44,7 @@ class RegisterForm extends React.Component {
                             autoComplete="password"
                         />
                     </label>
-                    <button type="submit">Register</button>
+                    <button type="submit" className="is_info">Register</button>
                 </form>
             </div>
         )

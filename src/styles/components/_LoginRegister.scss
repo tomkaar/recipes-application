@@ -1,0 +1,40 @@
+.LoginRegister{
+    position: relative;
+    left: calc(50% - 200px);
+    margin-top: $xl-size;
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid $light-grey;
+    border-radius: 4px;
+
+    .LoginRegister__title{
+        text-align: center;
+        letter-spacing: 1px;
+        padding: $l-size $m-size $m-size $m-size;
+        background: $lighter-grey;
+    }
+}
+
+.LoginRegister__Buttons{
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 0;
+
+    button{
+        appearance: none;
+        width: 50%;
+        padding: $m-size;
+        font-size: $m-size;
+        border: none;
+        border-bottom: 2px solid transparent;
+        background: $lighter-grey;
+
+        &.isActive {
+            border-bottom: 2px solid $info;
+        }
+    }
+}
+
+.LoginRegister__Content {
+    padding: 0 $l-size $l-size $l-size;
+}
