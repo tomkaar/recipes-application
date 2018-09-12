@@ -16,6 +16,8 @@ This application uses **React**, **Redux** and **Firebase**
 
 `/selectors` - Functionality that are used often when working
 
+`/styles` - All CSS writen in SCSS
+
 
 
 ## Scripts
@@ -23,5 +25,3 @@ This application uses **React**, **Redux** and **Firebase**
 use `npm start`  or  `yarn start` to start the application.
 
 
-
-## 

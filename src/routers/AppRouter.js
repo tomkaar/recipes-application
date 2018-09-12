@@ -9,8 +9,8 @@ import NewRecepiePage from "../components/NewRecepiePage";
 import EditRecepiePage from "../components/EditRecepiePage";
 import LoginPage from "../components/LoginPage";
 
-const newRecipe = requireAuthentication(NewRecepiePage);
-const editRecipe = requireAuthentication(EditRecepiePage);
+const newRecipe = requireAuthentication(NewRecepiePage, "");
+const editRecipe = requireAuthentication(EditRecepiePage, "");
 
 const AppRouter = (props) => (
     <Router basename={props.path}>
