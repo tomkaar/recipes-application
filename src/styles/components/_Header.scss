@@ -1,0 +1,14 @@
+.navigation{
+    position: fixed;
+    width: 100%;
+    height: $NavigationHeight;
+    background: white;
+    border-bottom: 1px solid grey;
+
+    .navigation__left {
+        float: left;
+    }
+    .navigation__right {
+        float: right;
+    }
+}
