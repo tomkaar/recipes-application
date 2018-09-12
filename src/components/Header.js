@@ -4,14 +4,18 @@ import { connect } from "react-redux";
 
 import { firebase } from "../firebase/Firebase";
 import { userLogin, userLogout } from '../actions/user';
+import { newMessage } from '../actions/messages';
 
 class Header extends React.Component {
     handleLogout = () => {
         firebase.auth().signOut()
             .then(() => {
                 this.props.userLogout();
+                this.props.newMessage("You have successfully been logged out", "Success", 3000);
             })
-            .catch(error => console.log(error));
+            .catch(error => {
+                this.props.newMessage(error.message, "Danger");
+            });
     }
 
     render() {
@@ -28,8 +32,6 @@ class Header extends React.Component {
                         <NavLink activeClassName="active" to="/login">Login</NavLink>
                     }
                 </div>
-                
-                
             </nav>
         )
     }
@@ -40,7 +42,8 @@ const mapStateToProps = (state) => ({
 });
 const mapDispatchToProps = (dispatch) => ({
     userLogin: (user) => dispatch(userLogin(user)),
-    userLogout: () => dispatch(userLogout())
+    userLogout: () => dispatch(userLogout()),
+    newMessage: (message, type, time) => dispatch(newMessage(message, type, time)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

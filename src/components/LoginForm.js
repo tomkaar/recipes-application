@@ -3,10 +3,10 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { firebase } from "../firebase/Firebase";
 import { userLogin, userLogout } from '../actions/user';
+import { newMessage, removeMessage } from '../actions/messages';
 
 class LoginForm extends React.Component {
 
-    // keep track of currently typed
     state = {
         email: "",
         password: "",
@@ -15,28 +15,30 @@ class LoginForm extends React.Component {
 
     componentDidMount() { this.setState(() => ({ toDashboard: false })); }
     componentDidUnMount() { this.setState(() => ({ toDashboard: false })); }
+    handleInputChange = e => this.setState({ [e.target.name]: e.target.value });
 
-    // when you click on the login button
-        // login with firebase auth and then update redux state if successfull
-    handleLogin = (e) => {
+    handleLoginSubmission = (e) => {
         e.preventDefault();
+        const attemptMessage = this.props.newMessage("Attempting to login", "Info");
         firebase.auth()
             .signInWithEmailAndPassword(this.state.email, this.state.password)
             .then((snapshot) => {
                 this.props.userLogin(snapshot.user);
-                this.setState(() => ({toDashboard: true}));
+                this.props.removeMessage(attemptMessage.payload.id);
+                this.props.newMessage("You have succesfully logged in", "Success", 3000);
+                this.setState(() => ({ toDashboard: true }));
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                this.props.removeMessage(attemptMessage.payload.id);
+                this.props.newMessage(error.message, "Danger", 3000);
+            })
     }
-
-    // update local state when typing
-    handleInputChange = e => this.setState({ [e.target.name]: e.target.value });
 
     render() {
         return(
             <div>
-                {this.state.toDashboard === true ? <Redirect to='/' /> : "" }
-                <form onSubmit={this.handleLogin}>
+                {this.state.toDashboard === true && <Redirect to='/' /> }
+                <form onSubmit={this.handleLoginSubmission}>
                     <label>
                         Email:
                             <input
@@ -73,7 +75,9 @@ const mapStateToProps = (state) => ({
 });
 const mapDispatchToProps = (dispatch) => ({
     userLogin: (user) => dispatch(userLogin(user)),
-    userLogout: () => dispatch(userLogout())
+    userLogout: () => dispatch(userLogout()),
+    newMessage: (message, type, time) => dispatch(newMessage(message, type, time)),
+    removeMessage: (id) => dispatch(removeMessage(id))
 });
 
 // cannot use functional components when using connect

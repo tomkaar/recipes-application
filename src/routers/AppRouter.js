@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import requireAuthentication from "../components/requireAuthentication";
+import Messages from "../components/Messages";
 
 import Header from "../components/Header";
 import DashboardPage from "../components/DashboardPage";
@@ -22,6 +23,7 @@ const AppRouter = (props) => (
                 <Route path="/edit" component={editRecipe} />
                 <Route path="/post/:id" render={() => <h1>Edit post with ID</h1>} />
                 <Route path="/login" component={LoginPage} />
+                <Messages />
             </div>
         </div>
     </Router>

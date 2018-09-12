@@ -33,6 +33,10 @@ class DashboardPage extends React.Component {
         // render recepies 
     }
 
+    handleOnClick = () => {
+        // console.log(newMessage("this is the message", "danger"));
+    }
+
     render() {
         return(
             <div>
