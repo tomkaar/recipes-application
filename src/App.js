@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { userLogin, userLogout } from "./actions/user";
 import AppRouter from "./routers/AppRouter";
 
+import "./styles/styles.scss";
+
 class App extends React.Component {
 
     componentDidMount() {
