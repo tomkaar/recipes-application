@@ -1,6 +1,6 @@
 import React from "react";
-import firebase from "firebase";
 import { connect } from "react-redux";
+import firebase from "firebase";
 
 import { userLogin, userLogout } from "./actions/user";
 import AppRouter from "./routers/AppRouter";

@@ -40,8 +40,20 @@ export const setRecipe = (expenses) => ({
     expenses
 });
 
-export const startSetRecipe = (expenses) => ({
-    // Fetch expenses from firebase
-    // Parse into array
-    // Dispatch
-})
+export const startSetRecipe = (expenses) => {
+    return (dispatch) => {
+        return database.ref("recipes").once("value")
+            .then((snapshot) => {
+                const expenses = [];
+
+                snapshot.forEach((childSnapShot) => {
+                    expenses.push({
+                        id: childSnapShot.key,
+                        ...childSnapShot.val()
+                    })
+                });
+
+                dispatch(setRecipe(expenses));
+            });
+    }
+};
