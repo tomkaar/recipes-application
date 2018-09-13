@@ -23,12 +23,12 @@ class Header extends React.Component {
             <nav className="navigation">
                 <div className="navigation__left">
                     <div className="navbar-brand">
-                        <h1>Recipes</h1>
+                        <h1>Recipes Application</h1>
                     </div>
                     <div className="navbar-menu">
                         <NavLink exact activeClassName="active" className="navbar-item" to="/">Home</NavLink>
                         {this.props.user.user && <NavLink activeClassName="active" className="navbar-item" to="/new">New</NavLink>}
-                        {this.props.user.user && <NavLink activeClassName="active" className="navbar-item" to="/edit">Edit</NavLink>}
+                        {/* {this.props.user.user && <NavLink activeClassName="active" className="navbar-item" to="/edit">Edit</NavLink>} */}
                     </div>
                 </div>
                 <div className="navigation__right">

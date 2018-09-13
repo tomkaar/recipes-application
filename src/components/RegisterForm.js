@@ -12,12 +12,18 @@ class RegisterForm extends React.Component {
 
     handleSubmit = e => {
         e.preventDefault();
+        const attemptMessage = this.props.newMessage("Attempting to create an account", "Info");
         firebase.auth()
             .createUserWithEmailAndPassword(this.state.email, this.state.password)
             .then(() => {
                 console.log("Created User!");
+                this.props.removeMessage(attemptMessage.payload.id);
+                this.props.newMessage("You account has been successfully created", "Success", 5000);
             })
-            .catch(error => console.log(error));
+            .catch(error => {
+                this.props.removeMessage(attemptMessage.payload.id);
+                this.props.newMessage(error.message, "Error", 5000);
+            });
     }
 
     handleInputChange = e => this.setState({ [e.target.name]: e.target.value });
