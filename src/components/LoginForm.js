@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { firebase } from "../firebase/Firebase";
 import { userLogin, userLogout } from '../actions/user';
@@ -9,8 +9,7 @@ class LoginForm extends React.Component {
 
     state = {
         email: "",
-        password: "",
-        toDashboard: false,
+        password: ""
     }
 
     componentDidMount() { this.setState(() => ({ toDashboard: false })); }
@@ -26,7 +25,7 @@ class LoginForm extends React.Component {
                 this.props.userLogin(snapshot.user);
                 this.props.removeMessage(attemptMessage.payload.id);
                 this.props.newMessage("You have successfully logged in", "Success", 3000)
-                // this.setState(() => ({ toDashboard: true }));
+                this.props.history.push('/');
             })
             .catch(error => {
                 this.props.removeMessage(attemptMessage.payload.id);
@@ -37,7 +36,6 @@ class LoginForm extends React.Component {
     render() {
         return(
             <div>
-                {this.state.toDashboard === true && <Redirect to='/' /> }
                 <form onSubmit={this.handleLoginSubmission}>
                     <label className="Label">
                         Email:
@@ -82,4 +80,4 @@ const mapDispatchToProps = (dispatch) => ({
     removeMessage: (id) => dispatch(removeMessage(id))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginForm));

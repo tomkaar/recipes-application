@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { firebase } from "../firebase/Firebase";
 import { userLogin, userLogout } from '../actions/user';
@@ -16,9 +17,9 @@ class RegisterForm extends React.Component {
         firebase.auth()
             .createUserWithEmailAndPassword(this.state.email, this.state.password)
             .then(() => {
-                console.log("Created User!");
                 this.props.removeMessage(attemptMessage.payload.id);
                 this.props.newMessage("You account has been successfully created", "Success", 5000);
+                this.props.history.push('/');
             })
             .catch(error => {
                 this.props.removeMessage(attemptMessage.payload.id);
@@ -74,4 +75,4 @@ const mapDispatchToProps = (dispatch) => ({
     removeMessage: (id) => dispatch(removeMessage(id))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterForm);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RegisterForm));
