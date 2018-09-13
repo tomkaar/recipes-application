@@ -11,7 +11,7 @@ const requireAuthentication = (WrappedComponent, RedirectURL = undefined) => {
             {props.user.user ? (
                 <WrappedComponent {...props} />
             ) : (
-                <div>
+                <div className="requireAuthentication__message">
                     {RedirectURL !== undefined && <Redirect to={"/" + RedirectURL} />}
                         <h2 className="requireAuthentication-title">You need to be logged in to view this page</h2>
                         <p className="requireAuthentication-paragraph">Create an Account or Sign In</p>

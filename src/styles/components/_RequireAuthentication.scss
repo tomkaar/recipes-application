@@ -1,13 +1,13 @@
-.requireAuthentication{
+.requireAuthentication__message{
     margin-top: $xl-size;
+}
 
-    .requireAuthentication-title{
-        text-align: center;
-        color: $medium-grey;
-    }
-    .requireAuthentication-paragraph{
-        margin-top: $s-size;
-        text-align: center;
-        color: $medium-grey;
-    }
+.requireAuthentication-title{
+    text-align: center;
+    color: $medium-grey;
+}
+.requireAuthentication-paragraph{
+    margin-top: $s-size;
+    text-align: center;
+    color: $medium-grey;
 }

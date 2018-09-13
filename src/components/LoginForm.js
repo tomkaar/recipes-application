@@ -25,8 +25,8 @@ class LoginForm extends React.Component {
             .then((snapshot) => {
                 this.props.userLogin(snapshot.user);
                 this.props.removeMessage(attemptMessage.payload.id);
-                this.props.newMessage("You have successfully logged in", "Success", 3000);
-                this.setState(() => ({ toDashboard: true }));
+                this.props.newMessage("You have successfully logged in", "Success", 3000)
+                // this.setState(() => ({ toDashboard: true }));
             })
             .catch(error => {
                 this.props.removeMessage(attemptMessage.payload.id);
