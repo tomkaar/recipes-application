@@ -1,10 +1,10 @@
 import React from 'react'
 
-const LoadingScreen = ({message = undefined}) => (
-    <div>
+const Loading = ({message = undefined}) => (
+    <div className="Loading">
         <h2>Loading..</h2>
         {message && <p>{message}</p>}
     </div>
 );
 
-export default  LoadingScreen;
+export default Loading;

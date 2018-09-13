@@ -5,7 +5,7 @@ import registerServiceWorker from './registerServiceWorker';
 import "./styles/styles.scss";
 
 import App from './App';
-import LoadingScreen from './components/Loading';
+import Loading from './components/Loading';
 
 import { Provider } from "react-redux";
 import firebase from "firebase";
@@ -24,7 +24,7 @@ const app = (
 
 // Loading screen until app is ready
 ReactDOM.render(
-    <LoadingScreen message="The application is currently loading"/>, 
+    <Loading message="The application is currently loading"/>, 
     document.getElementById('root')
 );
 
