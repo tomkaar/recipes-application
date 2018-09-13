@@ -6,7 +6,7 @@ import filterReducer from "../reducers/filters";
 import messageReducer from "../reducers/messages";
 import recipesReducer from "../reducers/recipes";
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION__COMPOSE__ || compose;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export default () => {
     const store = createStore(

@@ -30,10 +30,3 @@ const AppRouter = (props) => (
 );
 
 export default AppRouter;
-
-// Added React Router DOM to make it easier to created pages. 
-// It looks at the current url and renders a component depending on the url match
-// Yes you should add a state that looks at the current url and renders a component based on that
-// but that kind of ugly and here we have the functionality premade. 
-
-// Header will render on every page and will not be affected by the router or current page.

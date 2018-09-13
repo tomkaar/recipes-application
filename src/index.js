@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 import "./styles/styles.scss";
+
+import App from './App';
+import LoadingScreen from './components/Loading';
 
 import { Provider } from "react-redux";
 import firebase from "firebase";
@@ -21,7 +23,10 @@ const app = (
 );
 
 // Loading screen until app is ready
-ReactDOM.render(<p>Loading..</p>, document.getElementById('root'));
+ReactDOM.render(
+    <LoadingScreen message="The application is currently loading"/>, 
+    document.getElementById('root')
+);
 
 // Get all recipes from firebase
 store.dispatch(startSetRecipe())
@@ -38,4 +43,3 @@ store.dispatch(startSetRecipe())
     });
 
 registerServiceWorker();
-
