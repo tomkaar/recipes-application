@@ -13,13 +13,6 @@ firebase.initializeApp(config);
 
 const database = firebase.database();
 
-
-// database.ref("recipes").once("value", function(snapshot){
-//     console.log(snapshot.key, snapshot.val());
-//     // console.log(JSON.stringify(snapshot.val()));
-// });
-
-
 export { firebase, database };
 
 

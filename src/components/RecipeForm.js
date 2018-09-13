@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { startAddRecipe } from "../actions/recipes";
+import { firebaseAddRecipe } from "../actions/recipes";
 
 class RecipeForm extends React.Component {
     state = {
@@ -59,7 +59,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    addRecipe: (expense) => dispatch(startAddRecipe(expense))
+    addRecipe: (expense) => dispatch(firebaseAddRecipe(expense))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecipeForm);

@@ -9,7 +9,10 @@ export default (expenses, { text, sortBy, isVegetarian }) => {
             return a.createdAt < b.createdAt ? 1 : -1;
         }
         else if (sortBy === "oldest") {
-            return a.createdAt > b.createdAt ? 1 : -1;
+            return a.createdAt < b.createdAt ? -1 : 1;
+        }
+        else {
+            return a.createdAt < b.createdAt ? 1 : -1;
         }
     });
 }
