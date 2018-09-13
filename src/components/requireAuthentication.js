@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 import LoginRegister from "./LoginRegister";
 
-const requireAuthentication = (WrappedComponent, RedirectURL = undefined) => {
+const RequireAuthentication = (WrappedComponent, RedirectURL = undefined) => {
     return (props) => (
         <div className="requireAuthentication">
             {props.user.user ? (
@@ -28,5 +28,5 @@ const mapStateToProps = (state) => ({
 
 export default compose(
     connect(mapStateToProps),
-    requireAuthentication
+    RequireAuthentication
 );

@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import requireAuthentication from "../components/RequireAuthentication";
+import RequireAuthentication from "../components/RequireAuthentication";
 import Messages from "../components/Messages";
 
 import Header from "../components/Header";
@@ -10,8 +10,8 @@ import NewRecepiePage from "../components/NewRecepiePage";
 import EditRecepiePage from "../components/EditRecepiePage";
 import LoginPage from "../components/LoginPage";
 
-const newRecipe = requireAuthentication(NewRecepiePage);
-const editRecipe = requireAuthentication(EditRecepiePage, "");
+const newRecipe = RequireAuthentication(NewRecepiePage);
+const editRecipe = RequireAuthentication(EditRecepiePage, "");
 
 const AppRouter = (props) => (
     <Router basename={props.path}>
