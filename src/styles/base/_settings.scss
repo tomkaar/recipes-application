@@ -1,4 +1,5 @@
 // colors 
+$brand: #ee205e;
 $info: #209cee;
 $success: #23d160;
 $warning: #ffdd57;
@@ -18,3 +19,9 @@ $desktop-breakpoint: 45rem;
 
 // Special
 $NavigationHeight: 5.6rem;
+
+// Special classes
+.l-margin-top { margin-top: $l-size; }
+
+.m-margin-right { margin-right: $m-size; }
+.l-margin-right { margin-right: $l-size; }

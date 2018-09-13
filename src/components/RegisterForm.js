@@ -1,5 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
 import { firebase } from "../firebase/Firebase";
+import { userLogin, userLogout } from '../actions/user';
+import { newMessage, removeMessage } from '../actions/messages';
 
 class RegisterForm extends React.Component {
     state = {
@@ -11,7 +14,9 @@ class RegisterForm extends React.Component {
         e.preventDefault();
         firebase.auth()
             .createUserWithEmailAndPassword(this.state.email, this.state.password)
-            .then(console.log("Created User!"))
+            .then(() => {
+                console.log("Created User!");
+            })
             .catch(error => console.log(error));
     }
 
@@ -21,7 +26,7 @@ class RegisterForm extends React.Component {
         return(
             <div>
                 <form onSubmit={this.handleSubmit} className="form">
-                    <label>
+                    <label className="Label">
                         Email:
                         <input 
                             type="text" 
@@ -31,9 +36,10 @@ class RegisterForm extends React.Component {
                             onChange={this.handleInputChange} 
                             autoComplete="email"
                             autoFocus={true}
+                            className="Input"
                         />
                     </label>
-                    <label>
+                    <label className="Label">
                         Password:
                         <input 
                             type="password" 
@@ -42,13 +48,24 @@ class RegisterForm extends React.Component {
                             value={this.state.password} 
                             onChange={this.handleInputChange}
                             autoComplete="password"
+                            className="Input"
                         />
                     </label>
-                    <button type="submit" className="is_info">Register</button>
+                    <button type="submit" className="Button is_info l-margin-top">Register</button>
                 </form>
             </div>
         )
     }
 }
 
-export default RegisterForm;
+const mapStateToProps = (state) => ({
+    user: state.user
+});
+const mapDispatchToProps = (dispatch) => ({
+    userLogin: (user) => dispatch(userLogin(user)),
+    userLogout: () => dispatch(userLogout()),
+    newMessage: (message, type, time) => dispatch(newMessage(message, type, time)),
+    removeMessage: (id) => dispatch(removeMessage(id))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterForm);

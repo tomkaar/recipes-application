@@ -1,0 +1,11 @@
+%Label {
+    margin-top: $l-size;
+    color: $medium-grey;
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.Label {
+    @extend %Label;
+}

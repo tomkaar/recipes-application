@@ -2,13 +2,47 @@
     position: fixed;
     width: 100%;
     height: $NavigationHeight;
-    background: white;
-    border-bottom: 1px solid grey;
+    background: $lighter-grey;
+    border-bottom: 1px solid $light-grey;
+}
 
-    .navigation__left {
-        float: left;
+.navigation__left {
+    float: left;
+}
+.navigation__right {
+    float: right;
+}
+
+.navbar-brand{
+    height: $NavigationHeight;
+    float: left;
+    margin-left: $l-size;
+    line-height: $NavigationHeight;
+}
+.navbar-menu{
+    height: $NavigationHeight;
+    margin-left: $l-size;
+    float: left;
+    
+    .navbar-item {
+        display: inline-block;
+        height: $NavigationHeight;
+        margin-left: $s-size;
+        padding: 0 $s-size;
+        line-height: $NavigationHeight;
+
+        color: $medium-grey;
+        text-decoration: none;
+        border-bottom: 2px solid transparent;
+
+        &.active {
+            color: $brand;
+            border-bottom: 2px solid $brand;
+        }
     }
-    .navigation__right {
-        float: right;
+
+    .navbar-button {
+        margin-top: $s-size/2;
+        margin-right: $m-size;
     }
 }

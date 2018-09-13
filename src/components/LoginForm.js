@@ -38,8 +38,8 @@ class LoginForm extends React.Component {
         return(
             <div>
                 {this.state.toDashboard === true && <Redirect to='/' /> }
-                <form onSubmit={this.handleLoginSubmission} className="form">
-                    <label>
+                <form onSubmit={this.handleLoginSubmission}>
+                    <label className="Label">
                         Email:
                             <input
                             type="text"
@@ -49,9 +49,10 @@ class LoginForm extends React.Component {
                             onChange={this.handleInputChange}
                             autoComplete="email"
                             autoFocus={true}
+                            className="Input"
                         />
                     </label>
-                    <label>
+                    <label className="Label">
                         Password:
                             <input
                             type="password"
@@ -60,9 +61,10 @@ class LoginForm extends React.Component {
                             value={this.state.password}
                             onChange={this.handleInputChange}
                             autoComplete="password"
+                            className="Input"
                         />
                     </label>
-                    <button className="is_info">Sign In</button>
+                    <button className="Button is_info l-margin-top">Sign In</button>
                 </form>
             </div>
         )
@@ -80,5 +82,4 @@ const mapDispatchToProps = (dispatch) => ({
     removeMessage: (id) => dispatch(removeMessage(id))
 });
 
-// cannot use functional components when using connect
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

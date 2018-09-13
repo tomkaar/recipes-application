@@ -1,0 +1,30 @@
+%Button {
+    padding: $s-size/1.2 $s-size;
+    font-size: $m-size;
+    color: $medium-grey;
+    background-color: #fff;
+    border: 1px solid $light-grey;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &.is_info {
+        background: $info;
+        color: white;
+    }
+    &.is_success {
+        background: $success;
+        color: white;
+    }
+    &.is_warning {
+        background: $warning;
+        color: white;
+    }
+    &.is_danger {
+        background: $danger;
+        color: white;
+    }
+}
+
+.Button {
+    @extend %Button;
+}
