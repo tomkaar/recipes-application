@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import RequireAuthentication from "../components/test";
+import RequireAuthentication from "../components/RequireAuthentication";
 import Messages from "../components/Messages";
 
 import Header from "../components/Header";
