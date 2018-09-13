@@ -7,13 +7,14 @@ import LoginRegister from "./LoginRegister";
 
 const requireAuthentication = (WrappedComponent, RedirectURL = undefined) => {
     return (props) => (
-        <div>
+        <div className="requireAuthentication">
             {props.user.user ? (
                 <WrappedComponent {...props} />
             ) : (
                 <div>
                     {RedirectURL !== undefined && <Redirect to={"/" + RedirectURL} />}
-                    <h2>You need to be logged in to view this page</h2>
+                        <h2 className="requireAuthentication-title">You need to be logged in to view this page</h2>
+                        <p className="requireAuthentication-paragraph">Create an Account or Sign In</p>
                     <LoginRegister />
                 </div>
             )}

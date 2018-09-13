@@ -28,6 +28,7 @@
         border: none;
         border-bottom: 2px solid transparent;
         background: $lighter-grey;
+        outline: none;
 
         &.isActive {
             border-bottom: 2px solid $info;
