@@ -1,0 +1,40 @@
+.RecipeListFilters{
+    width: 100%;
+    padding: $m-size 0;
+    background: $lighter-grey;
+
+    .RecipeListFilters-section{
+        width: 100%; 
+
+        &:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    }
+
+    input[type=search] {
+        @extend %Input;
+        width: 200px;
+    }
+    input[type=button] {
+        margin-left: $s-size;
+    }
+    span{
+        float: left;
+        margin-right: $m-size;
+        margin-top: 2.6rem;
+        min-width: 6rem;
+    }
+    select {
+        @extend %Select;
+        float: left;
+    }
+    label {
+        @extend %Label;
+        margin-top: 2.6rem;
+        margin-left: $m-size;
+        float: left;
+        cursor: pointer;
+    }
+}
