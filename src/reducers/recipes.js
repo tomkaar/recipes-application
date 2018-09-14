@@ -9,7 +9,7 @@ export default (state = recipesDefaultState, action) => {
         case "EDIT_RECIPE":
             return state.map((expense) => {
                 if(expense.id === action.id) {
-                    return { ...state, ...action.update };
+                    return { ...expense, ...action.update };
                 } else {
                     return expense;
                 }

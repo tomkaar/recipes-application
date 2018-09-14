@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from "react-redux";
 
 import { database } from "../firebase/Firebase";
-import { firebaseAddRecipe } from "../actions/recipes";
+import { startEditRecipe } from "../actions/recipes";
 import RecipeForm from "./RecipeForm";
 
 class EditRecepiePage extends React.Component {
@@ -25,11 +25,9 @@ class EditRecepiePage extends React.Component {
     onSubmit = (recipe) => {
         const fullRecipeData = {
             ...recipe,
-            createdBy: this.props.user.uid,
-            timestamp: new Date().getTime()
-        };
-        console.log(fullRecipeData);
-        // this.props.addRecipe(fullRecipeData);
+            id: this.state.id
+        }
+        this.props.editRecipe(this.state.id, fullRecipeData);
     };
 
     render() {
@@ -47,7 +45,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    addRecipe: (expense) => dispatch(firebaseAddRecipe(expense))
+    editRecipe: (id, updates) => dispatch(startEditRecipe(id, updates))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditRecepiePage);
