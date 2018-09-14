@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { database } from "../firebase/Firebase";
@@ -28,6 +29,7 @@ class EditRecepiePage extends React.Component {
             id: this.state.id
         }
         this.props.editRecipe(this.state.id, fullRecipeData);
+        this.props.history.push('/');
     };
 
     render() {
@@ -48,4 +50,4 @@ const mapDispatchToProps = (dispatch) => ({
     editRecipe: (id, updates) => dispatch(firebaseEditRecipe(id, updates))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditRecepiePage);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EditRecepiePage));
