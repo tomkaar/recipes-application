@@ -14,7 +14,7 @@ const RecipeListItem = ({ title, description, id, createdBy, timestamp, removeRe
             { user.uid === createdBy &&  <Link to={`/edit/${id}`}> - edit</Link> }
             <p>{`${time.getDate()}/${time.getMonth()} - ${time.getFullYear()} ${time.getHours()}:${time.getMinutes()}`}</p>
             <p>{description}</p>
-            <button onClick={handleRemove}>Remove</button>
+            {user.uid === createdBy && <button onClick={handleRemove}>Remove</button>}
         </div>
     )
 };
