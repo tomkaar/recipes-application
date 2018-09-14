@@ -18,6 +18,10 @@ class RecipeListFilters extends React.Component {
         }
     }
 
+    handleIsVegitarianChangeTwo = (e) => {
+        this.props.setIsVegetarianFilter(e.target.value);
+    }
+
     render() {
         return(
             <div className="Filters">
@@ -35,11 +39,33 @@ class RecipeListFilters extends React.Component {
                     <option value="latest">Latest</option>
                     <option value="oldest">Oldest</option>
                 </select>
-                <input 
-                    type="checkbox" 
-                    checked={this.props.filters.isVegetarian}
-                    onChange={this.handleIsVegitarianChange}
-                />
+                <label>
+                    <input 
+                        type="radio" 
+                        value="all" 
+                        checked={this.props.filters.isVegetarian === "all"} 
+                        onChange={this.handleIsVegitarianChangeTwo}
+                    />
+                    All
+                </label>
+                <label>
+                    <input
+                        type="radio"
+                        value={"true"}
+                        checked={this.props.filters.isVegetarian === "true"}
+                        onChange={this.handleIsVegitarianChangeTwo}
+                    />
+                    Vegetarian
+                </label>
+                <label>
+                    <input
+                        type="radio"
+                        value={"false"}
+                        checked={this.props.filters.isVegetarian === "false"}
+                        onChange={this.handleIsVegitarianChangeTwo}
+                    />
+                    Not Vegetarian
+                </label>
             </div>
         )
     }
