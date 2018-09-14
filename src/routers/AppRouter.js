@@ -20,7 +20,7 @@ const AppRouter = (props) => (
             <div className="PageMarginTop">
                 <Route exact path="/" component={DashboardPage} />
                 <Route path="/new" component={newRecipe} />
-                <Route path="/edit" component={editRecipe} />
+                <Route path="/edit/:id" component={editRecipe} />
                 <Route path="/post/:id" render={() => <h1>Edit post with ID</h1>} />
                 <Route path="/login" component={LoginPage} />
                 <Messages />

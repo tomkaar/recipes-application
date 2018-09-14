@@ -1,33 +1,42 @@
 import React from "react";
-import { connect } from "react-redux";
-import { firebaseAddRecipe } from "../actions/recipes";
 
 class RecipeForm extends React.Component {
-    state = {
-        title: "",
-        description: "",
-        isVegetarian: false
+
+    constructor(props){
+        super(props);
+        this.state = {
+            id: props.id ? props.id : "",
+            title: props.title ? props.title : "",
+            description: props.description ? props.description : "",
+            isVegetarian: props.isVegetarian ? props.isVegetarian : false
+        }
     }
 
+    componentWillReceiveProps(props) {
+        this.setState(() => ({
+            id: props.recipeData.id,
+            title: props.recipeData.title,
+            description: props.recipeData.description,
+            isVegetarian: props.recipeData.isVegetarian,
+        }));
+    }
+    
     handleInputChange = e => this.setState({ [e.target.name]: e.target.value });
     handleIsVegitarianChange = e => this.setState({ isVegetarian: e.target.checked});
 
-    handleSubmit = (e) => {
+    onSubmit = (e) => {
         e.preventDefault();
-        const expense = {
+        this.props.onSubmit({
             title: this.state.title,
             description: this.state.description,
-            isVegetarian: this.state.isVegetarian,
-            timestamp: new Date().getTime(),
-            createdBy: this.props.user.uid
-        };
-        this.props.addRecipe(expense);
-    };
+            isVegetarian: this.state.isVegetarian
+        });
+    }
 
     render() {
         return(
             <div>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.onSubmit}>
                     <input
                         type="text"
                         name="title"
@@ -54,12 +63,4 @@ class RecipeForm extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-    user: state.user
-});
-
-const mapDispatchToProps = (dispatch) => ({
-    addRecipe: (expense) => dispatch(firebaseAddRecipe(expense))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(RecipeForm);
+export default RecipeForm;
