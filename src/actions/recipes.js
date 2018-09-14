@@ -1,5 +1,6 @@
 import { database } from "../firebase/Firebase";
 import { newMessage } from "./messages";
+import store from "../store/store";
 
 
 export const addRecipe = (expense) => ({
@@ -9,10 +10,14 @@ export const addRecipe = (expense) => ({
 
 export const firebaseAddRecipe = (expense = {}) => {
     return (dispatch) => {
+        const uid = store.getState().user.uid;
         return database.ref("recipes").push(expense)
-            .then((ref) => {
+            .then((snapshot) => {
+                database.ref(`recipeOwner/${uid}`).update({
+                    [snapshot.key]: true
+                })
                 dispatch(addRecipe({
-                    id: ref.key,
+                    id: snapshot.key,
                     ...expense
                 }))
                 dispatch(newMessage("You have added a new Recipe to the collection.", "Success", 3000));
@@ -34,8 +39,10 @@ export const removeRecipe = (id) => ({
 
 export const firebaseRemoveRecipe = (id) => {
     return (dispatch) => {
+        const uid = store.getState().user.uid;
         return database.ref(`recipes/${id}`).remove()
-            .then((ref) => {
+            .then((snapshot) => {
+                database.ref(`recipeOwner/${uid}/${id}`).remove();
                 dispatch(removeRecipe(id))
                 dispatch(newMessage("This recipe has been removed.", "Success", 3000));
             })

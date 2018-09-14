@@ -26,6 +26,8 @@ class EditRecepiePage extends React.Component {
     onSubmit = (recipe) => {
         const fullRecipeData = {
             ...recipe,
+            createdBy: this.props.user.uid,
+            timestamp: new Date().getTime(),
             id: this.state.id
         }
         this.props.editRecipe(this.state.id, fullRecipeData);

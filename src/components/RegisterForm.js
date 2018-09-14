@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { firebase } from "../firebase/Firebase";
+import { firebase, database } from "../firebase/Firebase";
 import { userLogin, userLogout } from '../actions/user';
 import { newMessage, removeMessage } from '../actions/messages';
 
@@ -16,6 +16,13 @@ class RegisterForm extends React.Component {
         const attemptMessage = this.props.newMessage("Attempting to create an account", "Info");
         firebase.auth()
             .createUserWithEmailAndPassword(this.state.email, this.state.password)
+            .then((ref) => {
+                const key = ref.user.uid;
+                database.ref(`users/${key}`).set({
+                    uid: key,
+                    email: this.state.email
+                });
+            })
             .then(() => {
                 this.props.removeMessage(attemptMessage.payload.id);
                 this.props.newMessage("You account has been successfully created", "Success", 5000);
