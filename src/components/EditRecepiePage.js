@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from "react-redux";
 
 import { database } from "../firebase/Firebase";
-import { startEditRecipe } from "../actions/recipes";
+import { firebaseEditRecipe } from "../actions/recipes";
 import RecipeForm from "./RecipeForm";
 
 class EditRecepiePage extends React.Component {
@@ -45,7 +45,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    editRecipe: (id, updates) => dispatch(startEditRecipe(id, updates))
+    editRecipe: (id, updates) => dispatch(firebaseEditRecipe(id, updates))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditRecepiePage);

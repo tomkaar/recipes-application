@@ -55,7 +55,7 @@ export const editRecipe = (id, update) => ({
     update
 });
 
-export const startEditRecipe = (id, update) => {
+export const firebaseEditRecipe = (id, update) => {
     return (dispatch) => {
         return database.ref(`recipes/${id}`).set(update)
             .then(() => {
@@ -77,7 +77,7 @@ export const setRecipe = (expenses) => ({
     expenses
 });
 
-export const startSetRecipe = (expenses) => {
+export const firebaseSetRecipe = (expenses) => {
     return (dispatch) => {
         return database.ref("recipes").once("value")
             .then((snapshot) => {

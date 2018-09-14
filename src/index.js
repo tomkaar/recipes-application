@@ -11,7 +11,7 @@ import { Provider } from "react-redux";
 import firebase from "firebase";
 
 import store from "./store/store";
-import { startSetRecipe } from './actions/recipes';
+import { firebaseSetRecipe } from './actions/recipes';
 import { userLogin, userLogout } from "./actions/user";
 
 store.subscribe(() => { console.log(store.getState()); });
@@ -29,7 +29,7 @@ ReactDOM.render(
 );
 
 // Get all recipes from firebase
-store.dispatch(startSetRecipe())
+store.dispatch(firebaseSetRecipe())
     // Check if user is logged in
     .then(() => {
         firebase.auth()
