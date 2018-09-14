@@ -1,9 +1,8 @@
-%Input {
-    appearance: none;
+%Select {
+    -webkit-appearance: none;
+    position: relative;
     padding: $s-size/2 $s-size*3 $s-size/2 $s-size;
     margin-top: $m-size;
-    width: 100%;
-    max-width: 100%;
     font-size: 1.6rem;
     line-height: 1.5;
     color: #363636;
@@ -12,8 +11,9 @@
     border: 1px solid transparent;
     border-color: #dbdbdb;
     border-radius: 4px;
+    cursor: pointer;
 }
 
-.Input {
-    @extend %Input;
+.Select {
+    @extend %Button;
 }
