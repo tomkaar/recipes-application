@@ -18,6 +18,8 @@
     float: left;
     margin-left: $l-size;
     line-height: $NavigationHeight;
+    color: $medium-grey;
+    text-decoration: none;
 }
 .navbar-menu{
     height: $NavigationHeight;

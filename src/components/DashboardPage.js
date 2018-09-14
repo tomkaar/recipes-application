@@ -1,10 +1,11 @@
 import React from 'react';
 import RecipeListFilters from "./RecipeListFilters";
 import RecipeList from "./RecipeList";
+import PageHeader from "./PageHeader";
 
 const DashboardPage = () => (
     <div className="DashboardPage">
-        <h1>Dashboard Page</h1>
+        <PageHeader title="Find Recipes" para="Find what you are looking for"/>
         <RecipeListFilters />
         <RecipeList />
     </div>

@@ -4,7 +4,9 @@ import { connect } from "react-redux";
 
 import { database } from "../firebase/Firebase";
 import { firebaseEditRecipe } from "../actions/recipes";
+
 import RecipeForm from "./RecipeForm";
+import PageHeader from "./PageHeader";
 
 class EditRecepiePage extends React.Component {
 
@@ -37,7 +39,7 @@ class EditRecepiePage extends React.Component {
     render() {
         return(
             <div>
-                <h1>Edit Recpie</h1>
+                <PageHeader title="Update Recipe" />
                 <RecipeForm recipeData={{ ...this.state }} onSubmit={this.onSubmit} />
             </div>
         )

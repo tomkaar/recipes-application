@@ -1,0 +1,14 @@
+.PageHeader{
+    width: 100%;
+    margin: $xl-size*2 0;
+
+    h2 {
+        color: $medium-grey;
+        font-size: $xl-size;
+    }
+    p {
+        padding: $s-size 0 $s-size $l-size;
+        color: $medium-grey;
+        font-size: $m-size;
+    }
+}

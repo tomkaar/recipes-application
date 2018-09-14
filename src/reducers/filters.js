@@ -1,7 +1,7 @@
 const filterReducerDefaultState = {
     text: "",
     sortBy: "latest",
-    isVegetarian: "false"
+    isVegetarian: "all"
 };
 
 export default (state = filterReducerDefaultState, action) => {

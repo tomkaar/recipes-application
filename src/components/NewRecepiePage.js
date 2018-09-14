@@ -3,10 +3,11 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { firebaseAddRecipe } from "../actions/recipes";
+
 import RecipeForm from "./RecipeForm";
+import PageHeader from "./PageHeader";
 
 class NewRecepiePage extends React.Component {
-
     onSubmit = (recipe) => {
         const fullRecipeData = {
             ...recipe,
@@ -20,12 +21,11 @@ class NewRecepiePage extends React.Component {
     render() {
         return(
             <div>
-                <h1>Add a recipe</h1>
+                <PageHeader title="Add a Recipe" para="Submit a new recipe" />
                 <RecipeForm onSubmit={this.onSubmit} />
             </div>
         )
     }
-
 };
 
 const mapStateToProps = (state) => ({
