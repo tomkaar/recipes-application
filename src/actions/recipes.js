@@ -2,15 +2,19 @@ import { database } from "../firebase/Firebase";
 import { newMessage } from "./messages";
 import store from "../store/store";
 
-
 export const addRecipe = (expense) => ({
     type: "ADD_RECIPE",
     expense
 });
 
-export const firebaseAddRecipe = (expense = {}) => {
+export const firebaseAddRecipe = (data = {}) => {
     return (dispatch) => {
         const uid = store.getState().user.uid;
+        const expense = { 
+            ...data, 
+            createdBy: uid, 
+            timestamp: new Date().getTime()
+        };
         return database.ref("recipes").push(expense)
             .then((snapshot) => {
                 database.ref(`recipeOwner/${uid}`).update({
@@ -21,9 +25,11 @@ export const firebaseAddRecipe = (expense = {}) => {
                     ...expense
                 }))
                 dispatch(newMessage("You have added a new Recipe to the collection.", "Success", 3000));
+                return true;
             })
             .catch((error) => {
                 dispatch(newMessage(error.message, "Error", 3000));
+                return false;
             });
     }
 }
@@ -62,15 +68,22 @@ export const editRecipe = (id, update) => ({
     update
 });
 
-export const firebaseEditRecipe = (id, update) => {
+export const firebaseEditRecipe = (id, data) => {
     return (dispatch) => {
+        const update = {
+            ...data,
+            createdBy: store.getState().user.uid,
+            timestamp: new Date().getTime(),
+        }
         return database.ref(`recipes/${id}`).set(update)
             .then(() => {
                 dispatch(editRecipe(id, update))
                 dispatch(newMessage("Your changes has been saved", "Success", 3000))
+                return true;
             })
             .catch((error) => {
                 dispatch(newMessage(error.message, "Error", 3000));
+                return false;
             });
     }
 }

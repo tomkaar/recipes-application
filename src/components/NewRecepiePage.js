@@ -9,13 +9,11 @@ import PageHeader from "./PageHeader";
 
 class NewRecepiePage extends React.Component {
     onSubmit = (recipe) => {
-        const fullRecipeData = {
-            ...recipe,
-            createdBy: this.props.user.uid,
-            timestamp: new Date().getTime()
-        };
-        this.props.addRecipe(fullRecipeData);
-        this.props.history.push('/');
+        this.props.addRecipe(recipe)
+            .then((res) => {
+                res && this.props.history.push('/');
+            });
+        
     };
 
     render() {
@@ -28,12 +26,8 @@ class NewRecepiePage extends React.Component {
     }
 };
 
-const mapStateToProps = (state) => ({
-    user: state.user
-});
-
 const mapDispatchToProps = (dispatch) => ({
     addRecipe: (expense) => dispatch(firebaseAddRecipe(expense))
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NewRecepiePage));
+export default withRouter(connect(null, mapDispatchToProps)(NewRecepiePage));

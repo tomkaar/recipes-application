@@ -26,14 +26,10 @@ class EditRecepiePage extends React.Component {
     }
 
     onSubmit = (recipe) => {
-        const fullRecipeData = {
-            ...recipe,
-            createdBy: this.props.user.uid,
-            timestamp: new Date().getTime(),
-            id: this.state.id
-        }
-        this.props.editRecipe(this.state.id, fullRecipeData);
-        this.props.history.push('/');
+        this.props.editRecipe(this.state.id, recipe)
+            .then((res) => {
+                res && this.props.history.push('/');
+            });
     };
 
     render() {
