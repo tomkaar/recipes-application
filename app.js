@@ -1,3 +1,6 @@
+// This file exists to create a server for Heroku to host att application.
+// https://recipes-application.herokuapp.com/
+
 const path = require("path");
 const express = require("express");
 const app = express();
