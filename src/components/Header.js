@@ -28,6 +28,7 @@ class Header extends React.Component {
                         </NavLink>
                         <div className="navbar-menu">
                             <NavLink exact activeClassName="active" className="navbar-item" to="/">Home</NavLink>
+                            <NavLink exact activeClassName="active" className="navbar-item" to="/search">Search</NavLink>
                             {this.props.user.user && <NavLink activeClassName="active" className="navbar-item" to="/new">New</NavLink>}
                         </div>
                     </div>

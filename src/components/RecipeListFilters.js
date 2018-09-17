@@ -5,7 +5,7 @@ import { setTextFilter, setIsVegetarianFilter, sortByLatest, sortByOldest } from
 class RecipeListFilters extends React.Component {
 
     state = {
-        textField: ""
+        textField: this.props.filters.text || ""
     }
 
     handleTextChange = (e) => {
