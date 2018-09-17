@@ -1,6 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
-import selectRecipes from "../selectors/selectRecipes";
 import RecipeListItem from "./RecipeListItem";
 
 export const RecipeList = (props) => (
@@ -9,16 +7,12 @@ export const RecipeList = (props) => (
             props.recipes.length === 0 ? (
                 <div>No Results</div>
             ) : (
-                props.recipes.map((expense) => {
-                    return <RecipeListItem key={expense.id} {...expense} />;
+                props.recipes.map((recipe) => {
+                        return <RecipeListItem key={recipe.id} {...recipe} />;
                 })
             )
         }
     </div>
 );
 
-const mapStateToProps = (state) => ({
-    recipes: selectRecipes(state.recipes, state.filters)
-});
-
-export default connect(mapStateToProps)(RecipeList);
+export default RecipeList;

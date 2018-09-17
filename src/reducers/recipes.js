@@ -4,6 +4,8 @@ export default (state = recipesDefaultState, action) => {
     switch (action.type) {
         case "ADD_RECIPE":
             return [...state, action.expense];
+        case "CLEAR_RECIPES":
+            return [];
         case "REMOVE_RECIPE":
             return state.filter(({ id }) => id !== action.id);
         case "EDIT_RECIPE":

@@ -2,6 +2,14 @@ import { database } from "../firebase/Firebase";
 import { newMessage } from "./messages";
 import store from "../store/store";
 
+
+
+export const clearRecipe = () => ({
+    type: "CLEAR_RECIPES"
+});
+
+
+
 export const addRecipe = (expense) => ({
     type: "ADD_RECIPE",
     expense
