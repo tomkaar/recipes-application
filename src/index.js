@@ -11,7 +11,6 @@ import { Provider } from "react-redux";
 import firebase from "firebase";
 
 import store from "./store/store";
-import { firebaseSetRecipe } from './actions/recipes';
 import { userLogin, userLogout } from "./actions/user";
 
 store.subscribe(() => { console.log(store.getState()); });
@@ -22,23 +21,16 @@ const app = (
     </Provider>
 );
 
-// Loading screen until app is ready
+// Loading screen until App is ready
 ReactDOM.render(
     <Loading message="The application is currently loading"/>, 
     document.getElementById('root')
 );
 
-// Get all recipes from firebase
-store.dispatch(firebaseSetRecipe())
-    // Check if user is logged in
-    .then(() => {
-        firebase.auth()
-            .onAuthStateChanged((user) => {
-                user ? store.dispatch(userLogin(user)) : store.dispatch(userLogout());
-            });
-    })
-    .then(() => {
-        // When App is Ready, render
+// check AuthState, then remove Loader and render App
+firebase.auth()
+    .onAuthStateChanged((user) => {
+        user ? store.dispatch(userLogin(user)) : store.dispatch(userLogout());
         ReactDOM.render(app, document.getElementById('root'));
     });
 
