@@ -1,0 +1,38 @@
+.RecipeListItem {
+    flex-basis: 50%;
+    width: 50%;
+    margin: $xl-size 0 0 0;
+}
+
+.RecipeListItem-Wrapper {
+    margin: 0 $l-size;
+    background: $lighter-grey;
+}
+.RecipeListItem-Header {
+    display: flex;
+    width: 100%;
+    padding: $m-size;
+
+    .RecipeListItem-Info {
+        flex-grow: 1;
+
+        a {
+            font-size: $m-size * 1.3;
+            color: $medium-grey;
+            text-decoration: none;
+        }
+
+        p { 
+            padding: 3px 0;
+            font-size: $s-size * 1.1;
+            color: $medium-grey;
+        }
+    }
+    .RecipeListItem-Buttons div button {
+        margin-right: $s-size;
+    }
+}
+.RecipeListItem-Content {
+    width: 100%;
+    padding: $m-size;
+}

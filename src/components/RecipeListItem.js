@@ -10,11 +10,26 @@ const RecipeListItem = ({ title, description, id, createdBy, timestamp, removeRe
 
     return (
         <div className="RecipeListItem">
-            <Link to={`/recipe/${id}`}>{title}</Link>
-            { user.uid === createdBy &&  <Link to={`/edit/${id}`}> - edit</Link> }
-            <p>{`${time.getDate()}/${time.getMonth()} - ${time.getFullYear()} ${time.getHours()}:${time.getMinutes()}`}</p>
-            <p>{description}</p>
-            {user.uid === createdBy && <button onClick={handleRemove}>Remove</button>}
+            <div className="RecipeListItem-Wrapper">
+                <div className="RecipeListItem-Header">
+                    <div className="RecipeListItem-Info">
+                        <Link to={`/recipe/${id}`}>{title}</Link>
+                        <p>{`${time.getDate()}/${time.getMonth()} - ${time.getFullYear()} ${time.getHours()}:${time.getMinutes()}`}</p>
+                    </div>
+                    
+                    <div className="RecipeListItem-Buttons">
+                        {user.uid === createdBy && (
+                            <div>
+                                <button className="Button" onClick={handleRemove}>Remove</button>
+                                <Link className="Button" to={`/edit/${id}`}>Edit</Link>
+                            </div>
+                        )}
+                    </div>
+                </div>
+                <div className="RecipeListItem-Content">
+                    <p>{description}</p>
+                </div>
+            </div>
         </div>
     )
 };

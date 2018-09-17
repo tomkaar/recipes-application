@@ -2,6 +2,10 @@
     width: 100%;
     margin: $xl-size*2 0;
 
+    .wrapper {
+        padding: 0 $xl-size;
+    }
+
     h2 {
         color: $medium-grey;
         font-size: $xl-size;

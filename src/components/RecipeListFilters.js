@@ -30,7 +30,6 @@ class RecipeListFilters extends React.Component {
             <div className="RecipeListFilters">
                 <div className="wrapper">
                     <div className="RecipeListFilters-section">
-                        <span>Search:</span>
                         <input
                             type="search"
                             value={this.state.textField}
@@ -49,7 +48,6 @@ class RecipeListFilters extends React.Component {
                         />
                     </div>
                     <div className="RecipeListFilters-section">
-                        <span>Filters:</span>
                         <select
                             value={this.props.filters.sortBy}
                             onChange={this.handleSortByChange}

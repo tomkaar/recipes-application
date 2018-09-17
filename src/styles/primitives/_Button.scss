@@ -3,6 +3,7 @@
     padding: $s-size/1.2 $s-size;
     font-size: $m-size;
     color: $medium-grey;
+    text-decoration: none;
     background-color: #fff;
     border: 1px solid $light-grey;
     border-radius: 4px;
@@ -23,6 +24,10 @@
     &.is_danger {
         background: $danger;
         color: white;
+    }
+
+    &:hover{
+        background-color: $light-grey;
     }
 }
 
