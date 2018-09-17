@@ -1,7 +1,11 @@
 .RecipeListFilters{
     width: 100%;
-    padding: $m-size 0;
+    padding: $xl-size 0;
     background: $lighter-grey;
+
+    .wrapper {
+        padding: 0 4.8rem;
+    }
 
     .RecipeListFilters-section{
         width: 100%; 
@@ -20,20 +24,15 @@
     input[type=button] {
         margin-left: $s-size;
     }
-    span{
-        float: left;
-        margin-right: $m-size;
-        margin-top: 2.6rem;
-        min-width: 6rem;
-    }
     select {
         @extend %Select;
-        float: left;
+        margin-left: $s-size;
+        // float: left;
     }
     label {
         @extend %Label;
         margin-top: 2.6rem;
-        margin-left: $m-size;
+        margin-right: $m-size;
         float: left;
         cursor: pointer;
     }

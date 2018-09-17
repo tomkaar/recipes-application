@@ -39,6 +39,13 @@ class RecipeListFilters extends React.Component {
                             autoFocus={true}
                             className="Filters-Text-Input"
                         />
+                        <select
+                            value={this.props.filters.sortBy}
+                            onChange={this.handleSortByChange}
+                        >
+                            <option value="latest">Latest</option>
+                            <option value="oldest">Oldest</option>
+                        </select>
                         <input
                             type="button"
                             name="submit"
@@ -48,13 +55,6 @@ class RecipeListFilters extends React.Component {
                         />
                     </div>
                     <div className="RecipeListFilters-section">
-                        <select
-                            value={this.props.filters.sortBy}
-                            onChange={this.handleSortByChange}
-                        >
-                            <option value="latest">Latest</option>
-                            <option value="oldest">Oldest</option>
-                        </select>
                         <label>
                             <input
                                 type="radio"
@@ -62,7 +62,7 @@ class RecipeListFilters extends React.Component {
                                 checked={this.props.filters.isVegetarian === "all"}
                                 onChange={this.handleIsVegitarianChange}
                             /> All Recipes
-                    </label>
+                        </label>
                         <label>
                             <input
                                 type="radio"

@@ -1,12 +1,13 @@
 .RecipeListItem {
     flex-basis: 50%;
     width: 50%;
-    margin: $xl-size 0 0 0;
+    margin: $l-size 0 0 0;
 }
 
 .RecipeListItem-Wrapper {
-    margin: 0 $l-size;
+    margin: 0 $m-size;
     background: $lighter-grey;
+    border-radius: 4px;
 }
 .RecipeListItem-Header {
     display: flex;
@@ -17,7 +18,7 @@
         flex-grow: 1;
 
         a {
-            font-size: $m-size * 1.3;
+            font-size: $m-size * 1.4;
             color: $medium-grey;
             text-decoration: none;
         }
@@ -35,4 +36,13 @@
 .RecipeListItem-Content {
     width: 100%;
     padding: $m-size;
+}
+
+
+@media (max-width: 768px) {
+    .RecipeListItem {
+        flex-basis: 100%;
+        width: 100%;
+        margin: $xl-size 0 0 0;
+    }
 }

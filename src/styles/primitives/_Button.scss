@@ -27,10 +27,13 @@
     }
 
     &:hover{
-        background-color: $light-grey;
+        background: darken($light-grey, 10%);
+
+        &.is_info { background: darken($info, 10%); }
+        &.is_success { background: darken($success, 10%); }
+        &.is_warning { background: darken($warning, 10%); }
+        &.is_danger { background: darken($danger, 10%); }
     }
 }
 
-.Button {
-    @extend %Button;
-}
+.Button { @extend %Button; }
