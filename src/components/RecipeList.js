@@ -8,7 +8,7 @@ export const RecipeList = (props) => (
                 props.recipes.length === 0 ? (
                     <div>No Results</div>
                 ) : (
-                        props.recipes.map((recipe) => {
+                        props.recipes.reverse().map((recipe) => {
                             return <RecipeListItem key={recipe.id} {...recipe} />;
                         })
                     )

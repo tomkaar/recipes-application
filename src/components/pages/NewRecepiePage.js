@@ -13,7 +13,6 @@ class NewRecepiePage extends React.Component {
             .then((res) => {
                 res && this.props.history.push('/');
             });
-        
     };
 
     render() {

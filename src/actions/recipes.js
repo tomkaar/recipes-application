@@ -19,19 +19,24 @@ export const firebaseAddRecipe = (data = {}) => {
     return (dispatch) => {
         const uid = store.getState().user.uid;
         const expense = { 
-            ...data, 
+            title: data.title,
+            description: data.description,
+            isVegetarian: data.isVegetarian,
+            ingredients: data.ingredients ? data.ingredients.length : 0,
             createdBy: uid, 
             timestamp: new Date().getTime()
         };
         return database.ref("recipes").push(expense)
             .then((snapshot) => {
-                database.ref(`recipeOwner/${uid}`).update({
-                    [snapshot.key]: true
-                })
+                const updateObject = {
+                    [`recipeOwner/${uid}/${snapshot.key}`]: true,
+                    [`ingredients/${snapshot.key}`]: data.ingredients
+                };
+                database.ref().update(updateObject);
                 dispatch(addRecipe({
                     id: snapshot.key,
                     ...expense
-                }))
+                }));
                 dispatch(newMessage("You have added a new Recipe to the collection.", "Success", 3000));
                 return true;
             })
@@ -57,6 +62,7 @@ export const firebaseRemoveRecipe = (id) => {
         return database.ref(`recipes/${id}`).remove()
             .then((snapshot) => {
                 database.ref(`recipeOwner/${uid}/${id}`).remove();
+                database.ref(`ingredients/${id}`).remove();
                 dispatch(removeRecipe(id))
                 dispatch(newMessage("This recipe has been removed.", "Success", 3000));
             })
@@ -79,12 +85,16 @@ export const editRecipe = (id, update) => ({
 export const firebaseEditRecipe = (id, data) => {
     return (dispatch) => {
         const update = {
-            ...data,
+            title: data.title,
+            description: data.description,
+            isVegetarian: data.isVegetarian,
+            ingredients: data.ingredients ? data.ingredients.length : 0,
             createdBy: store.getState().user.uid,
             timestamp: new Date().getTime(),
         }
         return database.ref(`recipes/${id}`).set(update)
             .then(() => {
+                database.ref(`ingredients/${id}`).set(data.ingredients);
                 dispatch(editRecipe(id, update))
                 dispatch(newMessage("Your changes has been saved", "Success", 3000))
                 return true;

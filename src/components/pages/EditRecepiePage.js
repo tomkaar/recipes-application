@@ -17,11 +17,21 @@ class EditRecepiePage extends React.Component {
     componentWillMount() {
         database.ref(`recipes/${this.state.id}`).once("value")
             .then((snapshot) => {
-                this.setState(() => ({
-                    title: snapshot.val().title,
-                    description: snapshot.val().description,
-                    isVegetarian: snapshot.val().isVegetarian,
-                 }));
+                if(snapshot.val() != null){
+                    this.setState(() => ({
+                        title: snapshot.val().title,
+                        description: snapshot.val().description,
+                        isVegetarian: snapshot.val().isVegetarian,
+                    }));
+                }
+            })
+        database.ref(`ingredients/${this.state.id}`).once("value")
+            .then((snapshot) => {
+                if (snapshot.val() != null) {
+                    this.setState(() => ({
+                        ingredients: snapshot.val()
+                    }));
+                }
             })
     }
 

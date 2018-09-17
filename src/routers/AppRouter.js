@@ -25,8 +25,8 @@ const AppRouter = (props) => (
                 <Route path="/edit/:id" component={editRecipe} />
                 <Route path="/recipe/:id" render={() => <h1>Edit post with ID</h1>} />
                 <Route path="/login" component={LoginPage} />
-                <Messages />
             </div>
+            <Messages />
         </div>
     </Router>
 );
