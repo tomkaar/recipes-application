@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { database } from "../firebase/Firebase";
-import { addRecipe, removeRecipe, editRecipe, clearRecipe, setRecipe } from '../actions/recipes';
-import RecipeList from "./RecipeList";
-import PageHeader from "./PageHeader";
+
+import { database } from "../../firebase/firebase";
+import { addRecipe, removeRecipe, editRecipe, clearRecipe, setRecipe } from '../../actions/recipes';
+import RecipeList from "../RecipeList";
+import PageHeader from "../layout/PageHeader";
 
 class DashboardPage extends React.Component {
     state = {

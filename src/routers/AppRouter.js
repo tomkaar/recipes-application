@@ -1,15 +1,15 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import RequireAuthentication from "../components/RequireAuthentication";
+import RequireAuthentication from "../components/auth/RequireAuthentication";
 import Messages from "../components/Messages";
 
-import Header from "../components/Header";
-import DashboardPage from "../components/DashboardPage";
-import NewRecepiePage from "../components/NewRecepiePage";
-import EditRecepiePage from "../components/EditRecepiePage";
-import LoginPage from "../components/LoginPage";
-import SearchRecipePage from "../components/SearchRecipePage";
+import Navigation from "../components/layout/Navigation";
+import DashboardPage from "../components/pages/DashboardPage";
+import NewRecepiePage from "../components/pages/NewRecepiePage";
+import EditRecepiePage from "../components/pages/EditRecepiePage";
+import LoginPage from "../components/pages/LoginPage";
+import SearchRecipePage from "../components/pages/SearchRecipePage";
 
 const newRecipe = RequireAuthentication(NewRecepiePage, "");
 const editRecipe = RequireAuthentication(EditRecepiePage, "");
@@ -17,7 +17,7 @@ const editRecipe = RequireAuthentication(EditRecepiePage, "");
 const AppRouter = (props) => (
     <Router basename={props.path}>
         <div>
-            <Header />
+            <Navigation />
             <div className="PageMarginTop">
                 <Route exact path="/" component={DashboardPage} />
                 <Route path="/new" component={newRecipe} />

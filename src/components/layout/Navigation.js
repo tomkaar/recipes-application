@@ -2,11 +2,12 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { firebase } from "../firebase/Firebase";
-import { userLogin, userLogout } from '../actions/user';
-import { newMessage } from '../actions/messages';
+import { firebase } from "../../firebase/firebase";
+import { userLogin, userLogout } from '../../actions/user';
+import { newMessage } from '../../actions/messages';
 
 class Header extends React.Component {
+
     handleLogout = () => {
         firebase.auth().signOut()
             .then(() => {

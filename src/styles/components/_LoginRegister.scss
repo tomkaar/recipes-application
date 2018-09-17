@@ -29,6 +29,11 @@
         border-bottom: 2px solid transparent;
         background: $lighter-grey;
         outline: none;
+        cursor: pointer;
+
+        &:focus {
+            background: darken($lighter-grey, 10%);
+        }
 
         &.isActive {
             border-bottom: 2px solid $info;

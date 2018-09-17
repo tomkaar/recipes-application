@@ -5,7 +5,7 @@ import registerServiceWorker from './registerServiceWorker';
 import "./styles/styles.scss";
 
 import App from './App';
-import Loading from './components/Loading';
+import Loading from './components/layout/Loading';
 
 import { Provider } from "react-redux";
 import firebase from "firebase";

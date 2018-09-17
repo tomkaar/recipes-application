@@ -2,10 +2,10 @@ import React from 'react';
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { firebaseAddRecipe } from "../actions/recipes";
+import { firebaseAddRecipe } from "../../actions/recipes";
 
-import RecipeForm from "./RecipeForm";
-import PageHeader from "./PageHeader";
+import RecipeForm from "../RecipeForm";
+import PageHeader from "../layout/PageHeader";
 
 class NewRecepiePage extends React.Component {
     onSubmit = (recipe) => {

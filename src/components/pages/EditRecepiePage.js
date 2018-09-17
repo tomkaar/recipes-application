@@ -2,11 +2,11 @@ import React from 'react';
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { database } from "../firebase/Firebase";
-import { firebaseEditRecipe } from "../actions/recipes";
+import { database } from "../../firebase/firebase";
+import { firebaseEditRecipe } from "../../actions/recipes";
 
-import RecipeForm from "./RecipeForm";
-import PageHeader from "./PageHeader";
+import RecipeForm from "../RecipeForm";
+import PageHeader from "../layout/PageHeader";
 
 class EditRecepiePage extends React.Component {
 

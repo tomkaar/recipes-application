@@ -1,4 +1,5 @@
 import React from 'react';
+
 const PageHeader = (props) => (
     <div className="PageHeader">
         <div className="wrapper">
