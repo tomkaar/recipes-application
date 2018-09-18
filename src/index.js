@@ -1,17 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from "react-redux";
 import registerServiceWorker from './registerServiceWorker';
 
 import "./styles/styles.scss";
 
+import store from "./store/store";
+import { firebase } from "./firebase/firebase";
+import { userLogin, userLogout } from "./actions/auth";
+
 import App from './App';
 import Loading from './components/layout/Loading';
-
-import { Provider } from "react-redux";
-import firebase from "firebase";
-
-import store from "./store/store";
-import { userLogin, userLogout } from "./actions/auth";
 
 store.subscribe(() => { console.log(store.getState()); });
 
