@@ -6,7 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 import "./styles/styles.scss";
 
 import store from "./store/store";
-import { firebase } from "./firebase/firebase";
+import { firebase } from "./firebase/Firebase";
 import { userLogin, userLogout } from "./actions/auth";
 
 import App from './App';
