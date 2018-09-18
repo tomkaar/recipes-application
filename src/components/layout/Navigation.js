@@ -1,23 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { connect } from "react-redux";
-
-import { firebase } from "../../firebase/firebase";
-import { userLogin, userLogout } from '../../actions/auth';
-import { newMessage } from '../../actions/messages';
+import { connect } from "react-redux"
+import { Logout } from '../../actions/auth';
 
 class Header extends React.Component {
 
-    handleLogout = () => {
-        firebase.auth().signOut()
-            .then(() => {
-                this.props.userLogout();
-                this.props.newMessage("You have successfully been logged out", "Success", 3000);
-            })
-            .catch(error => {
-                this.props.newMessage(error.message, "Danger");
-            });
-    }
+    handleLogout = () => { Logout(); }
 
     render() {
         return (
@@ -50,13 +38,5 @@ class Header extends React.Component {
 const mapStateToProps = (state) => ({
     user: state.user
 });
-const mapDispatchToProps = (dispatch) => ({
-    userLogin: (user) => dispatch(userLogin(user)),
-    userLogout: () => dispatch(userLogout()),
-    newMessage: (message, type, time) => dispatch(newMessage(message, type, time)),
-});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
-
-// only show NavLink New and Edit if user is logged in
-// instad of using a <a> we can use Link or NavLink which is a extension of Link to navigation on our page.
+export default connect(mapStateToProps)(Header);

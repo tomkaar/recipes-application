@@ -1,8 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { firebase } from "../../firebase/firebase";
-import { userLogin, userLogout } from '../../actions/auth';
+import { userLogin, userLogout, Login } from '../../actions/auth';
 import { newMessage, removeMessage } from '../../actions/messages';
 
 class LoginForm extends React.Component {
@@ -16,21 +15,10 @@ class LoginForm extends React.Component {
     componentDidUnMount() { this.setState(() => ({ toDashboard: false })); }
     handleInputChange = e => this.setState({ [e.target.name]: e.target.value });
 
-    handleLoginSubmission = (e) => {
+    handleLoginSubmission = async (e) => {
         e.preventDefault();
-        const attemptMessage = this.props.newMessage("Attempting to login", "Info");
-        firebase.auth()
-            .signInWithEmailAndPassword(this.state.email, this.state.password)
-            .then((snapshot) => {
-                this.props.userLogin(snapshot.user);
-                this.props.removeMessage(attemptMessage.payload.id);
-                this.props.newMessage("You have successfully logged in", "Success", 3000);
-                this.props.history.push('/');
-            })
-            .catch(error => {
-                this.props.removeMessage(attemptMessage.payload.id);
-                this.props.newMessage(error.message, "Error", 5000);
-            })
+        let login =  await Login(this.state.email, this.state.password);
+        login && this.props.history.push("/");
     }
 
     render() {
