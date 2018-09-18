@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { firebaseRemoveRecipe } from '../actions/recipes';
+import { firebaseRemoveRecipe } from '../../actions/recipes';
 
 const RecipeListItem = ({ title, description, id, createdBy, timestamp, removeRecipe, user}) => { 
     const handleRemove = () => removeRecipe(id);

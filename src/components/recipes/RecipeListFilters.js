@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { setTextFilter, setIsVegetarianFilter, sortByLatest, sortByOldest } from '../actions/filters';
+import { setTextFilter, setIsVegetarianFilter, sortByLatest, sortByOldest } from '../../actions/filters';
 
 class RecipeListFilters extends React.Component {
 

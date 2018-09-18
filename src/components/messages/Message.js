@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { removeMessage } from '../actions/messages';
+import { removeMessage } from '../../actions/messages';
 
 class Message extends React.Component {
     constructor(props){

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { database } from "../../firebase/firebase";
 import { addRecipe, removeRecipe, editRecipe, clearRecipe, setRecipe } from '../../actions/recipes';
-import RecipeList from "../RecipeList";
+import RecipeList from "../recipes/RecipeList";
 import PageHeader from "../layout/PageHeader";
 
 class DashboardPage extends React.Component {

@@ -5,8 +5,8 @@ import { addRecipe, removeRecipe, editRecipe, clearRecipe } from '../../actions/
 import selectRecipes from "../../selectors/selectRecipes";
 
 import PageHeader from "../layout/PageHeader";
-import RecipeListFilters from "../RecipeListFilters";
-import RecipeList from "../RecipeList";
+import RecipeListFilters from "../recipes/RecipeListFilters";
+import RecipeList from "../recipes/RecipeList";
 
 class DashboardPage extends React.Component {
     state = {

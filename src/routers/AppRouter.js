@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import RequireAuthentication from "../components/auth/RequireAuthentication";
-import Messages from "../components/Messages";
+import Messages from "../components/messages/Messages";
 
 import Navigation from "../components/layout/Navigation";
 import DashboardPage from "../components/pages/DashboardPage";

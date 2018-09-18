@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import { firebaseAddRecipe } from "../../actions/recipes";
 
-import RecipeForm from "../RecipeForm";
+import RecipeForm from "../recipes/RecipeForm";
 import PageHeader from "../layout/PageHeader";
 
 class NewRecepiePage extends React.Component {
