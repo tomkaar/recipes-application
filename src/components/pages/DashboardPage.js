@@ -12,9 +12,9 @@ class DashboardPage extends React.Component {
     }
 
     componentDidMount() {
+        this.props.clearRecipes();
         const ref = database.ref("recipes");
         this.setState(() => ({ ref }));
-        this.props.clearRecipes();
         ref.limitToLast(10)
             .orderByChild("timestamp")
             .on("child_added", (snapshot) => {

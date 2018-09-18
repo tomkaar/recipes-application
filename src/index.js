@@ -11,7 +11,7 @@ import { Provider } from "react-redux";
 import firebase from "firebase";
 
 import store from "./store/store";
-import { userLogin, userLogout } from "./actions/user";
+import { userLogin, userLogout } from "./actions/auth";
 
 store.subscribe(() => { console.log(store.getState()); });
 

@@ -2,7 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { firebase } from "../../firebase/firebase";
-import { userLogin, userLogout } from '../../actions/user';
+import { userLogin, userLogout } from '../../actions/auth';
 import { newMessage, removeMessage } from '../../actions/messages';
 
 class LoginForm extends React.Component {

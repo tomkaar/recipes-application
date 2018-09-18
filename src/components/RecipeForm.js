@@ -5,24 +5,27 @@ class RecipeForm extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            id: props.id ? props.id : "",
-            title: props.title ? props.title : "",
-            description: props.description ? props.description : "",
-            isVegetarian: props.isVegetarian ? props.isVegetarian : false,
-            ingredients: props.ingredients ? props.ingredients : [],
-            uid: props.ingredients ? props.ingredients.length : 0
+            id: "",
+            title: "",
+            description: "",
+            isVegetarian: false,
+            ingredients: [],
+            uid: 0
         }
     }
 
     componentWillReceiveProps(props) {
-        this.setState(() => ({
-            id: props.recipeData.id ? props.recipeData.id : "",
-            title: props.recipeData.title ? props.recipeData.title : "",
-            description: props.recipeData.description ? props.recipeData.description : "",
-            isVegetarian: props.recipeData.isVegetarian ? props.recipeData.isVegetarian : false,
-            ingredients: props.recipeData.ingredients ? props.recipeData.ingredients : [],
-            uid: props.recipeData.ingredients ? props.recipeData.ingredients.length : 0,
-        }));
+        if(props.recipeData){
+            this.setState(() => ({
+                id: props.recipeData ? props.recipeData.id : "",
+                title: props.recipeData ? props.recipeData.title : "",
+                description: props.recipeData ? props.recipeData.description : "",
+                isVegetarian: props.recipeData ? props.recipeData.isVegetarian : false,
+                ingredients: props.recipeData.ingredients ? props.recipeData.ingredients : [],
+                uid: props.recipeData ? props.recipeData.ingredients ? props.recipeData.ingredients.length : 0 : 0,
+            }));
+        }
+        
     }
     
     handleInputChange = e => this.setState({ [e.target.name]: e.target.value });
@@ -90,7 +93,7 @@ class RecipeForm extends React.Component {
 
 
 
-                {this.state.ingredients.length !== 0 ? (
+                {this.state.ingredients.length !== undefined ? (
                     <div>
                         {this.state.ingredients.map(ingredient => (
                             <div key={ingredient.uid}>

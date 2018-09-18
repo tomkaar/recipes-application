@@ -60,7 +60,7 @@ export const firebaseRemoveRecipe = (id) => {
     return (dispatch) => {
         const uid = store.getState().user.uid;
         return database.ref(`recipes/${id}`).remove()
-            .then((snapshot) => {
+            .then(() => {
                 database.ref(`recipeOwner/${uid}/${id}`).remove();
                 database.ref(`ingredients/${id}`).remove();
                 dispatch(removeRecipe(id))

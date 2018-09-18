@@ -11,7 +11,8 @@ import PageHeader from "../layout/PageHeader";
 class EditRecepiePage extends React.Component {
 
     state = {
-        id: this.props.location.pathname.split("/")[2] || ""
+        id: this.props.location.pathname.split("/")[2] || "",
+        ingredients: []
     }
 
     componentWillMount() {

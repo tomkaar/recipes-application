@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { firebase } from "../../firebase/firebase";
-import { userLogin, userLogout } from '../../actions/user';
+import { userLogin, userLogout } from '../../actions/auth';
 import { newMessage } from '../../actions/messages';
 
 class Header extends React.Component {
