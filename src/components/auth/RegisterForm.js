@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { firebase, database } from "../../firebase/firebase";
+import { firebase, database } from "../../firebase/Firebase";
 import { userLogin, userLogout } from '../../actions/auth';
 import { newMessage, removeMessage } from '../../actions/messages';
 

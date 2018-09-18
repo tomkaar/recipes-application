@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { database } from "../../firebase/firebase";
+import { database } from "../../firebase/Firebase";
 import { addRecipe, removeRecipe, editRecipe, clearRecipe } from '../../actions/recipes';
 import selectRecipes from "../../selectors/selectRecipes";
 

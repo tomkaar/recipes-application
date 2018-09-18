@@ -2,8 +2,7 @@ import React from 'react';
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { database } from "../../firebase/firebase";
-import { firebaseEditRecipe } from "../../actions/recipes";
+import { database } from "../../firebase/Firebase";
 
 class DetailedRecepiePage extends React.Component {
 

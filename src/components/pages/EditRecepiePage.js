@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { database } from "../../firebase/firebase";
+import { database } from "../../firebase/Firebase";
 import { firebaseEditRecipe } from "../../actions/recipes";
 
 import RecipeForm from "../recipes/RecipeForm";

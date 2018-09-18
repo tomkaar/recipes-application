@@ -1,4 +1,4 @@
-import { database } from "../firebase/firebase";
+import { database } from "../firebase/Firebase";
 import { newMessage } from "./messages";
 import store from "../store/store";
 
