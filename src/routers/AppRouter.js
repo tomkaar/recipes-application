@@ -10,6 +10,7 @@ import DashboardPage from "../components/pages/DashboardPage";
 import NewRecepiePage from "../components/pages/NewRecepiePage";
 import EditRecepiePage from "../components/pages/EditRecepiePage";
 import LoginPage from "../components/pages/LoginPage";
+import DetailedRecepiePage from "../components/pages/DetailedRecepiePage";
 import SearchRecipePage from "../components/pages/SearchRecipePage";
 
 const newRecipe = RequireAuthentication(NewRecepiePage, "");
@@ -24,7 +25,7 @@ const AppRouter = (props) => (
                 <Route path="/new" component={newRecipe} />
                 <Route path="/search" component={SearchRecipePage} />
                 <Route path="/edit/:id" component={editRecipe} />
-                <Route path="/recipe/:id" render={() => <h1>Edit post with ID</h1>} />
+                <Route path="/recipe/:id" render={DetailedRecepiePage} />
                 <Route path="/login" component={LoginPage} />
             </div>
             <Messages />
