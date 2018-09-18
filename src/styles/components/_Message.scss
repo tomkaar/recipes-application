@@ -1,8 +1,9 @@
 .message {
     position: relative;
-    background: $light-grey;
-    border-radius: 4px;
+    background: white;
+    border-radius: 16px;
     margin-top: $l-size;
+    box-shadow: 0 0px 20px rgba(10, 10, 10, 0.1);
 
     .message_remove {
         position: absolute;
@@ -32,21 +33,22 @@
     .message__content {
         padding: 1.25em 1.5em;
         color: #4a4a4a;
-        border-left: 3px solid $info;
+        border-right: 3px solid $info;
+        border-radius: 16px;
     }
 
     &.is_Success .message__content, 
     &.is_success .message__content {
-        border-left: 3px solid $success;
+        border-right: 3px solid $success;
     }
 
     &.is_Error .message__content, 
     &.is_error .message__content {
-        border-left: 3px solid $danger;
+        border-right: 3px solid $danger;
     }
 
     &.is_Warning .message__content, 
     &.is_warning .message__content {
-        border-left: 3px solid $warning;
+        border-right: 3px solid $warning;
     }
 }

@@ -17,7 +17,7 @@ class Message extends React.Component {
                     {this.props.message}
                 </div>
                 <div className="message_remove">
-                    <button>X</button>
+                    <button onClick={this.handleRemove}>X</button>
                 </div>
                 
             </div>
