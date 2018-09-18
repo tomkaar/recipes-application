@@ -1,45 +1,52 @@
 .message {
+    position: relative;
     background: $light-grey;
     border-radius: 4px;
-    overflow: hidden;
     margin-top: $l-size;
 
-    .message__header {
-        position: relative;
-        padding: $s-size $m-size;
-        color: white;
-        justify-content: space-between;
-        background: $info;
-        padding: .75em 1em;
+    .message_remove {
+        position: absolute;
+        top: 50%;
+        margin-top: -15px;
+        right: -38px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 1px solid #f5f5f5;
+        overflow: hidden;
+        box-shadow: 0 0px 20px rgba(10, 10, 10, 0.1);
 
         button {
+            -webkit-appearance: none;
             position: absolute;
-            top: 10px;
-            right: $m-size;
-            appearance: none;
-            color: white;
-            font-size: $m-size;
+            top: 0;
+            left: 0;
+            width: 28px;
+            height: 28px;
+            background: transparent;
             border: none;
-            background: none;
+            cursor: pointer;
         }
     }
+
     .message__content {
         padding: 1.25em 1.5em;
         color: #4a4a4a;
+        border-left: 3px solid $info;
     }
 
-    &.is_Success .message__header, 
-    &.is_success .message__header {
-        background: $success;
+    &.is_Success .message__content, 
+    &.is_success .message__content {
+        border-left: 3px solid $success;
     }
 
-    &.is_Error .message__header, 
-    &.is_error .message__header {
-        background: $danger;
+    &.is_Error .message__content, 
+    &.is_error .message__content {
+        border-left: 3px solid $danger;
     }
 
-    &.is_Warning .message__header, 
-    &.is_warning .message__header {
-        background: $warning;
+    &.is_Warning .message__content, 
+    &.is_warning .message__content {
+        border-left: 3px solid $warning;
     }
 }

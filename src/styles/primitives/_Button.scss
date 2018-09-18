@@ -1,38 +1,39 @@
 %Button {
+    display: inline-block;
     -webkit-appearance: none; 
     padding: $s-size/1.2 $s-size;
+    height: 40px;
     font-size: $m-size;
     color: $medium-grey;
     text-decoration: none;
     background-color: #fff;
     border: 1px solid $light-grey;
-    border-radius: 4px;
+    border-radius: 50px;
     cursor: pointer;
 
     &.is_info {
-        background: $info;
         color: white;
+        @extend %_info;
+        border: none;
     }
     &.is_success {
-        background: $success;
         color: white;
+        @extend %_success;
+        border: none;
     }
     &.is_warning {
-        background: $warning;
         color: white;
+        @extend %_info;
+        border: none;
     }
     &.is_danger {
-        background: $danger;
         color: white;
+        @extend %_danger;
+        border: none;
     }
 
     &:hover{
-        background: darken($light-grey, 10%);
-
-        &.is_info { background: darken($info, 10%); }
-        &.is_success { background: darken($success, 10%); }
-        &.is_warning { background: darken($warning, 10%); }
-        &.is_danger { background: darken($danger, 10%); }
+        box-shadow: 0 0px 20px rgba(10,10,10,.2);
     }
 }
 

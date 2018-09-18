@@ -28,11 +28,8 @@ export const firebaseAddRecipe = (data = {}) => {
         };
         return database.ref("recipes").push(expense)
             .then((snapshot) => {
-                const updateObject = {
-                    [`recipeOwner/${uid}/${snapshot.key}`]: true,
-                    [`ingredients/${snapshot.key}`]: data.ingredients
-                };
-                database.ref().update(updateObject);
+                database.ref(`recipeOwner/${uid}`).update({ [snapshot.key]: true });
+                database.ref(`ingredients/${snapshot.key}`).set(data.ingredients);
                 dispatch(addRecipe({
                     id: snapshot.key,
                     ...expense
@@ -61,8 +58,8 @@ export const firebaseRemoveRecipe = (id) => {
         const uid = store.getState().user.uid;
         return database.ref(`recipes/${id}`).remove()
             .then(() => {
-                database.ref(`recipeOwner/${uid}/${id}`).remove();
                 database.ref(`ingredients/${id}`).remove();
+                database.ref(`recipeOwner/${uid}/${id}`).remove();
                 dispatch(removeRecipe(id))
                 dispatch(newMessage("This recipe has been removed.", "Success", 3000));
             })
@@ -84,16 +81,18 @@ export const editRecipe = (id, update) => ({
 
 export const firebaseEditRecipe = (id, data) => {
     return (dispatch) => {
+        const uid = store.getState().user.uid;
         const update = {
             title: data.title,
             description: data.description,
             isVegetarian: data.isVegetarian,
             ingredients: data.ingredients ? data.ingredients.length : 0,
-            createdBy: store.getState().user.uid,
+            createdBy: uid,
             timestamp: new Date().getTime(),
         }
         return database.ref(`recipes/${id}`).set(update)
             .then(() => {
+                database.ref(`recipeOwner/${uid}`).update({ [id]: true });
                 database.ref(`ingredients/${id}`).set(data.ingredients);
                 dispatch(editRecipe(id, update))
                 dispatch(newMessage("Your changes has been saved", "Success", 3000))

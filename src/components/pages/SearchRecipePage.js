@@ -4,7 +4,6 @@ import { database } from "../../firebase/firebase";
 import { addRecipe, removeRecipe, editRecipe, clearRecipe } from '../../actions/recipes';
 import selectRecipes from "../../selectors/selectRecipes";
 
-import PageHeader from "../layout/PageHeader";
 import RecipeListFilters from "../recipes/RecipeListFilters";
 import RecipeList from "../recipes/RecipeList";
 
@@ -42,7 +41,6 @@ class DashboardPage extends React.Component {
     render() {
         return (
             <div className="SerachRecipePage">
-                <PageHeader title="Search Recipes" para="Find what you are looking for" />
                 <RecipeListFilters />
                 <RecipeList recipes={selectRecipes(this.props.recipes, this.props.filters)} />
             </div>

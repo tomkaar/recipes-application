@@ -50,7 +50,7 @@ class RecipeListFilters extends React.Component {
                             type="button"
                             name="submit"
                             value="Search"
-                            className="Button is_info"
+                            className="Button"
                             onClick={this.handleTextSubmit}
                         />
                     </div>

@@ -1,7 +1,9 @@
 .RecipeListFilters{
     width: 100%;
-    padding: $xl-size 0;
+    padding: $xl-size*2 0;
     background: $lighter-grey;
+    background-color: #8EC5FC;
+    background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
 
     .wrapper {
         padding: 0 4.8rem;
@@ -27,11 +29,10 @@
     select {
         @extend %Select;
         margin-left: $s-size;
-        // float: left;
     }
     label {
         @extend %Label;
-        margin-top: 2.6rem;
+        margin-top: $m-size;
         margin-right: $m-size;
         float: left;
         cursor: pointer;

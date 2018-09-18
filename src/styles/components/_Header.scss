@@ -2,7 +2,7 @@
     position: fixed;
     width: 100%;
     height: $NavigationHeight;
-    background: $lighter-grey;
+    background: white;
     border-bottom: 1px solid $light-grey;
 }
 
@@ -35,16 +35,14 @@
 
         color: $medium-grey;
         text-decoration: none;
-        border-bottom: 2px solid transparent;
 
         &.active {
-            color: $brand;
-            border-bottom: 2px solid $brand;
+            color: darken($info, 20%);
         }
     }
 
     .navbar-button {
-        margin-top: $s-size/2;
+        margin-top: $m-size * 1.8;
         margin-right: $m-size;
     }
 }

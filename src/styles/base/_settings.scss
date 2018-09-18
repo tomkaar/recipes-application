@@ -1,9 +1,30 @@
 // colors 
 $brand: #ee205e;
-$info: #209cee;
-$success: #23d160;
-$warning: #ffdd57;
-$danger: #ff3860;
+$info: #8EC5FC;
+$success: #08ea31;
+$warning: #FBAB7E;
+$danger: #f0506e;
+
+%_info{
+    background-color: #8EC5FC;
+    background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+}
+%_success{
+    background-color: #08eabf;
+    background-image: linear-gradient(0deg, #08eabf 0%, #2AF598 100%);
+    background-color: #08ea31;
+    background-image: linear-gradient(0deg, #08ea31 0%, #2AF598 100%);
+}
+%_warning{
+    background-color: #FBAB7E;
+    background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+}
+%_danger{
+    background-color: #ff371c;
+    background-image: linear-gradient(239deg, #ff371c 0%, #f9234e 55%, #fb3c60 100%);
+}
+
+
 
 $lighter-grey: #f8f8f8;
 $light-grey: #f5f5f5;
@@ -18,7 +39,7 @@ $desktop-breakpoint: 45rem;
 
 
 // Special
-$NavigationHeight: 5.6rem;
+$NavigationHeight: 4.8rem*2;
 
 // Special classes
 .l-margin-top { margin-top: $l-size; }
@@ -26,11 +47,12 @@ $NavigationHeight: 5.6rem;
 .m-margin-right { margin-right: $m-size; }
 .l-margin-right { margin-right: $l-size; }
 
-
-
 .wrapper{
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 $m-size;
+}
+
+.cursor-pointer{
+    cursor: pointer;
 }

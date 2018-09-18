@@ -6,5 +6,12 @@
     .wrapper {
         display: flex;
         flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+
+    .RecipeList-NoResult{
+        margin: $xl-size 0;
+        width: 100%;
+        text-align: center;
     }
 }

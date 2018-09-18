@@ -38,7 +38,7 @@ class DashboardPage extends React.Component {
     render() {
         return (
             <div className="DashboardPage">
-                <PageHeader title="Last 10 Recipes Added" />
+                <PageHeader title="Recently added" />
                 <RecipeList recipes={this.props.recipes.slice(-10)} />
             </div>
         )

@@ -18,7 +18,7 @@ class NewRecepiePage extends React.Component {
     render() {
         return(
             <div>
-                <PageHeader title="Add a Recipe" para="Submit a new recipe" />
+                <PageHeader title="Submit a Recipe" />
                 <RecipeForm onSubmit={this.onSubmit} />
             </div>
         )

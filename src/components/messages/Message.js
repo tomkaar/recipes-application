@@ -13,12 +13,11 @@ class Message extends React.Component {
     render(){
         return (
             <div className={`message is_${this.props.type}`}>
-                <div className="message__header">
-                    <p>{this.props.type}</p>
-                    <button onClick={this.handleRemove}>x</button>
-                </div>
                 <div className="message__content">
                     {this.props.message}
+                </div>
+                <div className="message_remove">
+                    <button>X</button>
                 </div>
                 
             </div>

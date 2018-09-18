@@ -32,7 +32,7 @@
         cursor: pointer;
 
         &:focus {
-            background: darken($lighter-grey, 10%);
+            background: darken($lighter-grey, 5%);
         }
 
         &.isActive {

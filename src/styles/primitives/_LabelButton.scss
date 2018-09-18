@@ -1,0 +1,17 @@
+.LabelButton {
+    display: inline-block;
+    -webkit-appearance: none; 
+    padding: $s-size/1.2 $s-size;
+    height: 40px;
+    min-width: 40px;
+    margin-right: 10px;
+    font-size: $m-size;
+    line-height: 1.2;
+    text-align: center;
+    color: $medium-grey;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid $light-grey;
+    border-radius: 50px;
+    cursor: default;
+}

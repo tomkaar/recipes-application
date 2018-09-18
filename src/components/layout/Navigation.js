@@ -3,9 +3,14 @@ import { NavLink } from "react-router-dom";
 import { connect } from "react-redux"
 import { Logout } from '../../actions/auth';
 
+import Button from "./NavButton";
+
 class Header extends React.Component {
 
     handleLogout = () => { Logout(); }
+    handleLoginNavigationButton = () => {
+        console.log("OK");
+    };
 
     render() {
         return (
@@ -13,7 +18,7 @@ class Header extends React.Component {
                 <div className="wrapper">
                     <div className="navigation__left">
                         <NavLink to="/" className="navbar-brand navbar-item l-margin-right">
-                            <h1>Recipes Application</h1>
+                            <h1>Recipes</h1>
                         </NavLink>
                         <div className="navbar-menu">
                             <NavLink exact activeClassName="active" className="navbar-item" to="/">Home</NavLink>
@@ -25,7 +30,7 @@ class Header extends React.Component {
                         <div className="navbar-menu">
                             {this.props.user.user ?
                                 <button onClick={this.handleLogout} className="Button navbar-button">Logout</button> :
-                                <NavLink to="/login" className="navbar-item l-margin-right">Login</NavLink>
+                                <Button url="/login">Login or Register</Button>
                             }
                         </div>
                     </div>

@@ -1,9 +1,10 @@
 import React from "react";
+import Button from "../layout/NavButton";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { firebaseRemoveRecipe } from '../../actions/recipes';
 
-const RecipeListItem = ({ title, description, id, createdBy, timestamp, removeRecipe, user}) => { 
+const RecipeListItem = ({ title, description, id, createdBy, timestamp, isVegetarian, ingredients, removeRecipe, user}) => { 
     const handleRemove = () => removeRecipe(id);
 
     const time = new Date(timestamp);
@@ -21,13 +22,24 @@ const RecipeListItem = ({ title, description, id, createdBy, timestamp, removeRe
                         {user.uid === createdBy && (
                             <div>
                                 <button className="Button" onClick={handleRemove}>Remove</button>
-                                <Link className="Button" to={`/edit/${id}`}>Edit</Link>
+                                <Button className="Button" url={`/edit/${id}`}>Edit</Button>
                             </div>
                         )}
                     </div>
                 </div>
                 <div className="RecipeListItem-Content">
                     <p>{description}</p>
+                </div>
+                <div className="RecipeListItem-ModifyBtns">
+                    <div>
+                        {isVegetarian && <label className="LabelButton">Vegetarian</label>}
+                        {ingredients > 0 && 
+                            <label className="LabelButton">
+                                {ingredients} {ingredients > 1 ? "Ingredients" : "Ingredient"}
+                            </label>
+                        }
+                    </div>
+                    <Button url={`/post/${id}`} addClass="is_info">See More</Button>
                 </div>
             </div>
         </div>

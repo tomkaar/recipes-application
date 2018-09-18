@@ -1,6 +1,6 @@
 .RecipeListItem {
-    flex-basis: 50%;
-    width: 50%;
+    flex-basis: 45%;
+    width: 45%;
     margin: $l-size 0 0 0;
 }
 
@@ -18,21 +18,33 @@
         flex-grow: 1;
 
         a {
-            font-size: $m-size * 1.4;
+            font-size: 2.8rem;
             color: $medium-grey;
             text-decoration: none;
         }
 
         p { 
-            padding: 3px 0;
-            font-size: $s-size * 1.1;
+            margin-top: -10px;
+            padding: 0 0 0 5px;
+            font-size: 1.8rem;
             color: $medium-grey;
         }
     }
 }
 .RecipeListItem-Content {
     width: 100%;
-    padding: $m-size;
+    padding: 0 $m-size $m-size $m-size;
+}
+.RecipeListItem-ModifyBtns{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 15px;
+    border-top: 1px solid darken($light-grey, 10%);
+
+    button {
+        margin-right: .5rem;
+    }
 }
 
 

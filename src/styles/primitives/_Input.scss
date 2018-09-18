@@ -12,6 +12,11 @@
     border: 1px solid transparent;
     border-color: #dbdbdb;
     border-radius: 4px;
+
+    &:focus {
+        outline: none;
+        border-bottom: 2px solid $info;
+    }
 }
 
 .Input {
