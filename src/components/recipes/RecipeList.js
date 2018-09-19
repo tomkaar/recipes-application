@@ -10,14 +10,15 @@ export const RecipeList = (props) => (
                         <h2>Loading..</h2>
                     </div>
                 ) : (
-                        props.recipes.reverse().map((recipe) => {
-                            return <RecipeListItem key={recipe.id} {...recipe} />;
-                        })
-                    )
+                    props.recipes.reverse().map((recipe) => {
+                        return <RecipeListItem key={recipe.id} {...recipe} />;
+                    })
                 )
-            }
+            )}
         </div>
     </div>
 );
 
 export default RecipeList;
+
+// tar emot recipes i form av props och mappar ut dem

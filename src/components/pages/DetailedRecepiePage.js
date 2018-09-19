@@ -50,8 +50,10 @@ class DetailedRecepiePage extends React.Component {
         return(
             (this.state.readyOne && this.state.readyTwo) ? (
                 <div className="wrapper">
-                    <div className="RecipeDetails-left">
+                    <div className="RecipeDetails-top">
                         <h2>{this.state.title}</h2>
+                    </div>
+                    <div className="RecipeDetails-left">
                         <p>{`${this.state.time.getDate()}/${this.state.time.getMonth()} - ${this.state.time.getFullYear()} ${this.state.time.getHours()}:${this.state.time.getMinutes()}`}</p>
                         <p>{this.state.description}</p>
                     </div>
@@ -60,7 +62,9 @@ class DetailedRecepiePage extends React.Component {
                             <h3>Ingredients</h3>
                             <ul>
                                 {this.state.ingredients.map((ingredient) => (
-                                    <li key={ingredient.uid}>{`${ingredient.amount}${ingredient.measure} ${ingredient.text}`}</li>
+                                    <li key={ingredient.uid}>
+                                        {`${ingredient.amount}${ingredient.measure} ${ingredient.text}`}
+                                    </li>
                                 ))}
                             </ul>
 
@@ -68,11 +72,7 @@ class DetailedRecepiePage extends React.Component {
                     </div>
                 </div>
             ) : (
-                !this.state.error ? (
-                    <h2>Loading..</h2>
-                ) : (
-                    <h2>Opps Someting went wrong</h2>
-                )
+                !this.state.error ? <h2>Loading..</h2> : <h2>Opps Someting went wrong</h2> 
             )
         )
     }

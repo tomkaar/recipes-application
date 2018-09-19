@@ -5,27 +5,13 @@ class RecipeForm extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            id: "",
-            title: "",
-            description: "",
-            isVegetarian: false,
-            ingredients: [],
-            uid: 0
+            id: props.recipeData ? props.recipeData.id : "",
+            title: props.recipeData ? props.recipeData.title : "",
+            description: props.recipeData ? props.recipeData.description : "",
+            isVegetarian: props.recipeData ? props.recipeData.isVegetarian : false,
+            ingredients: props.recipeData ? props.recipeData.ingredients : [],
+            uid: props.recipeData ? props.recipeData.ingredients.length : [],
         }
-    }
-
-    componentWillReceiveProps(props) {
-        if(props.recipeData){
-            this.setState(() => ({
-                id: props.recipeData ? props.recipeData.id : "",
-                title: props.recipeData ? props.recipeData.title : "",
-                description: props.recipeData ? props.recipeData.description : "",
-                isVegetarian: props.recipeData ? props.recipeData.isVegetarian : false,
-                ingredients: props.recipeData.ingredients ? props.recipeData.ingredients : [],
-                uid: props.recipeData ? props.recipeData.ingredients ? props.recipeData.ingredients.length : 0 : 0,
-            }));
-        }
-        
     }
     
     handleInputChange = e => this.setState({ [e.target.name]: e.target.value });
@@ -67,55 +53,81 @@ class RecipeForm extends React.Component {
 
     render() {
         return(
-            <div>
-                <form onSubmit={this.onSubmit}>
-                    <input
-                        type="text"
-                        name="title"
-                        placeholder="Title"
-                        value={this.state.title}
-                        onChange={this.handleInputChange}
-                    />
-                    <input
-                        type="checkbox"
-                        checked={this.state.isVegetarian}
-                        onChange={this.handleIsVegitarianChange}
-                    />
-                    <textarea
-                        placeholder="Add a note for your expense (optional)"
-                        name="description"
-                        value={this.state.description}
-                        onChange={this.handleInputChange}
-                    >
-                    </textarea>
-                    <button type="submit">Submit</button>
+            <div className="RecipeForm">
+                <form onSubmit={this.onSubmit} className="RecipeForm-meta">
+                    <label className="Label">
+                        Title: 
+                        <input
+                            type="text"
+                            name="title"
+                            placeholder="Title"
+                            autoFocus={true}
+                            value={this.state.title}
+                            onChange={this.handleInputChange}
+                            className="Input"
+                        />
+                    </label>
+                    <label className="Label">
+                        Description:
+                        <textarea
+                            placeholder="Description"
+                            name="description"
+                            value={this.state.description}
+                            onChange={this.handleInputChange}
+                            className="Textarea"
+                        >
+                        </textarea>
+                    </label>
+                    <label className="Label">
+                        <input
+                            type="checkbox"
+                            checked={this.state.isVegetarian}
+                            onChange={this.handleIsVegitarianChange}
+                        /> Is Vegetarian
+                    </label>
+                    <button type="submit" className="Button is_info">Submit</button>
                 </form>
 
+                <div className="RecipeForm-ingredients">
+                    {this.state.ingredients.length !== undefined ? (
+                        <div>
+                            <h3>Ingredients</h3>
+                            {this.state.ingredients.map(ingredient => (
+                                <div className="RecipeForm-ingredients__item" key={ingredient.uid}>
+                                    <button
+                                        onClick={(e) => { this.removeIngredient(ingredient.uid) }}
+                                        className="Button"
+                                    >X</button>
+                                    {ingredient.amount}{ingredient.measure} {ingredient.text}
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <div>No Ingredients</div>
+                    )}
 
-
-                {this.state.ingredients.length !== undefined ? (
-                    <div>
-                        {this.state.ingredients.map(ingredient => (
-                            <div key={ingredient.uid}>
-                                {ingredient.amount}{ingredient.measure} {ingredient.text}
-                                <button onClick={(e) => { this.removeIngredient(ingredient.uid) }}>X</button>
-                            </div>
-                        ))}
-                    </div>
-                ) : (
-                    <div>No Ingredients</div>
-                )}
-
-                <div>
                     <form onSubmit={this.AddIngredient}>
-                        <input type="number" placeholder="amount" required ref={node => this.ingredientAmount = node} />
-                        <input type="text" placeholder="Mesure" required ref={node => this.ingredientMeasure = node} />
-                        <input type="text" placeholder="Ingredient" required ref={node => this.ingredientText = node} />
-                        <button type="submit">Add</button>
+                        <input 
+                            type="number" 
+                            placeholder="amount" 
+                            required 
+                            ref={node => this.ingredientAmount = node} 
+                            className="Input RecipeForm-ingredients__amount" />
+                        <input 
+                            type="text" 
+                            placeholder="Mesure" 
+                            required 
+                            ref={node => this.ingredientMeasure = node} 
+                            className="Input RecipeForm-ingredients__Mesure" />
+                        <input 
+                            type="text" 
+                            placeholder="Ingredient" 
+                            required 
+                            ref={node => this.ingredientText = node} 
+                            className="Input RecipeForm-ingredients__Ingredient" />
+                        <button type="submit" className="Button is_info RecipeForm-ingredients__Button">Add</button>
                     </form>
                 </div>
-
-
 
             </div>
         )

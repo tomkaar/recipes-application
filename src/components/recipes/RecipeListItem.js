@@ -1,17 +1,21 @@
 import React from "react";
-import Button from "../layout/NavButton";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { firebaseRemoveRecipe } from '../../actions/recipes';
 
-const RecipeListItem = ({ title, description, id, createdBy, timestamp, isVegetarian, ingredients, removeRecipe, user}) => { 
-    const handleRemove = () => removeRecipe(id);
+import Button from "../layout/NavButton";
 
+const RecipeListItem = (props) => { 
+
+    const { title, description, id, createdBy, timestamp, isVegetarian, ingredients, removeRecipe, user } = props;
+    
+    const handleRemove = () => removeRecipe(id);
     const time = new Date(timestamp);
 
     return (
         <div className="RecipeListItem">
             <div className="RecipeListItem-Wrapper">
+
                 <div className="RecipeListItem-Header">
                     <div className="RecipeListItem-Info">
                         <Link to={`/recipe/${id}`}>{title}</Link>
@@ -27,9 +31,11 @@ const RecipeListItem = ({ title, description, id, createdBy, timestamp, isVegeta
                         )}
                     </div>
                 </div>
+
                 <div className="RecipeListItem-Content">
                     <p>{description}</p>
                 </div>
+
                 <div className="RecipeListItem-ModifyBtns">
                     <div>
                         {isVegetarian && <label className="LabelButton">Vegetarian</label>}
@@ -39,19 +45,24 @@ const RecipeListItem = ({ title, description, id, createdBy, timestamp, isVegeta
                             </label>
                         }
                     </div>
-                    <Button url={`/post/${id}`} addClass="is_info">See More</Button>
+                    <Button url={`/recipe/${id}`} addClass="is_info">See More</Button>
                 </div>
+
             </div>
         </div>
     )
 };
 
+// access current redux state
 const mapStateToProps = (state) => ({
     user: state.user
 });
 
+// access redux actions to modify state
 const mapDispatchToProps = (dispatch) => ({
     removeRecipe: (id) => dispatch(firebaseRemoveRecipe(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecipeListItem);
+
+// tar emot data för att skriva ut info om receptet

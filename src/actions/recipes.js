@@ -3,18 +3,19 @@ import { newMessage } from "./messages";
 import store from "../store/store";
 
 
-
+// funktionen för att endast uppdatera redux state
 export const clearRecipe = () => ({
     type: "CLEAR_RECIPES"
 });
 
 
-
+// funktionen för att endast uppdatera redux state
 export const addRecipe = (expense) => ({
     type: "ADD_RECIPE",
     expense
 });
 
+// funktion för att prata med firebase och senare updatera redux state.
 export const firebaseAddRecipe = (data = {}) => {
     return (dispatch) => {
         const uid = store.getState().user.uid;
@@ -47,12 +48,13 @@ export const firebaseAddRecipe = (data = {}) => {
 
 
 
-
+// funktionen för att endast uppdatera redux state
 export const removeRecipe = (id) => ({
     type: "REMOVE_RECIPE",
     id
 });
 
+// funktion för att prata med firebase och senare updatera redux state.
 export const firebaseRemoveRecipe = (id) => {
     return (dispatch) => {
         const uid = store.getState().user.uid;
@@ -72,13 +74,14 @@ export const firebaseRemoveRecipe = (id) => {
 
 
 
-
+// funktionen för att endast uppdatera redux state
 export const editRecipe = (id, update) => ({
     type: "EDIT_RECIPE",
     id,
     update
 });
 
+// funktion för att prata med firebase och senare updatera redux state.
 export const firebaseEditRecipe = (id, data) => {
     return (dispatch) => {
         const uid = store.getState().user.uid;
@@ -87,9 +90,10 @@ export const firebaseEditRecipe = (id, data) => {
             description: data.description,
             isVegetarian: data.isVegetarian,
             ingredients: data.ingredients ? data.ingredients.length : 0,
-            createdBy: uid,
             timestamp: new Date().getTime(),
+            createdBy: uid,
         }
+        console.log(update);
         return database.ref(`recipes/${id}`).set(update)
             .then(() => {
                 database.ref(`recipeOwner/${uid}`).update({ [id]: true });
@@ -108,26 +112,27 @@ export const firebaseEditRecipe = (id, data) => {
 
 
 
+// // funktionen för att uppdatera redux state
+// export const setRecipe = (expenses) => ({
+//     type: "SET_RECIPE",
+//     expenses
+// });
 
-export const setRecipe = (expenses) => ({
-    type: "SET_RECIPE",
-    expenses
-});
+// // funktion för att prata med firebase och senare updatera redux state.
+// export const firebaseSetRecipe = (expenses) => {
+//     return (dispatch) => {
+//         return database.ref("recipes").once("value")
+//             .then((snapshot) => {
+//                 const expenses = [];
 
-export const firebaseSetRecipe = (expenses) => {
-    return (dispatch) => {
-        return database.ref("recipes").once("value")
-            .then((snapshot) => {
-                const expenses = [];
+//                 snapshot.forEach((childSnapShot) => {
+//                     expenses.push({
+//                         id: childSnapShot.key,
+//                         ...childSnapShot.val()
+//                     })
+//                 });
 
-                snapshot.forEach((childSnapShot) => {
-                    expenses.push({
-                        id: childSnapShot.key,
-                        ...childSnapShot.val()
-                    })
-                });
-
-                dispatch(setRecipe(expenses));
-            });
-    }
-};
+//                 dispatch(setRecipe(expenses));
+//             });
+//     }
+// };

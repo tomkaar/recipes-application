@@ -2,88 +2,74 @@ import React from "react";
 import { connect } from 'react-redux';
 import { setTextFilter, setIsVegetarianFilter, sortByLatest, sortByOldest } from '../../actions/filters';
 
-class RecipeListFilters extends React.Component {
-
-    state = {
-        textField: this.props.filters.text || ""
+const RecipeListFilters = (props) => {
+    
+    const handleTextSubmitTwo = (e) => {
+        props.setTextFilter(e.target.value);
     }
 
-    handleTextChange = (e) => {
-        this.setState(() => ({ textField: this.textField.value }))
-    }
-    handleTextSubmit = (e) => {
-        this.props.setTextFilter(this.textField.value);
-    }
-    handleSortByChange = (e) => {
+    const handleSortByChange = (e) => {
         if (e.target.value === 'latest') {
-            this.props.sortByLatest();
+            props.sortByLatest();
         } else if (e.target.value === 'oldest') {
-            this.props.sortByOldest();
+            props.sortByOldest();
         }
     }
-    handleIsVegitarianChange = (e) => {
-        this.props.setIsVegetarianFilter(e.target.value);
+
+    const handleIsVegitarianChange = (e) => {
+        props.setIsVegetarianFilter(e.target.value);
     }
 
-    render() {
-        return(
-            <div className="RecipeListFilters">
-                <div className="wrapper">
-                    <div className="RecipeListFilters-section">
+    return(
+        <div className="RecipeListFilters">
+            <div className="wrapper">
+                <div className="RecipeListFilters-section">
+                    <input
+                        type="search"
+                        value={props.filters.text}
+                        onChange={handleTextSubmitTwo}
+                        ref={node => this.textField = node}
+                        placeholder="Search"
+                        autoFocus={true}
+                        className="Filters-Text-Input"
+                    />
+                    <select
+                        value={props.filters.sortBy}
+                        onChange={handleSortByChange}
+                    >
+                        <option value="latest">Latest</option>
+                        <option value="oldest">Oldest</option>
+                    </select>
+                </div>
+                <div className="RecipeListFilters-section">
+                    <label>
                         <input
-                            type="search"
-                            value={this.state.textField}
-                            onChange={this.handleTextChange}
-                            ref={node => this.textField = node}
-                            placeholder="Search"
-                            autoFocus={true}
-                            className="Filters-Text-Input"
-                        />
-                        <select
-                            value={this.props.filters.sortBy}
-                            onChange={this.handleSortByChange}
-                        >
-                            <option value="latest">Latest</option>
-                            <option value="oldest">Oldest</option>
-                        </select>
+                            type="radio"
+                            value="all"
+                            checked={props.filters.isVegetarian === "all"}
+                            onChange={handleIsVegitarianChange}
+                        /> All Recipes
+                    </label>
+                    <label>
                         <input
-                            type="button"
-                            name="submit"
-                            value="Search"
-                            className="Button"
-                            onClick={this.handleTextSubmit}
-                        />
-                    </div>
-                    <div className="RecipeListFilters-section">
-                        <label>
-                            <input
-                                type="radio"
-                                value="all"
-                                checked={this.props.filters.isVegetarian === "all"}
-                                onChange={this.handleIsVegitarianChange}
-                            /> All Recipes
-                        </label>
-                        <label>
-                            <input
-                                type="radio"
-                                value={"true"}
-                                checked={this.props.filters.isVegetarian === "true"}
-                                onChange={this.handleIsVegitarianChange}
-                            /> Vegetarian
-                    </label>
-                        <label>
-                            <input
-                                type="radio"
-                                value={"false"}
-                                checked={this.props.filters.isVegetarian === "false"}
-                                onChange={this.handleIsVegitarianChange}
-                            /> Not Vegetarian
-                    </label>
-                    </div>
+                            type="radio"
+                            value={"true"}
+                            checked={props.filters.isVegetarian === "true"}
+                            onChange={handleIsVegitarianChange}
+                        /> Vegetarian
+                </label>
+                    <label>
+                        <input
+                            type="radio"
+                            value={"false"}
+                            checked={props.filters.isVegetarian === "false"}
+                            onChange={handleIsVegitarianChange}
+                        /> Not Vegetarian
+                </label>
                 </div>
             </div>
-        )
-    }
+        </div>
+    )
 }
 
 const mapStateToProps = (state) => ({

@@ -1,6 +1,6 @@
-%Input {
+%Textarea {
     appearance: none;
-    padding: $s-size/2 $s-size/2 $s-size/2 $s-size;
+    padding: $s-size/2 $s-size*3 $s-size/2 $s-size;
     margin-top: $m-size;
     width: 100%;
     max-width: 100%;
@@ -19,6 +19,6 @@
     }
 }
 
-.Input {
-    @extend %Input;
+.Textarea {
+    @extend %Textarea;
 }

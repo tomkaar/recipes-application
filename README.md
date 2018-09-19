@@ -1,20 +1,22 @@
 # Recipe Application
 
-A application that allows a users to sign up and share their recipes. Written in **React**, **Redux** and **Firebase**.
+A application that allows a users to sign up and share their recipes. Written in **React**, **Redux** and connected to **Firebase**.
 
-`SASS Loader` was added to allow the use of the SASS, CSS extension language.
+`redux` används för att slippa passa data lika myket data mellan olika komponenter. För att kunna komma åt ex. användardata utan att behöva passa ner den mellan komponenter som egentligen inte behöver den. Gör det lättare att återanvända komponenter om de inte är lika beroende av varrandra. 
 
-`Redux Thunk` was added so I can use dispatch function inside the Redux action Reducer. Normally redux don't allow a function or promise to be used inside a action since the function has to be pure, Redux Thunk to get around that. 
+`SASS Loader` was added to allow the use of the SASS.
+
+`Redux Thunk` was added so I can use dispatch function inside the Redux action Reducer. Normally redux don't allow a function or promise to be used inside a action since the function has to be pure. This middleware allows me to use functions and other methods so I can connect to firebase and update the users state when the connection is done. 
 
 
 
 ## Folder Structure 
 
-**actions** - Functions to update update firebase and state
+**actions** - Functions used to update firebase and redux state
 **components** - All the components in the Application
 **firebase** - Setup Firebase
-**reducers** - All the reducers for Redux
-**routers** - React Router Paths and page components
+**reducers** - All the reducers for Redux, functions update the state on our users application
+**routers** - React Router Paths
 **selectors** - Functionality that are used
 **store** - Configurate and Setup Store to be used in Application
 **styles** - All CSS writen in SCSS
@@ -86,6 +88,130 @@ When happens when and how and why.
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+## How?
+
+Varje sida component har hand om att hämta data och att passa denna data till componenterna under. 
+
+
+
+
+
+# Structure
+
+Varje sida/ Page komponent tar hand om att hämta data och att passa denna data till componenterna under. 
+
+```
+App
+    Navigation
+	Messages
+	Router 
+		DashboardRecipePage
+			PageHeader
+			RecipeList
+				RecipeItem
+		SearchRecipePage
+			RecipeFiltersList
+			RecipeList
+				RecipeItem
+		EditRecipePage
+			PageHeader
+			RecipeForm
+		NewRecipePage
+			PageHeader
+			RecipeForm
+		LoginPage
+			LoginRegister
+				LoginForm
+				RegisterForm
+		
+```
+
+
+
+*DashboardPage*, *SearchRecipePage*, *EditRecipePage* tar hand om att hämta och uppdatera datan som skrivs ut av komponenterna på sidan. 
+
+
+
+
+
+
+
+
+
+
+
+### App
+
+Kopplar till Firebase och startar Redux Store. 
+
+
+
+### Router
+
+`/routers/router` importerar de olika sidorna/ komponenterna som existerar i Applikationen. Tar hand om att visa rätt sida beroende på nuvarande URL. Använder komponenten `RequireAuthentication` på de sidor som endast får besökas av registrerde användare ex. `/new` och `/edit`. 
+
+
+
+### Navigation
+
+Visas i toppen på alla sidan. 
+
+### Messages
+
+Visas på alla sidor. De små meddelandena som syns i högra nedre hörnet. Innehållet bestämms av innehållet i redux state.  
+
+
+
+### Dashboard Page
+
+Dashboard tar hand om att lyssna efter ändringar i databasen, detta görs mer listeners. På ComponentDidMount skapar vi listeners till databasen (*child_added*, *child_removed*, *child_changed*). När någon av dessa listeners tar emot data, pushas denna data till redux globala state och sidan uppdateras med den nya datan. `RecipeList` får data från Redux State och tar hand om att skriva ut det som finns där. Skriver endast ut de 10 sista. 
+
+
+
+### RecipeList
+
+Tar endast emot den data som ska skrivas ut och har inget state och är därför en stateless component. Om det inte finns någon data så säger den att den laddar, om det finns data så använder den `RecipeListItem` componenten. Används på både 
+
+### RecipeListItem
+
+Tar endast emot data och skriver ut det till sidan. Den är stateless då den inte hanterar något state. Den tar emot data som handlar om ett recept och skapar varje recept. Det kopplar till redux state som har hand om att hålla koll på om en användare är inloggad. Den använder användarens unika id (`uid`) och kollar om värdet är samma som personen som har skapat receptet. Om detta är sant kommer knappar för att Redigera och Updatera visas för användaren.
+
+### SearchListFilters
+
+En stateless komponent som tar sina props från redux state. Elementen som renderas användas för att updatera redux state. När redux state uppdateras, uppdateras de recipes som visas på sidan. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# QUESTION
+
+Recipe datan som hämtas av varje sidan delas inte av flera sidor och resettas varje gång man byter sida. Ska jag ta bort Redux state på de sidorna och bara använda det state som finns på sidans huvud komponent? Detta tar även bort användandet av connect på flera sidor vilket gör att koden känns lättare.
 
 
 

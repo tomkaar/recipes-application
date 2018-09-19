@@ -12,7 +12,10 @@ class EditRecepiePage extends React.Component {
 
     state = {
         id: this.props.location.pathname.split("/")[2] || "",
-        ingredients: []
+        ingredients: [],
+        readyMeta: false,
+        readyIngredients: false,
+        error: false
     }
 
     componentWillMount() {
@@ -23,15 +26,25 @@ class EditRecepiePage extends React.Component {
                         title: snapshot.val().title,
                         description: snapshot.val().description,
                         isVegetarian: snapshot.val().isVegetarian,
+                        readyMeta: true
                     }));
+                } else {
+                    this.setState(() => ({
+                        error: true
+                    }))
                 }
             })
         database.ref(`ingredients/${this.state.id}`).once("value")
             .then((snapshot) => {
                 if (snapshot.val() != null) {
                     this.setState(() => ({
-                        ingredients: snapshot.val()
+                        ingredients: snapshot.val(),
+                        readyIngredients: true
                     }));
+                } else {
+                    this.setState(() => ({
+                        error: true
+                    }))
                 }
             })
     }
@@ -45,10 +58,15 @@ class EditRecepiePage extends React.Component {
 
     render() {
         return(
-            <div>
-                <PageHeader title="Update Recipe" />
-                <RecipeForm recipeData={{ ...this.state }} onSubmit={this.onSubmit} />
-            </div>
+            (this.state.readyMeta && this.state.readyIngredients) ? (
+                <div>
+                    {console.log(this.state)}
+                    <PageHeader title="Update Recipe" />
+                    <RecipeForm recipeData={{ ...this.state }} onSubmit={this.onSubmit} />
+                </div>
+            ) : (
+                !this.state.error ? <h2>Loading..</h2> : <h2>Opps Someting went wrong</h2>
+            )
         )
     }
 };

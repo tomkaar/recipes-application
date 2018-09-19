@@ -18,7 +18,7 @@ class LoginForm extends React.Component {
     handleLoginSubmission = async (e) => {
         e.preventDefault();
         let login =  await Login(this.state.email, this.state.password);
-        login && this.props.history.push("/");
+        (login === true) && this.props.history.push("/");
     }
 
     render() {

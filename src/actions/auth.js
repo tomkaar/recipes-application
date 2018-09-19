@@ -30,7 +30,7 @@ export function Login(email, password) {
             .catch(error => {
                 store.dispatch(removeMessage(attemptMessage.payload.id));
                 store.dispatch(newMessage(error.message, "Error", 5000));
-                reject(false);
+                resolve(false);
             });
     }
 )};
