@@ -207,13 +207,3 @@ En stateless komponent som tar sina props från redux state. Elementen som rende
 
 
 
-
-
-# QUESTION
-
-Recipe datan som hämtas av varje sidan delas inte av flera sidor och resettas varje gång man byter sida. Ska jag ta bort Redux state på de sidorna och bara använda det state som finns på sidans huvud komponent? Detta tar även bort användandet av connect på flera sidor vilket gör att koden känns lättare.
-
-
-
-
-

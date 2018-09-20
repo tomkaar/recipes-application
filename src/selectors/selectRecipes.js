@@ -6,13 +6,13 @@ export default (expenses, { text, sortBy, isVegetarian }) => {
     })
     .sort((a, b) => {
         if(sortBy === "latest") {
-            return a.createdAt < b.createdAt ? 1 : -1;
+            return a.timestamp < b.timestamp ? -1 : 1;
         }
         else if (sortBy === "oldest") {
-            return a.createdAt < b.createdAt ? -1 : 1;
+            return a.timestamp < b.timestamp ? 1 : -1;
         }
         else {
-            return a.createdAt < b.createdAt ? 1 : -1;
+            return a.timestamp < b.timestamp ? -1 : 1;
         }
     });
 }

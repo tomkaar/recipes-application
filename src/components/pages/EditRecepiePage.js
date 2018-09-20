@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { database } from "../../firebase/Firebase";
-import { firebaseEditRecipe } from "../../actions/recipes";
+import { EditRecipeInFirebase } from "../../actions/recipes";
 
 import RecipeForm from "../recipes/RecipeForm";
 import PageHeader from "../layout/PageHeader";
@@ -18,7 +18,7 @@ class EditRecepiePage extends React.Component {
         error: false
     }
 
-    componentWillMount() {
+    componentDidMount() {
         database.ref(`recipes/${this.state.id}`).once("value")
             .then((snapshot) => {
                 if(snapshot.val() != null){
@@ -29,9 +29,7 @@ class EditRecepiePage extends React.Component {
                         readyMeta: true
                     }));
                 } else {
-                    this.setState(() => ({
-                        error: true
-                    }))
+                    this.setState(() => ({ error: true }))
                 }
             })
         database.ref(`ingredients/${this.state.id}`).once("value")
@@ -42,15 +40,13 @@ class EditRecepiePage extends React.Component {
                         readyIngredients: true
                     }));
                 } else {
-                    this.setState(() => ({
-                        error: true
-                    }))
+                    this.setState(() => ({ error: true }))
                 }
             })
     }
 
     onSubmit = (recipe) => {
-        this.props.editRecipe(this.state.id, recipe)
+        EditRecipeInFirebase(this.state.id, recipe)
             .then((res) => {
                 res && this.props.history.push('/');
             });
@@ -75,8 +71,4 @@ const mapStateToProps = (state) => ({
     user: state.user
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    editRecipe: (id, updates) => dispatch(firebaseEditRecipe(id, updates))
-});
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EditRecepiePage));
+export default withRouter(connect(mapStateToProps)(EditRecepiePage));

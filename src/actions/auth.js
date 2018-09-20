@@ -1,8 +1,5 @@
-// import { firebase } from "../firebase/firebase";
 import firebase from 'firebase/app'
-import 'firebase/app'
 import 'firebase/auth'
-import 'firebase/firestore'
 import store from "../store/store";
 import { newMessage, removeMessage } from './messages';
 

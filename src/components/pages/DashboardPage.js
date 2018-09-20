@@ -1,66 +1,87 @@
 import React from 'react';
-import { connect } from "react-redux";
+
+import store from "../../store/store";
+import { GetUserLikesFromFirebase } from "../../actions/recipes";
 
 import { database } from "../../firebase/Firebase";
-import { addRecipe, removeRecipe, editRecipe, clearRecipe } from '../../actions/recipes';
+import { AddRecipeToState, RemoveRecipeFromState, EditRecipeOnState } from "../../actions/recipes";
+import OrderByLatest from "../../selectors/orderByLatest";
 import RecipeList from "../recipes/RecipeList";
 import PageHeader from "../layout/PageHeader";
 
 class DashboardPage extends React.Component {
+
     state = {
-        ref: ""
+        firebaseRef: "",
+        newItems: false,
+        error: false,
+        errorMessage: "",
+        recipes: []
+    }
+
+    componentWillMount() {
+        const firebaseRef = database.ref("recipes");
+        this.setState(() => ({ firebaseRef }));
+
+        firebaseRef.limitToLast(10).once("value")
+            .then((snapshot) => {
+                const data = [];
+                for (const key in snapshot.val()) {
+                    data.push({
+                        ...snapshot.val()[key], id: key
+                    });
+                }
+                this.setState(() => ({
+                    recipes: data
+                }))
+            }).catch((error) => {
+                this.setState(() => ({
+                    error: true,
+                    errorMessage: error.message
+                }))
+            })
+
+        GetUserLikesFromFirebase(store.getState().user.uid);
     }
 
     componentDidMount() {
-        this.props.clearRecipes();
-
-        const ref = database.ref("recipes");
-        this.setState(() => ({ ref }));
-
-        ref.limitToLast(10)
+        this.state.firebaseRef
+            .limitToLast(10)
             .orderByChild("timestamp")
             .on("child_added", (snapshot) => {
-                this.props.addRecipe({ 
-                    ...snapshot.val(), id: snapshot.key
-                });
+                const data = { ...snapshot.val(), id: snapshot.key };
+                this.setState((prevState) => ({
+                    recipes: AddRecipeToState(prevState.recipes, data)
+                }))
             }).bind(this);
 
-        ref.on("child_removed", snapshot => {
-            this.props.removeRecipe(snapshot.key);
+
+        this.state.firebaseRef.on("child_removed", snapshot => {
+            this.setState((prevState) => ({
+                recipes: RemoveRecipeFromState(prevState.recipes, snapshot.key)
+            }))
         })
 
-        ref.on("child_changed", snapshot => {
+        this.state.firebaseRef.on("child_changed", snapshot => {
             const data = { ...snapshot.val(), id: snapshot.key };
-            this.props.editRecipe(snapshot.key, data);
+            this.setState((prevState) => ({
+                recipes: EditRecipeOnState(prevState.recipes, data)
+            }))
         })
     }
 
     componentWillUnmount() {
-        this.state.ref.off();
-        this.props.clearRecipes();
+        this.state.firebaseRef.off();
     }
 
     render() {
         return (
             <div className="DashboardPage">
-                <PageHeader title="Recently added" />
-                <RecipeList recipes={this.props.recipes.slice(-10)} />
+                <PageHeader title="Recently added" para="No Redux" />
+                <RecipeList recipes={OrderByLatest(this.state.recipes.slice(-10))} />
             </div>
         )
     }
 }
 
-// access current redux state
-const mapStateToProps = (state) => ({
-    recipes: state.recipes
-});
-
-// access redux actions to modify state
-const mapDispatchToProps = (dispatch) => ({
-    addRecipe: (recipe) => dispatch(addRecipe(recipe)),
-    editRecipe: (id, updated) => dispatch(editRecipe(id, updated)),
-    removeRecipe: (id) => dispatch(removeRecipe(id)),
-    clearRecipes: () => dispatch(clearRecipe())
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(DashboardPage);
+export default DashboardPage;

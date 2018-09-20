@@ -30,6 +30,9 @@
             color: $medium-grey;
         }
     }
+    .RecipeListItem-Buttons {
+        flex-shrink: 0;
+    }
 }
 .RecipeListItem-Content {
     width: 100%;

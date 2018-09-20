@@ -1,15 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { firebaseRemoveRecipe } from '../../actions/recipes';
+import { RemoveRecipeFromFirebase, AddLikeToFirebase, RemoveLikeFromFirebase } from '../../actions/recipes';
+import { UserHasLiked } from '../../actions/recipes';
 
 import Button from "../layout/NavButton";
 
 const RecipeListItem = (props) => { 
 
-    const { title, description, id, createdBy, timestamp, isVegetarian, ingredients, removeRecipe, user } = props;
+    const { title, description, id, createdBy, timestamp, isVegetarian, ingredients, user } = props;
     
-    const handleRemove = () => removeRecipe(id);
+    const handleRemove = () => RemoveRecipeFromFirebase(id);
+    const handleAddLike = () =>  AddLikeToFirebase(id);
+    const handleRemoveLike = () => RemoveLikeFromFirebase(id);
     const time = new Date(timestamp);
 
     return (
@@ -23,6 +26,13 @@ const RecipeListItem = (props) => {
                     </div>
                     
                     <div className="RecipeListItem-Buttons">
+                        {user.uid !== undefined && (
+                            UserHasLiked(id) ? (
+                                <button className="Button" onClick={handleRemoveLike}>UnLike</button>
+                            ) : (
+                                <button className="Button" onClick={handleAddLike}>Like</button>
+                            )
+                        )}
                         {user.uid === createdBy && (
                             <div>
                                 <button className="Button" onClick={handleRemove}>Remove</button>
@@ -58,11 +68,4 @@ const mapStateToProps = (state) => ({
     user: state.user
 });
 
-// access redux actions to modify state
-const mapDispatchToProps = (dispatch) => ({
-    removeRecipe: (id) => dispatch(firebaseRemoveRecipe(id))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(RecipeListItem);
-
-// tar emot data för att skriva ut info om receptet
+export default connect(mapStateToProps)(RecipeListItem);
