@@ -6,7 +6,7 @@ import store from "../store/store";
 
 // State modification
 // These are called from the firebase eventlisteners 
-// Used to modify the state and reduce common errors
+// Used to modify the state and rerrors such as duplicates
 
 // add recipe to state if the id does not already exist
 export const AddRecipeToState = (prevState, recipe) => {
@@ -36,8 +36,8 @@ export const EditRecipeOnState = (prevState, data) => {
 
 
 // Firebase modification
-// These functions update firebase
-// when firebase is updated, the eventlisteners will be triggered and update the application everywhere
+// These functions are used to update firebase
+// when firebase is updated, the eventlisteners will be triggered and update the application
 
 export const AddRecipeToFirebase = (data) => {
     const uid = store.getState().user.uid;
@@ -113,7 +113,10 @@ export const RemoveRecipeFromFirebase = (id) => {
 
 
 
-// Like Button
+// Like Button Firebase
+// AddLikeToFirebase and RemoveLikeFromFirebase are triggered when a user click a button
+// GetUserLikesFromFirebase are triggered when a page is loaded
+
 
 // Add Like
 export const AddLikeToFirebase = (recipe_id) => {
@@ -149,32 +152,11 @@ export const RemoveLikeFromFirebase = (recipe_id) => {
         });
 }
 
-
-
-
-
-
-
-// Likes
-// On page load -> Fetch recipes and store in state
-// When RecipeItem is loaded check if id exists in state
-
-const setLikes = (likes) => ({
-    type: "SET_LIKES", likes
-});
-
-const addLike = (id) => ({
-    type: "ADD_LIKE", id
-});
-
-const removeLike = (id) => ({
-    type: "REMOVE_LIKE", id
-});
-
+// Get All Likes from a User
 export function GetUserLikesFromFirebase(uid) {
     database.ref(`user_likes/${uid}`).once("value")
         .then((snapshot) => {
-            if(snapshot.val() !== null){
+            if (snapshot.val() !== null) {
                 const keys = Object.keys(snapshot.val());
                 store.dispatch(setLikes(keys));
                 return keys;
@@ -182,14 +164,37 @@ export function GetUserLikesFromFirebase(uid) {
         })
 }
 
-export function AddUserLikeToState(id) {
-    store.dispatch(addLike(id)); 
-}
 
-export function RemoveUserLikeFromState(id) {
+
+
+
+
+// 
+// Redux State modification
+// 
+
+// setLikes, addLike and removeLike are the redux actions used to update the state
+const setLikes = (likes) => ({
+    type: "SET_LIKES", likes
+});
+const addLike = (id) => ({
+    type: "ADD_LIKE", id
+});
+const removeLike = (id) => ({
+    type: "REMOVE_LIKE", id
+});
+
+// AddUserLikeToState and RemoveUserLikeFromState are called from the functions above 
+// (AddLikeToFirebase and RemoveLikeFromFirebase) to keep the state synced with firebase
+function AddUserLikeToState(id) {
+    store.dispatch(addLike(id));
+}
+function RemoveUserLikeFromState(id) {
     store.dispatch(removeLike(id));
 }
 
+// When a RecipeItem is loaded check if id exists in state
+// This will decide which button should be visible, (Like/ UnLike button)
 export function UserHasLiked(id) {
     const likes = store.getState().user.likes;
     const filter = likes.filter(like => like === id);

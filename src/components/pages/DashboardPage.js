@@ -12,40 +12,15 @@ import PageHeader from "../layout/PageHeader";
 class DashboardPage extends React.Component {
 
     state = {
-        firebaseRef: "",
-        newItems: false,
         error: false,
         errorMessage: "",
         recipes: []
     }
 
-    componentWillMount() {
-        const firebaseRef = database.ref("recipes");
-        this.setState(() => ({ firebaseRef }));
-
-        firebaseRef.limitToLast(10).once("value")
-            .then((snapshot) => {
-                const data = [];
-                for (const key in snapshot.val()) {
-                    data.push({
-                        ...snapshot.val()[key], id: key
-                    });
-                }
-                this.setState(() => ({
-                    recipes: data
-                }))
-            }).catch((error) => {
-                this.setState(() => ({
-                    error: true,
-                    errorMessage: error.message
-                }))
-            })
-
-        GetUserLikesFromFirebase(store.getState().user.uid);
-    }
-
     componentDidMount() {
-        this.state.firebaseRef
+        this.firebaseRef = database.ref("recipes");
+
+        this.firebaseRef
             .limitToLast(10)
             .orderByChild("timestamp")
             .on("child_added", (snapshot) => {
@@ -56,28 +31,30 @@ class DashboardPage extends React.Component {
             }).bind(this);
 
 
-        this.state.firebaseRef.on("child_removed", snapshot => {
+        this.firebaseRef.on("child_removed", snapshot => {
             this.setState((prevState) => ({
                 recipes: RemoveRecipeFromState(prevState.recipes, snapshot.key)
             }))
         })
 
-        this.state.firebaseRef.on("child_changed", snapshot => {
+        this.firebaseRef.on("child_changed", snapshot => {
             const data = { ...snapshot.val(), id: snapshot.key };
             this.setState((prevState) => ({
                 recipes: EditRecipeOnState(prevState.recipes, data)
             }))
         })
+
+        GetUserLikesFromFirebase(store.getState().user.uid);
     }
 
     componentWillUnmount() {
-        this.state.firebaseRef.off();
+        this.firebaseRef.off();
     }
 
     render() {
         return (
             <div className="DashboardPage">
-                <PageHeader title="Recently added" para="No Redux" />
+                <PageHeader title="Recently added" />
                 <RecipeList recipes={OrderByLatest(this.state.recipes.slice(-10))} />
             </div>
         )
