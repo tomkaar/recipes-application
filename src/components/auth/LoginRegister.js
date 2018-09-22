@@ -1,7 +1,9 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 
 import RegisterForm from "./RegisterForm";
 import LoginForm from "./LoginForm";
+import { SignUpWithGoogle } from "../../actions/auth";
 
 class LoginRegister extends React.Component {
 
@@ -14,6 +16,10 @@ class LoginRegister extends React.Component {
     }
     handleClickToDisplayRegister = () => {
         this.setState(() => ({ visible: "register" }));
+    }
+    handleGoogleSignIn = async () => {
+        const googleLoginRegister = await SignUpWithGoogle();
+        (googleLoginRegister === true) && this.props.history.push("/");
     }
 
     render() {
@@ -28,9 +34,15 @@ class LoginRegister extends React.Component {
                     {this.state.visible === "login" && <LoginForm />}
                     {this.state.visible === "register" && <RegisterForm />}
                 </div>
+                <div className="OtherSignInMethods">
+                    <div className="OtherSignInMethods-Google">
+                        <button onClick={this.handleGoogleSignIn}>Google</button>
+                    </div>
+                </div>
             </div>
         );
     }
 }
 
-export default LoginRegister;
+
+export default withRouter(LoginRegister);

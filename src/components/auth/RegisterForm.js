@@ -1,9 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
-import { firebase, database } from "../../firebase/Firebase";
-import { userLogin, userLogout } from '../../actions/auth';
-import { newMessage, removeMessage } from '../../actions/messages';
+import { RegisterWithEmail } from '../../actions/auth';
 
 class RegisterForm extends React.Component {
     state = {
@@ -11,27 +8,10 @@ class RegisterForm extends React.Component {
         password: ""
     }
 
-    handleSubmit = e => {
+    handleSubmit = async (e) => {
         e.preventDefault();
-        const attemptMessage = this.props.newMessage("Attempting to create an account", "Info");
-        firebase.auth()
-            .createUserWithEmailAndPassword(this.state.email, this.state.password)
-            .then((ref) => {
-                const key = ref.user.uid;
-                database.ref(`users/${key}`).set({
-                    uid: key,
-                    email: this.state.email
-                });
-            })
-            .then(() => {
-                this.props.removeMessage(attemptMessage.payload.id);
-                this.props.newMessage("You account has been successfully created", "Success", 5000);
-                this.props.history.push('/');
-            })
-            .catch(error => {
-                this.props.removeMessage(attemptMessage.payload.id);
-                this.props.newMessage(error.message, "Error", 5000);
-            });
+        const register = await RegisterWithEmail(this.state.email, this.state.password);
+        (register === true) && this.props.history.push("/");
     }
 
     handleInputChange = e => this.setState({ [e.target.name]: e.target.value });
@@ -72,14 +52,4 @@ class RegisterForm extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-    user: state.user
-});
-const mapDispatchToProps = (dispatch) => ({
-    userLogin: (user) => dispatch(userLogin(user)),
-    userLogout: () => dispatch(userLogout()),
-    newMessage: (message, type, time) => dispatch(newMessage(message, type, time)),
-    removeMessage: (id) => dispatch(removeMessage(id))
-});
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RegisterForm));
+export default withRouter(RegisterForm);

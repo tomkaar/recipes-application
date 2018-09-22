@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { userLogin, userLogout, Login } from '../../actions/auth';
+import { userLogin, userLogout, LoginWithEmail } from '../../actions/auth';
 import { newMessage, removeMessage } from '../../actions/messages';
 
 class LoginForm extends React.Component {
@@ -11,13 +11,11 @@ class LoginForm extends React.Component {
         password: ""
     }
 
-    componentDidMount() { this.setState(() => ({ toDashboard: false })); }
-    componentDidUnMount() { this.setState(() => ({ toDashboard: false })); }
     handleInputChange = e => this.setState({ [e.target.name]: e.target.value });
 
     handleLoginSubmission = async (e) => {
         e.preventDefault();
-        let login =  await Login(this.state.email, this.state.password);
+        let login = await LoginWithEmail(this.state.email, this.state.password);
         (login === true) && this.props.history.push("/");
     }
 

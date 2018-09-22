@@ -1,7 +1,6 @@
-import firebase from 'firebase/app'
-import 'firebase/auth'
 import store from "../store/store";
 import { newMessage, removeMessage } from './messages';
+import { firebase, database, googleAuthProvider } from "../firebase/Firebase";
 
 export const userLogin = (user) => ({
     type: "USER_LOGIN",
@@ -13,7 +12,7 @@ export const userLogout = () => ({
     user: ""
 });
 
-export function Login(email, password) {
+export function LoginWithEmail(email, password) {
     const attemptMessage = store.dispatch(newMessage("Attempting to login", "Info"));
     return new Promise(function (resolve, reject) {
         firebase.auth()
@@ -39,6 +38,52 @@ export function Logout() {
             store.dispatch(newMessage("You have successfully been logged out", "Success", 3000));
         })
         .catch(error => {
-            store.dispatch(newMessage(error.message, "Danger"));
+            store.dispatch(newMessage(error.message, "Error"));
         });
 }
+
+export function RegisterWithEmail(email, password) {
+    const attemptMessage = store.dispatch(newMessage("Attempting to login", "Info"));
+    return new Promise(function (resolve, reject) {
+        firebase.auth()
+            .createUserWithEmailAndPassword(email, password)
+            .then((ref) => {
+                const key = ref.user.uid;
+                database.ref(`users/${key}`).set({
+                    uid: key,
+                    email: email
+                });
+            })
+            .then(() => {
+                store.dispatch(removeMessage(attemptMessage.payload.id));
+                store.dispatch(newMessage("You account has been successfully created", "Success", 5000));
+                resolve(true);
+            })
+            .catch(error => {
+                store.dispatch(removeMessage(attemptMessage.payload.id));
+                store.dispatch(newMessage(error.message, "Error", 5000));
+                resolve(false);
+            });
+    })
+}
+
+export function SignUpWithGoogle() {
+    const attemptMessage = store.dispatch(newMessage("Attempting to login", "Info"));
+    return new Promise(function (resolve, reject) {
+        firebase.auth().signInWithPopup(googleAuthProvider).then(function (result) {
+            var user = result.user;
+            database.ref(`users/${user.uid}`).set({
+                uid: user.uid,
+                email: user.email
+            });
+            userLogin(user);
+            store.dispatch(removeMessage(attemptMessage.payload.id));
+            store.dispatch(newMessage("You have successfully logged in", "Success", 3000));
+            resolve(true);
+        }).catch(function (error) {
+            store.dispatch(removeMessage(attemptMessage.payload.id));
+            store.dispatch(newMessage(error.message, "Error"));
+            resolve(false);
+        });
+    }
+)}
