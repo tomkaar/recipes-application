@@ -10,6 +10,58 @@ A application that allows a users to sign up and share their recipes. Written in
 
 
 
+## Folder Structure 
+
+**actions** - Functions used to update Firebase and Redux state
+**components** - All the components in the Application
+**firebase** - Firebase Setup
+**reducers** - All the reducers for Redux, functions that update the state on our users application
+**routers** - React Router Paths
+**selectors** - Functionality that are used
+**store** - Configurate and setup Redux Store
+**styles** - All CSS writen in SCSS
+
+
+
+## Application Structure and Dataflow
+
+Varje sida/ Page komponent tar hand om att hämta data och att passa denna data till componenterna under. 
+
+```
+App
+    Navigation
+	Messages
+	Router 
+		DashboardRecipePage
+			PageHeader
+			RecipeList
+				RecipeItem
+		SearchRecipePage
+			RecipeListFilters
+			RecipeList
+				RecipeItem
+		EditRecipePage
+			PageHeader
+			RecipeForm
+		NewRecipePage
+			PageHeader
+			RecipeForm
+		LoginPage
+			LoginRegister
+				LoginForm
+				RegisterForm
+```
+
+
+
+`App` takes care of the essentials. initiating Firebase connection and checkes if a user is logged in as well as setting up the Redux Store, we use `Provider` to to make the store accessible to every component inside our app. We also check if the user is logged in and we add our styles to the application.
+
+React `Router` takes care of displaying each page, it looks at the current url and renders a component accordingly. 
+
+Each `page` component takes care of fetching and keeping the data relevant and updated for that page. This data will be saved in the page components state or in some cases Redux Store. This information will be passed down to the appropriate components that take care of the rendering to the screen.
+
+​	
+
 ## Database Structure
 
 ```
@@ -68,59 +120,7 @@ A application that allows a users to sign up and share their recipes. Written in
 
 
 
-## Folder Structure 
-
-**actions** - Functions used to update Firebase and Redux state
-**components** - All the components in the Application
-**firebase** - Firebase Setup
-**reducers** - All the reducers for Redux, functions that update the state on our users application
-**routers** - React Router Paths
-**selectors** - Functionality that are used
-**store** - Configurate and setup Redux Store
-**styles** - All CSS writen in SCSS
-
-
-
-## Application Structure and Dataflow
-
-Varje sida/ Page komponent tar hand om att hämta data och att passa denna data till componenterna under. 
-
-```
-App
-    Navigation
-	Messages
-	Router 
-		DashboardRecipePage
-			PageHeader
-			RecipeList
-				RecipeItem
-		SearchRecipePage
-			RecipeListFilters
-			RecipeList
-				RecipeItem
-		EditRecipePage
-			PageHeader
-			RecipeForm
-		NewRecipePage
-			PageHeader
-			RecipeForm
-		LoginPage
-			LoginRegister
-				LoginForm
-				RegisterForm
-```
-
-
-
-`App` takes care of the essentials. initiating Firebase connection and checkes if a user is logged in as well as setting up the Redux Store, we use `Provider` to to make the store accessible to every component inside our app. We also check if the user is logged in and we add our styles to the application.
-
-React `Router` takes care of displaying each page, it looks at the current url and renders a component accordingly. 
-
-Each `page` component takes care of fetching and keeping the data relevant and updated for that page. This data will be saved in the page components state or in some cases Redux Store. This information will be passed down to the appropriate components that take care of the rendering to the screen.
-
-
-
-## Functionality Flow
+## Functionality
 
 #### Visits the Dashboard Page
 
@@ -164,7 +164,7 @@ When A user click the Remove button on a Recipe Item it will fire the `RemoveRec
 
 #### Edit Recipe
 
-When a user click on the *Edit* button on a recipe it will direct you to
+When a user click on the *Edit* button on a recipe it will direct you to the URL `/edit/:id`. This page will look for the `:id` and fetch the recipe data and ingredients connected to that *recipe_id*. This data will be passed into the `RecipeForm` component together with the `onSubmit` function. 
 
 #### Like a Recipe
 
@@ -176,13 +176,15 @@ Fires the `RemoveLikeFromFirebase` function which is located in `src/actions/rec
 
 #### Comments on a Recipe
 
+
+
 #### Remove a Comment on a Recipe
 
 
 
 #### Interact with RecipeListFilters
 
-When you interact with the recipe filters, you will update the Redux State. You update the filters with the `RecipeListFilters` component. 
+When you interact with the recipe filters elements, you will update the Redux State, that's all. Then we can use the filter properties inside for example the `selectRecipes` function, this function takes two arguments, `recipes` and `filters`. This function will return only the recipes that match the filter, the recipes are sorted. 
 
 
 
