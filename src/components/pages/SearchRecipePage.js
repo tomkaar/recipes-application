@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { database } from "../../firebase/Firebase";
 
 import store from "../../store/store";
-import { GetUserLikesFromFirebase } from "../../actions/recipes";
+import { GetUserLikesFromFirebase, fetchAddRecipes, RemovedRecipes, ChangedRecipes } from "../../actions/recipes";
 
 import { AddRecipeToState, RemoveRecipeFromState, EditRecipeOnState } from "../../actions/recipes";
 import selectRecipes from "../../selectors/selectRecipes";
@@ -15,34 +15,29 @@ import withLoader from '../layout/withLoader';
 class SearchRecipePage extends React.Component {
 
     state = {
-        error: false,
         recipes: []
     }
 
     componentDidMount() {
         this.firebaseRef = database.ref("recipes");
         
-        this.firebaseRef
-            .on("child_added", (snapshot) => {
-                const data = { ...snapshot.val(), id: snapshot.key };
-                this.setState((prevState) => ({
-                    recipes: AddRecipeToState(prevState.recipes, data)
-                }))
-            }).bind(this);
-
-
-        this.firebaseRef.on("child_removed", snapshot => {
+        fetchAddRecipes(this.firebaseRef, recipe => {
             this.setState((prevState) => ({
-                recipes: RemoveRecipeFromState(prevState.recipes, snapshot.key)
+                recipes: AddRecipeToState(prevState.recipes, recipe)
             }))
-        })
+        });
 
-        this.firebaseRef.on("child_changed", snapshot => {
-            const data = { ...snapshot.val(), id: snapshot.key };
+        RemovedRecipes(this.firebaseRef, recipe => {
             this.setState((prevState) => ({
-                recipes: EditRecipeOnState(prevState.recipes, data)
+                recipes: RemoveRecipeFromState(prevState.recipes, recipe)
             }))
-        })
+        });
+
+        ChangedRecipes(this.firebaseRef, recipe => {
+            this.setState((prevState) => ({
+                recipes: EditRecipeOnState(prevState.recipes, recipe)
+            }))
+        });
 
         GetUserLikesFromFirebase(store.getState().user.uid);
     }

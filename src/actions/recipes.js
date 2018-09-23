@@ -201,3 +201,36 @@ export function UserHasLiked(id) {
     if (!Array.isArray(filter) || !filter.length) { return false; }
     else { return true; }
 }
+
+
+
+
+
+
+
+
+
+
+// Firebase Eventlisteners
+// Pass in the reference and use the functions to get the data
+
+export function fetchAddRecipes(ref, callback) {
+    ref.orderByChild("timestamp")
+        .on("child_added", (snapshot) => {
+            const data = { ...snapshot.val(), id: snapshot.key };
+            callback(data);
+        });
+};
+
+export function RemovedRecipes(ref, callback) {
+    ref.on("child_removed", snapshot => {
+            callback(snapshot.key);
+        });
+};
+
+export function ChangedRecipes(ref, callback) {
+    ref.on("child_changed", snapshot => {
+            const data = { ...snapshot.val(), id: snapshot.key };
+            callback(data);
+        })
+};
