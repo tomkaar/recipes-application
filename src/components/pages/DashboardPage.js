@@ -8,6 +8,7 @@ import { AddRecipeToState, RemoveRecipeFromState, EditRecipeOnState } from "../.
 import OrderByLatest from "../../selectors/orderByLatest";
 import RecipeList from "../recipes/RecipeList";
 import PageHeader from "../layout/PageHeader";
+import withLoader from '../layout/withLoader';
 
 class DashboardPage extends React.Component {
 
@@ -52,10 +53,14 @@ class DashboardPage extends React.Component {
     }
 
     render() {
+        const RecipeListWithLoader = withLoader(RecipeList);
         return (
             <div className="DashboardPage">
                 <PageHeader title="Recently added" />
-                <RecipeList recipes={OrderByLatest(this.state.recipes.slice(-10))} />
+                <RecipeListWithLoader 
+                    isLoading={this.state.recipes.length > 0} 
+                    recipes={OrderByLatest(this.state.recipes.slice(-10))}
+                />
             </div>
         )
     }
