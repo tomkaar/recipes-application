@@ -47,3 +47,32 @@
 .LoginRegister__Content {
     padding: 0 $l-size $l-size $l-size;
 }
+
+.OtherSignInMethods{
+    text-align: center;
+    background: $lighter-grey;
+
+    span{
+        display: block;
+        width: 100%;
+        padding: $s-size 0 0 0;
+        color: $medium-grey;
+        opacity: 0.6;
+    }
+
+    .GoogleAuthButton{
+        margin: $s-size 0 0 0;
+        -webkit-appearance: none;
+        width: 191px;
+        height: 46px;
+        border: none;
+        background: #4285F4;
+        color: transparent;
+        font-size: 1.6rem;
+        background: url("../img/GoogleAuthButton.png");
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

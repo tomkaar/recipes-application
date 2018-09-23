@@ -35,9 +35,10 @@ class LoginRegister extends React.Component {
                     {this.state.visible === "register" && <RegisterForm />}
                 </div>
                 <div className="OtherSignInMethods">
-                    <div className="OtherSignInMethods-Google">
-                        <button onClick={this.handleGoogleSignIn}>Google</button>
-                    </div>
+                    <span>or</span>
+                    <button className="GoogleAuthButton" onClick={this.handleGoogleSignIn}>
+                        Sign in with Google
+                    </button>
                 </div>
             </div>
         );
