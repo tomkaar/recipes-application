@@ -1,12 +1,12 @@
 import React from 'react';
-import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
 
 import { database } from "../../firebase/Firebase";
 import { EditRecipeInFirebase } from "../../actions/recipes";
 
 import RecipeForm from "../recipes/RecipeForm";
 import PageHeader from "../layout/PageHeader";
+
+import withLoader from '../layout/withLoader';
 
 class EditRecepiePage extends React.Component {
 
@@ -15,6 +15,7 @@ class EditRecepiePage extends React.Component {
         ingredients: [],
         readyMeta: false,
         readyIngredients: false,
+        readyInstructions: false,
         error: false
     }
 
@@ -43,6 +44,17 @@ class EditRecepiePage extends React.Component {
                     this.setState(() => ({ error: true }))
                 }
             })
+        database.ref(`instructions/${this.state.id}`).once("value")
+            .then((snapshot) => {
+                if (snapshot.val() != null) {
+                    this.setState(() => ({
+                        instructions: snapshot.val(),
+                        readyInstructions: true
+                    }));
+                } else {
+                    this.setState(() => ({ error: true }))
+                }
+            })
     }
 
     onSubmit = (recipe) => {
@@ -53,21 +65,18 @@ class EditRecepiePage extends React.Component {
     };
 
     render() {
+        const PageWithLoader = withLoader(RecipeForm);
         return(
-            (this.state.readyMeta && this.state.readyIngredients) ? (
-                <div>
-                    <PageHeader title="Update Recipe" />
-                    <RecipeForm recipeData={{ ...this.state }} onSubmit={this.onSubmit} />
-                </div>
-            ) : (
-                !this.state.error ? <h2>Loading..</h2> : <h2>Opps Someting went wrong</h2>
-            )
+            <div>
+                <PageHeader title="Update Recipe" />
+                <PageWithLoader
+                    isLoading={this.state.readyMeta && this.state.readyIngredients && this.state.readyInstructions}
+                    recipeData={{ ...this.state }}
+                    onSubmit={this.onSubmit}
+                />
+            </div>
         )
     }
 };
 
-const mapStateToProps = (state) => ({
-    user: state.user
-});
-
-export default withRouter(connect(mapStateToProps)(EditRecepiePage));
+export default EditRecepiePage;

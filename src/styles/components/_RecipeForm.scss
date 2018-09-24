@@ -4,56 +4,145 @@
     margin-top: $xl-size;
     width: 100%;
     max-width: 1200px;
-    border: 1px solid $light-grey;
     border-radius: 4px;
     overflow: hidden;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-evenly;
 }
 
-.RecipeForm-meta {
+    .RecipeForm-Sidebar{
+        width: 30%;
+    }
+    .RecipeForm-Content{
+        width: 70%;
+    }
+    .RecipeForm-Bottom{
+        padding: $m-size;
+        margin: 0 0 $xl-size*2 0;
+        width: 100%;
+        text-align: right;
+    }
+
+
+
+.RecipeForm-Meta{
+    width: 100%;
     padding: $m-size;
-    width: 45%;
-    float: left;
     background: white;
+    border-radius: 0.8rem;
+
+    h3{
+        font-size: 2rem;
+        margin: 0 0 $s-size 0;
+    }
+
+    label {
+        margin-top: 0;
+        margin-bottom: 2rem;
+        font-size: 1.6rem;
+        font-weight: normal;
+
+        input { margin-top: 0; }
+        textarea { margin-top: 0.2rem; }
+    }
 }
 
-.RecipeForm-ingredients {
+
+
+.RecipeForm-Ingredients {
+    width: 100%;
     padding: $m-size;
-    width: 45%;
-    float: left;
+    margin-top: $m-size;
     background: white;
+    border-radius: 0.8rem;
+
+    h3{
+        font-size: 2rem;
+        margin: 0 0 $s-size 0;
+    }
+
+    .RecipeForm-ingredients__ul{
+        margin: $m-size 0;
+    }
+
+    .RecipeForm-ingredients__item{
+        clear: both;
+        font-size: 1.6rem;
+        color: $medium-grey;
+    }
+
+    form {
+        margin-top: 2rem;
+        
+        input { padding: 0.6rem 0.6rem 0.6rem 0.6rem; }
+
+        .RecipeForm-ingredients__amount{
+            margin-top: 1rem;
+            width: 50%;
+        }
+        .RecipeForm-ingredients__Mesure{
+            margin-top: 1rem;
+            width: 50%;
+        }
+        .RecipeForm-ingredients__Ingredient{
+            margin-top: 1rem;
+            width: 71%;
+        }
+        .RecipeForm-ingredients__Button{
+            margin: 1rem 2% 0 2%;
+            padding: 0.6rem 0.6rem 0.6rem 0.6rem;
+            width: 25%;
+            height: 38px;
+            font-size: 1.6rem;
+        }
+    }
+}
+
+
+
+.RecipeForm-Content {
+    padding: $m-size;
+
+    h3{
+        font-size: 2rem;
+        margin: 0 0 $s-size 0;
+    }
+}
+
+.RecipeForm-Instruction {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    height: 100%;
 
-    form {
-        overflow: hidden;
+    .NoInstruction{
+        margin: $xl-size 0;
+        text-align: center;
     }
-}
 
-.RecipeForm-ingredients__item {
-    width: 100%;
-    padding: $s-size/2 0 0 $s-size;
-    font-size: $m-size*1.1;
+    .RecipeForm-instructions__item{
+        padding: 0.7rem 0;
 
-    button{
-        padding: 0;
-        width: 30px;
-        height: 30px;
-        margin-right: $s-size;
+        p{
+            font-size: 1.6rem;
+            color: $medium-grey;
+
+            span {
+                font-size: 2rem;
+                color: black;
+            }
+        }
     }
-}
 
-.RecipeForm-ingredients__amount,
-.RecipeForm-ingredients__Mesure,
-.RecipeForm-ingredients__Ingredient {
-    margin-top: 0;
-    width: 25%;
-    float: left;
-}
-.RecipeForm-ingredients__Button {
-    width: 18%;
-    float: left;
-    margin-left: 5%;
+    form{
+        display: flex;
+        width: 100%;
+        align-items: flex-end;
+        border-top: 1px solid darken($light-grey, 10%);
+
+        button {
+            margin: 0 1%;
+        }
+    }
 }

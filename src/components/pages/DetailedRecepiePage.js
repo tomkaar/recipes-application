@@ -25,6 +25,7 @@ class DetailedRecepiePage extends React.Component {
     }
 
     render() {
+        // const PageWithLoader = withLoader();
         return(
             (this.state.ready) ? (
                 <div className="wrapper">
@@ -40,7 +41,7 @@ class DetailedRecepiePage extends React.Component {
                             <h3>Ingredients</h3>
                             <ul>
                                 {this.state.ingredients.map((ingredient) => (
-                                    <li key={ingredient.uid}>
+                                    <li key={ingredient.id}>
                                         {`${ingredient.amount}${ingredient.measure} ${ingredient.text}`}
                                     </li>
                                 ))}

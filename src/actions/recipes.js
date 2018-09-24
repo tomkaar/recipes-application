@@ -46,6 +46,7 @@ export const AddRecipeToFirebase = (data) => {
         description: data.description,
         isVegetarian: data.isVegetarian,
         ingredients: data.ingredients ? data.ingredients.length : 0,
+        instructions: data.instructions ? data.instructions.length : 0,
         createdBy: uid,
         timestamp: new Date().getTime()
     };
@@ -54,6 +55,7 @@ export const AddRecipeToFirebase = (data) => {
             const key = snapshot.key;
             database.ref(`recipeOwner/${uid}/${key}`).set(true);
             database.ref(`ingredients/${snapshot.key}`).set(data.ingredients);
+            database.ref(`instructions/${snapshot.key}`).set(data.instructions);
             store.dispatch(newMessage("You have added a new recipe to the collection", "Success", 3000));
             return true;
         })
@@ -72,6 +74,7 @@ export const EditRecipeInFirebase = (id, data) => {
         description: data.description,
         isVegetarian: data.isVegetarian,
         ingredients: data.ingredients ? data.ingredients.length : 0,
+        instructions: data.instructions ? data.instructions.length : 0,
         timestamp: new Date().getTime(),
         createdBy: uid,
     }
@@ -79,6 +82,7 @@ export const EditRecipeInFirebase = (id, data) => {
     const updateObject = {};
     updateObject[`recipes/${id}`] = recipe;
     updateObject[`ingredients/${id}`] = data.ingredients;
+    updateObject[`instructions/${id}`] = data.instructions;
 
     return database.ref().update(updateObject)
         .then(() => {
@@ -98,6 +102,7 @@ export const RemoveRecipeFromFirebase = (id) => {
     return database.ref(`recipes/${id}`).remove()
         .then(() => {
             database.ref(`ingredients/${id}`).remove();
+            database.ref(`instructions/${id}`).remove();
             database.ref(`recipeOwner/${uid}/${id}`).remove();
             store.dispatch(newMessage("This recipe has been removed.", "Success", 3000));
             return true;
@@ -269,19 +274,19 @@ function GetRecipeIngredients(id) {
     });
 }
 
-
-
-
-// recipe Details Page
+function GetRecipeInstructions(id) {
+    return new Promise(function (resolve, reject) {
+        database.ref(`instructions/${id}`).once("value")
+            .then((snapshot) => {
+                resolve(snapshot.val());
+            });
+    });
+}
 
 // Get all info about a recipe
 export async function AllRecipeInfo(id) {
-
-    console.log(id);
-    
     const RecipeMeta = await GetRecipeMeta(id);
     const RecipeIngredients = await GetRecipeIngredients(id);
-
-    return {RecipeMeta, RecipeIngredients};
-
+    const RecipeInstructions = await GetRecipeInstructions(id);
+    return { RecipeMeta, RecipeIngredients, RecipeInstructions };
 }
