@@ -2,60 +2,38 @@ import React from 'react';
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { database } from "../../firebase/Firebase";
+import { AllRecipeInfo } from "../../actions/recipes";
 
 class DetailedRecepiePage extends React.Component {
 
     state = {
         id: this.props.location.pathname.split("/")[2] || "",
+        meta: {},
         ingredients: [],
-        readyOne: false,
-        readyTwo: false,
-        error: false
+        ready: false
     }
 
-    componentWillMount() {
-        database.ref(`recipes/${this.state.id}`).once("value")
-            .then((snapshot) => {
-                if(snapshot.val() != null){
-                    this.setState(() => ({
-                        title: snapshot.val().title,
-                        description: snapshot.val().description,
-                        time: new Date(snapshot.val().timestamp),
-                        isVegetarian: snapshot.val().isVegetarian,
-                        readyOne: true
-                    }));
-                } else {
-                    this.setState(() => ({
-                        error: true
-                    }))
-                }
-            })
-        database.ref(`ingredients/${this.state.id}`).once("value")
-            .then((snapshot) => {
-                if (snapshot.val() != null) {
-                    this.setState(() => ({
-                        ingredients: snapshot.val(),
-                        readyTwo: true
-                    }));
-                } else {
-                    this.setState(() => ({
-                        error: true
-                    }))
-                }
-            })
+    componentDidMount() {
+        AllRecipeInfo(this.state.id)
+            .then((res) => {
+                this.setState(() => ({
+                    meta: res.RecipeMeta,
+                    ingredients: res.RecipeIngredients,
+                    ready: true
+                }));
+            });
     }
 
     render() {
         return(
-            (this.state.readyOne && this.state.readyTwo) ? (
+            (this.state.ready) ? (
                 <div className="wrapper">
                     <div className="RecipeDetails-top">
-                        <h2>{this.state.title}</h2>
+                        <h2>{this.state.meta.title}</h2>
                     </div>
                     <div className="RecipeDetails-left">
-                        <p>{`${this.state.time.getDate()}/${this.state.time.getMonth()} - ${this.state.time.getFullYear()} ${this.state.time.getHours()}:${this.state.time.getMinutes()}`}</p>
-                        <p>{this.state.description}</p>
+                        <p>{`${this.state.meta.time.getDate()}/${this.state.meta.time.getMonth()} - ${this.state.meta.time.getFullYear()} ${this.state.meta.time.getHours()}:${this.state.meta.time.getMinutes()}`}</p>
+                        <p>{this.state.meta.description}</p>
                     </div>
                     <div className="RecipeDetails-right">
                         <div>

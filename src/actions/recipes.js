@@ -242,3 +242,46 @@ export function fetchRecipeDetails(callback) {
     // if both meta and ingredients are fetched, return data
     return true;
 }
+
+
+
+function GetRecipeMeta(id) {
+    return new Promise(function (resolve, reject) {
+        database.ref(`recipes/${id}`).once("value")
+            .then((snapshot) => {
+                resolve({
+                    title: snapshot.val().title,
+                    description: snapshot.val().description,
+                    time: new Date(snapshot.val().timestamp),
+                    isVegetarian: snapshot.val().isVegetarian,
+                    readyOne: true
+                });
+            });
+    });
+}
+
+function GetRecipeIngredients(id) {
+    return new Promise(function (resolve, reject) {
+        database.ref(`ingredients/${id}`).once("value")
+            .then((snapshot) => {
+                resolve(snapshot.val());
+            });
+    });
+}
+
+
+
+
+// recipe Details Page
+
+// Get all info about a recipe
+export async function AllRecipeInfo(id) {
+
+    console.log(id);
+    
+    const RecipeMeta = await GetRecipeMeta(id);
+    const RecipeIngredients = await GetRecipeIngredients(id);
+
+    return {RecipeMeta, RecipeIngredients};
+
+}
