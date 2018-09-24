@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import { newMessage } from '../../actions/messages';
 
 class RecipeForm extends React.Component {
 
@@ -19,12 +21,16 @@ class RecipeForm extends React.Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        this.props.onSubmit({
-            title: this.state.title,
-            description: this.state.description,
-            isVegetarian: this.state.isVegetarian,
-            ingredients: this.state.ingredients
-        });
+        if(this.state.ingredients.length < 1){
+            this.props.newMessage("You need to add at least one ingredient before submitting", "Error", 5000);
+        } else {
+            this.props.onSubmit({
+                title: this.state.title,
+                description: this.state.description,
+                isVegetarian: this.state.isVegetarian,
+                ingredients: this.state.ingredients
+            });
+        }
     }
 
     AddIngredient = (e) => {
@@ -134,4 +140,10 @@ class RecipeForm extends React.Component {
     }
 }
 
-export default RecipeForm;
+// export default RecipeForm;
+
+const mapDispatchToProps = (dispatch) => ({
+    newMessage: (message, type, time) => dispatch(newMessage(message, type, time))
+});
+
+export default connect(null, mapDispatchToProps)(RecipeForm);

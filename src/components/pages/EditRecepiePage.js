@@ -56,7 +56,6 @@ class EditRecepiePage extends React.Component {
         return(
             (this.state.readyMeta && this.state.readyIngredients) ? (
                 <div>
-                    {console.log(this.state)}
                     <PageHeader title="Update Recipe" />
                     <RecipeForm recipeData={{ ...this.state }} onSubmit={this.onSubmit} />
                 </div>

@@ -52,7 +52,7 @@ export const AddRecipeToFirebase = (data) => {
     return database.ref("recipes").push(recipe)
         .then((snapshot) => {
             const key = snapshot.key;
-            database.ref(`recipeOwner/${uid}`).update({ [key]: true });
+            database.ref(`recipeOwner/${uid}/${key}`).set(true);
             database.ref(`ingredients/${snapshot.key}`).set(data.ingredients);
             store.dispatch(newMessage("You have added a new recipe to the collection", "Success", 3000));
             return true;
@@ -234,3 +234,11 @@ export function ChangedRecipes(ref, callback) {
             callback(data);
         })
 };
+
+export function fetchRecipeDetails(callback) {
+    // fetch meta
+    // fetch ingredients 
+
+    // if both meta and ingredients are fetched, return data
+    return true;
+}
