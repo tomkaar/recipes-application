@@ -67,6 +67,7 @@
     }
 
     .RecipeForm-ingredients__item{
+        padding: 0 0 0 $m-size;
         clear: both;
         font-size: 1.6rem;
         color: $medium-grey;
@@ -79,18 +80,20 @@
 
         .RecipeForm-ingredients__amount{
             margin-top: 1rem;
-            width: 50%;
+            margin: 1rem 2% 0 0;
+            width: 48%;
         }
         .RecipeForm-ingredients__Mesure{
             margin-top: 1rem;
-            width: 50%;
+            margin: 1rem 0 0 2%;
+            width: 48%;
         }
         .RecipeForm-ingredients__Ingredient{
             margin-top: 1rem;
             width: 71%;
         }
         .RecipeForm-ingredients__Button{
-            margin: 1rem 2% 0 2%;
+            margin: 1rem 0 0 2%;
             padding: 0.6rem 0.6rem 0.6rem 0.6rem;
             width: 25%;
             height: 38px;
@@ -123,6 +126,7 @@
 
     .RecipeForm-instructions__item{
         padding: 0.7rem 0;
+        padding: 0.7rem 0 0.7rem $m-size;
 
         p{
             font-size: 1.6rem;

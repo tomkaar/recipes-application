@@ -8,7 +8,7 @@ import Button from "../layout/NavButton";
 
 const RecipeListItem = (props) => { 
 
-    const { title, description, id, createdBy, timestamp, isVegetarian, ingredients, user } = props;
+    const { title, description, id, createdBy, timestamp, isVegetarian, ingredients, instructions, user } = props;
     
     const handleRemove = () => RemoveRecipeFromFirebase(id);
     const handleAddLike = () =>  AddLikeToFirebase(id);
@@ -47,11 +47,16 @@ const RecipeListItem = (props) => {
                 </div>
 
                 <div className="RecipeListItem-ModifyBtns">
-                    <div>
+                    <div className="RecipeListItem-ModifyBtns-labels">
                         {isVegetarian && <label className="LabelButton">Vegetarian</label>}
                         {ingredients > 0 && 
                             <label className="LabelButton">
                                 {ingredients} {ingredients > 1 ? "Ingredients" : "Ingredient"}
+                            </label>
+                        }
+                        {instructions > 0 &&
+                            <label className="LabelButton">
+                                {instructions} {instructions > 1 ? "Steps" : "Step"}
                             </label>
                         }
                     </div>

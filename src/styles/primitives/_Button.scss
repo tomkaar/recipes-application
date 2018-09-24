@@ -7,9 +7,10 @@
     color: $medium-grey;
     text-decoration: none;
     background-color: #fff;
-    border: 1px solid $light-grey;
+    border: 1px solid #dbdbdb;
     border-radius: 50px;
     cursor: pointer;
+    transition: 0.2s ease-in-out;
 
     &.is_info {
         color: white;
@@ -33,7 +34,7 @@
     }
 
     &:hover{
-        box-shadow: 0 0px 20px rgba(10,10,10,.2);
+        box-shadow: 0 0px 15px rgba(10,10,10,.15);
     }
 }
 
