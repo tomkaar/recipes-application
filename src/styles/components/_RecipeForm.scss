@@ -43,6 +43,13 @@
         font-size: 1.6rem;
         font-weight: normal;
 
+        &.checkbox {
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            input { cursor: pointer; }
+            span{ padding: 0 0 0 1rem; }
+        }
+
         input { margin-top: 0; }
         textarea { margin-top: 0.2rem; }
     }
@@ -62,6 +69,10 @@
         margin: 0 0 $s-size 0;
     }
 
+    .NoIngredients{
+        text-align: center;
+    }
+
     .RecipeForm-ingredients__ul{
         margin: $m-size 0;
     }
@@ -75,25 +86,24 @@
 
     form {
         margin-top: 2rem;
+        border-top: 1px solid gainsboro;
         
         input { padding: 0.6rem 0.6rem 0.6rem 0.6rem; }
 
         .RecipeForm-ingredients__amount{
-            margin-top: 1rem;
-            margin: 1rem 2% 0 0;
+            margin: 1.6rem 2% 0 0;
             width: 48%;
         }
         .RecipeForm-ingredients__Mesure{
-            margin-top: 1rem;
-            margin: 1rem 0 0 2%;
+            margin: 1.6rem 0 0 2%;
             width: 48%;
         }
         .RecipeForm-ingredients__Ingredient{
-            margin-top: 1rem;
+            margin-top: 1.6rem;
             width: 71%;
         }
         .RecipeForm-ingredients__Button{
-            margin: 1rem 0 0 2%;
+            margin: 1.6rem 0 0 2%;
             padding: 0.6rem 0.6rem 0.6rem 0.6rem;
             width: 25%;
             height: 38px;
@@ -144,6 +154,10 @@
         width: 100%;
         align-items: flex-end;
         border-top: 1px solid darken($light-grey, 10%);
+
+        textarea {
+            height: 92px;
+        }
 
         button {
             margin: 0 1%;

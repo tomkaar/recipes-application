@@ -120,7 +120,7 @@ class RecipeForm extends React.Component {
                                 >
                                 </textarea>
                             </label>
-                            <label className="Label">
+                            <label className="Label checkbox">
                                 <input
                                     type="checkbox"
                                     checked={this.state.isVegetarian}
@@ -144,7 +144,7 @@ class RecipeForm extends React.Component {
                                 ))}
                             </div>
                         ) : (
-                            <p>No ingredients</p>
+                                <p className="NoIngredients">No ingredients</p>
                         )}
 
                         <form onSubmit={this.AddIngredient}>
@@ -196,8 +196,6 @@ class RecipeForm extends React.Component {
                             )}
                         </div>
 
-
-
                         <form onSubmit={this.AddInstruction}>
                             <textarea
                                 rows="3"
@@ -219,150 +217,10 @@ class RecipeForm extends React.Component {
                         onClick={this.onSubmit}
                     >Submit</button>
                 </div>
-
-
-                {/* <RecipeFormMeta 
-                    onSubmit={this.onSubmit} 
-                    handleInputChange={this.handleInputChange} 
-                    handleIsVegitarianChange={this.handleIsVegitarianChange} 
-                    state={ {
-                        title: this.state.title, 
-                        description: this.state.description,
-                        checkbox: this.state.isVegetarian
-                    }}
-                /> */}
-
-
-
-                {/* <form onSubmit={this.onSubmit} className="RecipeForm-meta">
-                    <label className="Label">
-                        Title: 
-                        <input
-                            type="text"
-                            name="title"
-                            placeholder="Title"
-                            autoFocus={true}
-                            value={this.state.title}
-                            onChange={this.handleInputChange}
-                            className="Input"
-                        />
-                    </label>
-                    <label className="Label">
-                        Description:
-                        <textarea
-                            placeholder="Description"
-                            name="description"
-                            value={this.state.description}
-                            onChange={this.handleInputChange}
-                            className="Textarea"
-                        >
-                        </textarea>
-                    </label>
-                    <label className="Label">
-                        <input
-                            type="checkbox"
-                            checked={this.state.isVegetarian}
-                            onChange={this.handleIsVegitarianChange}
-                        /> Is Vegetarian
-                    </label>
-                    <button type="submit" className="Button is_info">Submit</button>
-                </form>
-
-
-
-                <div className="RecipeForm-ingredients">
-                    {this.state.ingredients.length !== undefined ? (
-                        <div>
-                            <h3>Ingredients</h3>
-                            {this.state.ingredients.map(ingredient => (
-                                <div className="RecipeForm-ingredients__item" key={ingredient.id}>
-                                    <button
-                                        onClick={(e) => { this.removeIngredient(ingredient.id) }}
-                                        className="Button"
-                                    >X</button>
-                                    {ingredient.amount}{ingredient.measure} {ingredient.text}
-                                </div>
-                            ))}
-                        </div>
-                    ) : (
-                        <div>No Ingredients</div>
-                    )}
-
-                    <form onSubmit={this.AddIngredient}>
-                        <input 
-                            type="number" 
-                            placeholder="amount" 
-                            required 
-                            ref={node => this.ingredientAmount = node} 
-                            className="Input RecipeForm-ingredients__amount" />
-                        <input 
-                            type="text" 
-                            placeholder="Mesure" 
-                            required 
-                            ref={node => this.ingredientMeasure = node} 
-                            className="Input RecipeForm-ingredients__Mesure" />
-                        <input 
-                            type="text" 
-                            placeholder="Ingredient" 
-                            required 
-                            ref={node => this.ingredientText = node} 
-                            className="Input RecipeForm-ingredients__Ingredient" />
-                        <button type="submit" className="Button is_info RecipeForm-ingredients__Button">Add</button>
-                    </form>
-                </div>
-
-
-
-                <div className="RecipeForm-Instruction">
-
-                    {this.state.instructions.length !== undefined ? (
-                        <div>
-                            <h3>Instructions</h3>
-                            {this.state.instructions.map((instruction, index) => (
-                                <div className="RecipeForm-instructions__item" key={instruction.id}>
-
-                                    <button
-                                        onClick={(e) => { 
-                                            this.removeInstruction(instruction.id) 
-                                        }}
-                                        className="Button"
-                                    >X</button>
-
-                                    <p>{index + 1} - {instruction.text}</p>
-
-                                </div>
-                            ))}
-                        </div>
-                    ) : (
-                        <div>No instructions</div>
-                    )}
-
-
-
-                    <form onSubmit={this.AddInstruction}>
-                        <textarea 
-                            rows="3"
-                            required
-                            ref={node => this.instructionText = node}
-                            placeholder="Instruction"
-                            className="Input"
-                        >
-                        </textarea>
-                        <button type="submit" className="Button is_info">Add</button>
-                    </form>
-
-                </div> */}
-
-
-                
-
-
             </div>
         )
     }
 }
-
-// export default RecipeForm;
 
 const mapDispatchToProps = (dispatch) => ({
     newMessage: (message, type, time) => dispatch(newMessage(message, type, time))
