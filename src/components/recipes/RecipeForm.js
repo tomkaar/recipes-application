@@ -26,7 +26,11 @@ class RecipeForm extends React.Component {
         e.preventDefault();
         if(this.state.ingredients.length < 1){
             this.props.newMessage("You need to add at least one ingredient before submitting", "Error", 5000);
-        } else {
+        } 
+        else if (this.state.instructions.length < 1) {
+            this.props.newMessage("You need to add at least one instruction before submitting", "Error", 5000);
+        } 
+        else {
             this.props.onSubmit({
                 title: this.state.title,
                 description: this.state.description,

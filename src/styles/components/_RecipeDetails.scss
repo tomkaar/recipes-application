@@ -1,14 +1,62 @@
 .RecipeDetails-top {
     width: 100%;
     float: left;
+    margin: 10rem 0 7rem 0;
+    text-align: center;
+
+    h2 {
+        font-size: 6rem;
+        line-height: 1;
+    }
+    p {
+        font-size: 2rem;
+    }
 }
 
 .RecipeDetails-left {
-    width: 40%;
+    width: 30%;
     float: left;
+    padding: $s-size $xl-size;
+    border-right: 1px solid darken($light-grey, 10%);
 }
 
 .RecipeDetails-right {
-    width: 60%;
+    width: 70%;
     float: left;
+    padding: $m-size $xl-size;
+}
+
+
+
+.RecipeDetails-Meta__description{
+    padding: $s-size 0;
+    text-align: justify;
+}
+
+
+.RecipeDetails-Ingredients {
+    margin-top: 2rem;
+
+    ul {
+        padding: $s-size 0 $s-size $l-size;
+    }
+}
+
+
+.RecipeDetails-Instructions{
+    
+    ol {
+        padding: 0.7rem 0 0.7rem $m-size;
+
+        li {
+            padding: 0 0 $s-size 0;
+            color: $medium-grey;
+            font-size: 1.6rem;
+
+            span {
+                font-size: 2rem;
+                color: black;
+            }
+        }
+    }
 }

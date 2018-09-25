@@ -1,6 +1,5 @@
 import React from 'react';
 import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
 
 import { AllRecipeInfo } from "../../actions/recipes";
 
@@ -19,25 +18,26 @@ class DetailedRecepiePage extends React.Component {
                 this.setState(() => ({
                     meta: res.RecipeMeta,
                     ingredients: res.RecipeIngredients,
+                    instructions: res.RecipeInstructions,
                     ready: true
                 }));
             });
     }
 
     render() {
-        // const PageWithLoader = withLoader();
         return(
             (this.state.ready) ? (
                 <div className="wrapper">
                     <div className="RecipeDetails-top">
                         <h2>{this.state.meta.title}</h2>
+                        <p>{`${this.state.meta.time.getDate()}/${this.state.meta.time.getMonth()} - ${this.state.meta.time.getFullYear()} ${this.state.meta.time.getHours()}:${this.state.meta.time.getMinutes()}`}</p>
                     </div>
                     <div className="RecipeDetails-left">
-                        <p>{`${this.state.meta.time.getDate()}/${this.state.meta.time.getMonth()} - ${this.state.meta.time.getFullYear()} ${this.state.meta.time.getHours()}:${this.state.meta.time.getMinutes()}`}</p>
-                        <p>{this.state.meta.description}</p>
-                    </div>
-                    <div className="RecipeDetails-right">
-                        <div>
+                        <div className="RecipeDetails-Meta">
+                            <p className="RecipeDetails-Meta__description">{this.state.meta.description}</p>
+                            {this.state.meta.isVegetarian && <p className="RecipeDetails-Meta_vegetarian">Is Vegetarian</p>}
+                        </div>
+                        <div className="RecipeDetails-Ingredients">
                             <h3>Ingredients</h3>
                             <ul>
                                 {this.state.ingredients.map((ingredient) => (
@@ -46,19 +46,26 @@ class DetailedRecepiePage extends React.Component {
                                     </li>
                                 ))}
                             </ul>
-
+                        </div>
+                    </div>
+                    <div className="RecipeDetails-right">
+                        <div className="RecipeDetails-Instructions">
+                            <h3>Instructions</h3>
+                            <ol>
+                                {this.state.instructions.map((instruction, index) => (
+                                    <li key={instruction.id}>
+                                        {instruction.text}
+                                    </li>
+                                ))}
+                            </ol>
                         </div>
                     </div>
                 </div>
             ) : (
-                !this.state.error ? <h2>Loading..</h2> : <h2>Opps Someting went wrong</h2> 
+                <h2>Loading..</h2>
             )
         )
     }
 };
 
-const mapStateToProps = (state) => ({
-    user: state.user
-});
-
-export default withRouter(connect(mapStateToProps)(DetailedRecepiePage));
+export default withRouter(DetailedRecepiePage);
