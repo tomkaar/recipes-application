@@ -1,0 +1,29 @@
+%LikeButton {
+    display: inline-block;
+    -webkit-appearance: none; 
+    height: 40px;
+    width: 40px;
+    font-size: $m-size;
+    color: $medium-grey;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+
+    img {
+        width: 20px;
+        height: 20px;
+        padding: 0px;
+        margin: 4px 0 0 0;
+    }
+    
+    &:hover{
+        box-shadow: 0 0px 15px rgba(10,10,10,.15);
+    }
+}
+
+.LikeButton { 
+    @extend %LikeButton;
+}

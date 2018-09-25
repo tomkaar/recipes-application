@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { RemoveRecipeFromFirebase, AddLikeToFirebase, RemoveLikeFromFirebase } from '../../actions/recipes';
 import { UserHasLiked } from '../../actions/recipes';
+import LikeButton from "../layout/LikeButton";
 
 import Button from "../layout/NavButton";
+import CreatedByButtons from "../layout/CreatedByButtons";
 
 const RecipeListItem = (props) => { 
 
@@ -27,16 +29,18 @@ const RecipeListItem = (props) => {
                     
                     <div className="RecipeListItem-Buttons">
                         {user.uid !== undefined && (
-                            UserHasLiked(id) ? (
-                                <button className="Button" onClick={handleRemoveLike}>UnLike</button>
-                            ) : (
-                                <button className="Button" onClick={handleAddLike}>Like</button>
-                            )
+                            <LikeButton 
+                                hasLiked={UserHasLiked(id)}
+                                handleRemoveLike={handleRemoveLike}
+                                handleAddLike={handleAddLike}
+                             />
                         )}
                         {user.uid === createdBy && (
                             <div>
-                                <button className="Button" onClick={handleRemove}>Remove</button>
-                                <Button className="Button" url={`/edit/${id}`}>Edit</Button>
+                                <CreatedByButtons 
+                                    id={id}
+                                    handleRemove={handleRemove}
+                                />
                             </div>
                         )}
                     </div>
