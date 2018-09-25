@@ -56,6 +56,10 @@
     padding: 15px;
     border-top: 1px solid darken($light-grey, 10%);
 
+    .Button {
+        flex-shrink: 0;
+    }
+
     .RecipeListItem-ModifyBtns-labels{
         
 

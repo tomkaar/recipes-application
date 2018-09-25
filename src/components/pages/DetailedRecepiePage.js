@@ -35,7 +35,11 @@ class DetailedRecepiePage extends React.Component {
                     <div className="RecipeDetails-left">
                         <div className="RecipeDetails-Meta">
                             <p className="RecipeDetails-Meta__description">{this.state.meta.description}</p>
-                            {this.state.meta.isVegetarian && <p className="RecipeDetails-Meta_vegetarian">Is Vegetarian</p>}
+                            {this.state.meta.isVegetarian && (
+                                <p className="RecipeDetails-Meta_vegetarian">
+                                    <input type="checkbox" disabled checked={true} /> Is Vegetarian
+                                </p>
+                            )}
                         </div>
                         <div className="RecipeDetails-Ingredients">
                             <h3>Ingredients</h3>

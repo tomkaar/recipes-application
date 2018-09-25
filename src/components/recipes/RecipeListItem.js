@@ -26,7 +26,6 @@ const RecipeListItem = (props) => {
                         <Link to={`/recipe/${id}`}>{title}</Link>
                         <p>{`${time.getDate()}/${time.getMonth()} - ${time.getFullYear()} ${time.getHours()}:${time.getMinutes()}`}</p>
                     </div>
-                    
                     <div className="RecipeListItem-Buttons">
                         {user.uid !== undefined && (
                             <LikeButton 
@@ -36,12 +35,10 @@ const RecipeListItem = (props) => {
                              />
                         )}
                         {user.uid === createdBy && (
-                            <div>
-                                <CreatedByButtons 
-                                    id={id}
-                                    handleRemove={handleRemove}
-                                />
-                            </div>
+                            <CreatedByButtons 
+                                id={id}
+                                handleRemove={handleRemove}
+                            />
                         )}
                     </div>
                 </div>
