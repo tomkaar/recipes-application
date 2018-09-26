@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { RemoveRecipeFromFirebase, AddLikeToFirebase, RemoveLikeFromFirebase } from '../../actions/recipes';
 import { UserHasLiked } from '../../actions/recipes';
 import LikeButton from "../layout/LikeButton";
 
@@ -12,9 +11,6 @@ const RecipeListItem = (props) => {
 
     const { title, description, id, createdBy, timestamp, isVegetarian, ingredients, instructions, user } = props;
     
-    const handleRemove = () => RemoveRecipeFromFirebase(id);
-    const handleAddLike = () =>  AddLikeToFirebase(id);
-    const handleRemoveLike = () => RemoveLikeFromFirebase(id);
     const time = new Date(timestamp);
 
     return (
@@ -28,17 +24,10 @@ const RecipeListItem = (props) => {
                     </div>
                     <div className="RecipeListItem-Buttons">
                         {user.uid !== undefined && (
-                            <LikeButton 
-                                hasLiked={UserHasLiked(id)}
-                                handleRemoveLike={handleRemoveLike}
-                                handleAddLike={handleAddLike}
-                             />
+                            <LikeButton id={id} hasLiked={UserHasLiked(id)} />
                         )}
                         {user.uid === createdBy && (
-                            <CreatedByButtons 
-                                id={id}
-                                handleRemove={handleRemove}
-                            />
+                            <CreatedByButtons id={id} />
                         )}
                     </div>
                 </div>

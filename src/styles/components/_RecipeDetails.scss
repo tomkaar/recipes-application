@@ -7,6 +7,7 @@
     h2 {
         font-size: 6rem;
         line-height: 1;
+        color: $medium-grey;
     }
     p {
         font-size: 2rem;
@@ -34,16 +35,22 @@
 }
 
 
+
+
+
 .RecipeDetails-Ingredients {
     margin-top: 2rem;
 
-    ul {
-        padding: $s-size 0 $s-size $l-size;
-    }
+    h3{ color: $medium-grey; }
+    ul { padding: $s-size 0 $s-size $l-size; }
 }
 
 
 .RecipeDetails-Instructions{
+
+    h3{
+        color: $medium-grey;
+    }
     
     ol {
         padding: 0.7rem 0 0.7rem $m-size;

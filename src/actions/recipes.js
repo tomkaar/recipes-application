@@ -259,6 +259,7 @@ function GetRecipeMeta(id) {
                     description: snapshot.val().description,
                     time: new Date(snapshot.val().timestamp),
                     isVegetarian: snapshot.val().isVegetarian,
+                    createdBy: snapshot.val().createdBy,
                     readyOne: true
                 });
             });

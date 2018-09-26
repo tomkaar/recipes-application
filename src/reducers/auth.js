@@ -9,7 +9,8 @@ export default (state = userReducerDefaultState, action) => {
         case "USER_LOGIN":
             return { ...state, user: action.user, uid: action.user.uid };
         case "USER_LOGOUT":
-            return { ...state, user: "", uid: "" };
+            console.log("LOGGIN OUT");
+            return { user: "", uid: "none", likes: [] };
         case "SET_LIKES":
             return { ...state, likes: action.likes }
         case "ADD_LIKE":

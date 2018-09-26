@@ -1,7 +1,6 @@
 import React from 'react';
 
-import store from "../../store/store";
-import { GetUserLikesFromFirebase, fetchAddRecipes, RemovedRecipes, ChangedRecipes } from "../../actions/recipes";
+import { fetchAddRecipes, RemovedRecipes, ChangedRecipes } from "../../actions/recipes";
 
 import { database } from "../../firebase/Firebase";
 import { AddRecipeToState, RemoveRecipeFromState, EditRecipeOnState } from "../../actions/recipes";
@@ -36,8 +35,6 @@ class DashboardPage extends React.Component {
                 recipes: EditRecipeOnState(prevState.recipes, recipe)
             }))
         });
-        
-        GetUserLikesFromFirebase(store.getState().user.uid);
     }
 
     componentWillUnmount() {

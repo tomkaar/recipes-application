@@ -8,8 +8,7 @@ export const userLogin = (user) => ({
 });
 
 export const userLogout = () => ({
-    type: "USER_LOGIN",
-    user: ""
+    type: "USER_LOGOUT"
 });
 
 export function LoginWithEmail(email, password) {
@@ -34,7 +33,6 @@ export function LoginWithEmail(email, password) {
 export function Logout() {
     firebase.auth().signOut()
         .then(() => {
-            store.dispatch(userLogout());
             store.dispatch(newMessage("You have successfully been logged out", "Success", 3000));
         })
         .catch(error => {
