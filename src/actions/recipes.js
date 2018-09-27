@@ -291,3 +291,21 @@ export async function AllRecipeInfo(id) {
     const RecipeInstructions = await GetRecipeInstructions(id);
     return { RecipeMeta, RecipeIngredients, RecipeInstructions };
 }
+
+
+
+
+
+
+
+
+
+
+/*
+
+    CURRENT CONTENT IN THE FILE
+
+    State modificationa and firebase modification
+
+
+*/
