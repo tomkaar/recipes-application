@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from 'react-redux';
 import { setTextFilter, setIsVegetarianFilter, sortByLatest, sortByOldest } from '../../actions/filters';
+import Checkbox from '../layout/Checkbox';
 
 const RecipeListFilters = (props) => {
     
@@ -9,11 +10,7 @@ const RecipeListFilters = (props) => {
     }
 
     const handleSortByChange = (e) => {
-        if (e.target.value === 'latest') {
-            props.sortByLatest();
-        } else if (e.target.value === 'oldest') {
-            props.sortByOldest();
-        }
+        e.target.value === "latest" ? props.sortByLatest() : props.sortByOldest();
     }
 
     const handleIsVegitarianChange = (e) => {
@@ -23,6 +20,7 @@ const RecipeListFilters = (props) => {
     return(
         <div className="RecipeListFilters">
             <div className="wrapper">
+                <h2>Search</h2>
                 <div className="RecipeListFilters-section">
                     <input
                         type="search"
@@ -35,37 +33,33 @@ const RecipeListFilters = (props) => {
                     />
                     <select
                         value={props.filters.sortBy}
-                        onChange={handleSortByChange}
-                    >
+                        onChange={handleSortByChange} >
                         <option value="latest">Latest</option>
                         <option value="oldest">Oldest</option>
                     </select>
                 </div>
                 <div className="RecipeListFilters-section">
-                    <label>
-                        <input
-                            type="radio"
-                            value="all"
-                            checked={props.filters.isVegetarian === "all"}
-                            onChange={handleIsVegitarianChange}
-                        /> All Recipes
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            value={"true"}
-                            checked={props.filters.isVegetarian === "true"}
-                            onChange={handleIsVegitarianChange}
-                        /> Vegetarian
-                </label>
-                    <label>
-                        <input
-                            type="radio"
-                            value={"false"}
-                            checked={props.filters.isVegetarian === "false"}
-                            onChange={handleIsVegitarianChange}
-                        /> Not Vegetarian
-                </label>
+                    <Checkbox 
+                        text="All Recipes"
+                        value={"all"}
+                        checked={props.filters.isVegetarian === "all"}
+                        onChange={handleIsVegitarianChange} 
+                        color="white"
+                    />
+                    <Checkbox 
+                        text="Vegetarian"
+                        value={"true"}
+                        checked={props.filters.isVegetarian === "true"}
+                        onChange={handleIsVegitarianChange} 
+                        color="white"
+                    />
+                    <Checkbox 
+                        text="Not Vegetarian"
+                        value={"false"}
+                        checked={props.filters.isVegetarian === "false"}
+                        onChange={handleIsVegitarianChange} 
+                        color="white"
+                    />
                 </div>
             </div>
         </div>

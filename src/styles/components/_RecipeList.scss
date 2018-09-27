@@ -15,4 +15,10 @@
         width: 100%;
         text-align: center;
     }
+
+    .NoResult{
+        padding: $xl-size 0;
+        font-weight: normal;
+        font-size: $l-size;
+    }
 }
