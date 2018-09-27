@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { AddRecipeToFirebase } from "../../actions/recipes";
+import { AddRecipeToFirebase } from "../../firebase/recipes";
 
 import RecipeForm from "../recipes/RecipeForm";
 import PageHeader from "../layout/PageHeader";

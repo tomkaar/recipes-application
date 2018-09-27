@@ -8,7 +8,7 @@ import "./styles/styles.scss";
 import store from "./store/store";
 import { firebase } from "./firebase/Firebase";
 import { userLogin, userLogout } from "./actions/auth";
-import { GetUserLikesFromFirebase } from "./actions/recipes";
+import { GetUserLikesFromFirebase } from "./firebase/likes";
 
 import App from './App';
 import Loading from './components/layout/Loading';

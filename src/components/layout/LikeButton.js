@@ -1,5 +1,5 @@
 import React from "react";
-import { AddLikeToFirebase, RemoveLikeFromFirebase } from '../../actions/recipes';
+import { AddLikeToFirebase, RemoveLikeFromFirebase } from '../../firebase/likes';
 import UnLikeImg from "../../img/unliked.png";
 import LikeImg from "../../img/liked.png";
 

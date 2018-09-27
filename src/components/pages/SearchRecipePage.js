@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { database } from "../../firebase/Firebase";
 
 import store from "../../store/store";
-import { GetUserLikesFromFirebase, fetchAddRecipes, RemovedRecipes, ChangedRecipes } from "../../actions/recipes";
+import { fetchAddRecipes, RemovedRecipes, ChangedRecipes } from "../../firebase/recipes";
+import { GetUserLikesFromFirebase } from "../../firebase/likes";
 
 import { AddRecipeToState, RemoveRecipeFromState, EditRecipeOnState } from "../../actions/recipes";
 import selectRecipes from "../../selectors/selectRecipes";

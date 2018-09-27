@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { RegisterWithEmail } from '../../actions/auth';
+import { RegisterWithEmail } from '../../firebase/auth';
 
 class RegisterForm extends React.Component {
     state = {

@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux"
-import { Logout } from '../../actions/auth';
+import { Logout } from '../../firebase/auth';
 
 import Button from "./NavButton";
 

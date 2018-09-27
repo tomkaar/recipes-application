@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 
 import RegisterForm from "./RegisterForm";
 import LoginForm from "./LoginForm";
-import { SignUpWithGoogle } from "../../actions/auth";
+import { SignUpWithGoogle } from "../../firebase/auth";
 
 class LoginRegister extends React.Component {
 

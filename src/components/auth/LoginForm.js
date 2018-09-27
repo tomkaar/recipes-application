@@ -1,7 +1,8 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { userLogin, userLogout, LoginWithEmail } from '../../actions/auth';
+import { userLogin, userLogout } from '../../actions/auth';
+import { LoginWithEmail } from '../../firebase/auth';
 import { newMessage, removeMessage } from '../../actions/messages';
 
 class LoginForm extends React.Component {

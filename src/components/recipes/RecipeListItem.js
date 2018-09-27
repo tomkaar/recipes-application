@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { UserHasLiked } from '../../actions/recipes';
+import { UserHasLiked } from '../../firebase/likes';
 import LikeButton from "../layout/LikeButton";
 
 import Button from "../layout/NavButton";

@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "./NavButton";
-import { RemoveRecipeFromFirebase } from '../../actions/recipes';
+import { RemoveRecipeFromFirebase } from '../../firebase/recipes';
 
 const CreatedByButtons = (props) => {
 

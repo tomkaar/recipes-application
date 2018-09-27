@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { database } from "../../firebase/Firebase";
-import { fetchAddRecipes, RemovedRecipes, ChangedRecipes } from "../../actions/recipes";
+import { fetchAddRecipes, RemovedRecipes, ChangedRecipes } from "../../firebase/recipes";
 import { AddRecipeToState, RemoveRecipeFromState, EditRecipeOnState } from "../../actions/recipes";
 
 import OrderByLatest from "../../selectors/orderByLatest";
