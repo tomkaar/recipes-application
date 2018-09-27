@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from "react-router-dom";
 
-import withLoader from "../layout/withLoader";
+import WithLoaderTwo from "../layout/withLoader";
 import { AllRecipeInfo } from "../../actions/recipes";
 import RecipeDetails from "../recipes/RecipeDetails";
 
@@ -28,11 +28,10 @@ class DetailedRecepiePage extends React.Component {
     }
 
     render() {
-        const DetailedRecipePageWithLoader = withLoader(RecipeDetails);
         return(
-            <DetailedRecipePageWithLoader
-                isLoading={this.state.ready}
-                state={this.state} />
+            <WithLoaderTwo isLoading={this.state.ready}>
+                <RecipeDetails state={this.state} />
+            </WithLoaderTwo>
         )
     }
 };

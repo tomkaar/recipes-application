@@ -1,15 +1,13 @@
 import React from "react";
 
-const withLoader = (WrappedComponent) => {
-    return (props) => (
+const WithLoader = ({isLoading, children}) => {
+    return (
         <div>
-            {props.isLoading ? (
-                <WrappedComponent {...props} />
-            ) : (
-                <h2 className="Loading">Loading..</h2>
-            )}
+            {
+                isLoading ? children : <h2 className="Loading">Loading..</h2>
+            }
         </div>
     );
-};
+}
 
-export default withLoader;
+export default WithLoader;

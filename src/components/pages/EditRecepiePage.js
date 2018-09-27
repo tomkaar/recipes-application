@@ -6,7 +6,7 @@ import { EditRecipeInFirebase } from "../../actions/recipes";
 import RecipeForm from "../recipes/RecipeForm";
 import PageHeader from "../layout/PageHeader";
 
-import withLoader from '../layout/withLoader';
+import WithLoaderTwo from '../layout/withLoader';
 
 class EditRecepiePage extends React.Component {
 
@@ -65,15 +65,12 @@ class EditRecepiePage extends React.Component {
     };
 
     render() {
-        const PageWithLoader = withLoader(RecipeForm);
         return(
             <div>
                 <PageHeader title="Update Recipe" />
-                <PageWithLoader
-                    isLoading={this.state.readyMeta && this.state.readyIngredients && this.state.readyInstructions}
-                    recipeData={{ ...this.state }}
-                    onSubmit={this.onSubmit}
-                />
+                <WithLoaderTwo isLoading={this.state.readyMeta && this.state.readyIngredients && this.state.readyInstructions}>
+                    <RecipeForm recipeData={{ ...this.state }} onSubmit={this.onSubmit} />
+                </WithLoaderTwo>
             </div>
         )
     }

@@ -10,7 +10,7 @@ import selectRecipes from "../../selectors/selectRecipes";
 
 import RecipeListFilters from "../recipes/RecipeListFilters";
 import RecipeList from "../recipes/RecipeList";
-import withLoader from '../layout/withLoader';
+import WithLoaderTwo from '../layout/withLoader';
 
 class SearchRecipePage extends React.Component {
 
@@ -47,14 +47,12 @@ class SearchRecipePage extends React.Component {
     }
 
     render() {
-        const RecipeListWithLoader = withLoader(RecipeList);
         return (
             <div className="SearchRecipePage">
                 <RecipeListFilters />
-                <RecipeListWithLoader
-                    isLoading={this.state.recipes.length > 0}
-                    recipes={selectRecipes(this.state.recipes, this.props.filters)}
-                />
+                <WithLoaderTwo isLoading={this.state.recipes.length > 0}>
+                    <RecipeList recipes={selectRecipes(this.state.recipes, this.props.filters)} />
+                </WithLoaderTwo>
             </div>
         )
     }

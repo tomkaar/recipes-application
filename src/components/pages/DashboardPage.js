@@ -1,13 +1,15 @@
 import React from 'react';
 
-import { fetchAddRecipes, RemovedRecipes, ChangedRecipes } from "../../actions/recipes";
-
 import { database } from "../../firebase/Firebase";
+import { fetchAddRecipes, RemovedRecipes, ChangedRecipes } from "../../actions/recipes";
 import { AddRecipeToState, RemoveRecipeFromState, EditRecipeOnState } from "../../actions/recipes";
+
 import OrderByLatest from "../../selectors/orderByLatest";
+
 import RecipeList from "../recipes/RecipeList";
 import PageHeader from "../layout/PageHeader";
-import withLoader from '../layout/withLoader';
+
+import WithLoaderTwo from '../layout/withLoader';
 
 class DashboardPage extends React.Component {
 
@@ -42,15 +44,11 @@ class DashboardPage extends React.Component {
     }
 
     render() {
-        const RecipeListWithLoader = withLoader(RecipeList);
         return (
-            <div className="DashboardPage">
+            <WithLoaderTwo isLoading={this.state.recipes.length > 0} >
                 <PageHeader title="Recently added" />
-                <RecipeListWithLoader 
-                    isLoading={this.state.recipes.length > 0} 
-                    recipes={OrderByLatest(this.state.recipes.slice(-10))}
-                />
-            </div>
+                <RecipeList recipes={OrderByLatest(this.state.recipes.slice(-10))} />
+            </WithLoaderTwo>
         )
     }
 }
