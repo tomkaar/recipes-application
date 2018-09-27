@@ -23,7 +23,7 @@ const RecipeListItem = (props) => {
                         <p>{`${time.getDate()}/${time.getMonth()} - ${time.getFullYear()} ${time.getHours()}:${time.getMinutes()}`}</p>
                     </div>
                     <div className="RecipeListItem-Buttons">
-                        {user.uid !== undefined && (
+                        {user.loggedIn && (
                             <LikeButton id={id} hasLiked={UserHasLiked(id)} />
                         )}
                         {user.uid === createdBy && (

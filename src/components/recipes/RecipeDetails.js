@@ -33,7 +33,7 @@ class RecipeDetails extends React.Component {
                 </div>
                 <div className="RecipeDetails-left">
                     <div className="RecipeDetails-Buttons">
-                        {store.getState().user.uid !== undefined && (
+                        {store.getState().user.loggedIn && (
                             <LikeButton
                                 id={this.props.state.id}
                                 hasLiked={this.state.liked}

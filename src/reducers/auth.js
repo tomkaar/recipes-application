@@ -1,16 +1,17 @@
 const userReducerDefaultState = {
     user: "",
     uid: "",
-    likes: []
+    likes: [],
+    loggedIn: false
 };
 
 export default (state = userReducerDefaultState, action) => {
     switch (action.type) {
         case "USER_LOGIN":
-            return { ...state, user: action.user, uid: action.user.uid };
+            return { ...state, user: action.user, uid: action.user.uid, loggedIn: true };
         case "USER_LOGOUT":
             console.log("LOGGIN OUT");
-            return { user: "", uid: "none", likes: [] };
+            return { user: "", uid: "none", likes: [], loggedIn: false };
         case "SET_LIKES":
             return { ...state, likes: action.likes }
         case "ADD_LIKE":
