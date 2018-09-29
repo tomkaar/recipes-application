@@ -26,14 +26,6 @@ export const AddRecipeToFirebase = (data) => {
             database.ref(`recipeOwner/${uid}/${key}`).set(true);
             database.ref(`ingredients/${snapshot.key}`).set(data.ingredients);
             database.ref(`instructions/${snapshot.key}`).set(data.instructions);
-
-            // const updateObject = {};
-            // updateObject["recipeOwner/" + uid + "/" + key] = true;
-            // updateObject["ingredients/" + key] = data.ingredients;
-            // updateObject["instructions/" + key] = data.instructions;
-            // console.log(updateObject);
-            // database.ref().set(updateObject);
-
             store.dispatch(newMessage("You have added a new recipe to the collection", "Success", 3000));
             return true;
         })
@@ -117,8 +109,7 @@ export const RemoveRecipeFromFirebase = (id) => {
 // Pass in the reference and use the functions to get the data
 
 export function fetchAddRecipes(ref, callback) {
-    ref.orderByChild("timestamp")
-        .on("child_added", (snapshot) => {
+    ref.on("child_added", (snapshot) => {
             const data = { ...snapshot.val(), id: snapshot.key };
             callback(data);
         });

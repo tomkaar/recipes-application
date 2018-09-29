@@ -18,21 +18,21 @@ class DashboardPage extends React.Component {
     }
 
     componentDidMount() {
-        this.firebaseRef = database.ref("recipes").limitToLast(10);
+        this.firebaseRef = database.ref("recipes").orderByChild("timestamp").limitToLast(10);
 
-        fetchAddRecipes(this.firebaseRef, recipe => {
+        this.firebaseRefAdded = fetchAddRecipes(this.firebaseRef, recipe => {
             this.setState((prevState) => ({
                 recipes: AddRecipeToState(prevState.recipes, recipe)
             }))
         });
 
-        RemovedRecipes(this.firebaseRef, recipe => {
+        this.firebaseRefRemove = RemovedRecipes(this.firebaseRef, recipe => {
             this.setState((prevState) => ({
                 recipes: RemoveRecipeFromState(prevState.recipes, recipe)
             }))
         });
 
-        ChangedRecipes(this.firebaseRef, recipe => {
+        this.firebaseRefChanged = ChangedRecipes(this.firebaseRef, recipe => {
             this.setState((prevState) => ({
                 recipes: EditRecipeOnState(prevState.recipes, recipe)
             }))
