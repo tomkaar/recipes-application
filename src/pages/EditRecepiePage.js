@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { database } from "../../firebase/Firebase";
-import { EditRecipeInFirebase } from "../../firebase/recipes";
+import { database } from "../firebase/Firebase";
+import { EditRecipeInFirebase } from "../firebase/recipes";
 
-import RecipeForm from "../recipes/RecipeForm";
-import PageHeader from "../layout/PageHeader";
+import RecipeForm from "../components/recipes/RecipeForm";
+import PageHeader from "../components/layout/PageHeader";
 
-import WithLoaderTwo from '../layout/withLoader';
+import WithLoaderTwo from '../components/layout/withLoader';
 
 class EditRecepiePage extends React.Component {
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import Loginregister from "../auth/LoginRegister";
+import Loginregister from "../components/auth/LoginRegister";
 
 class DashboardPage extends React.Component {
 

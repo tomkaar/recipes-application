@@ -21,10 +21,19 @@ export const AddRecipeToFirebase = (data) => {
     };
     return database.ref("recipes").push(recipe)
         .then((snapshot) => {
+            const uid = store.getState().user.uid;
             const key = snapshot.key;
             database.ref(`recipeOwner/${uid}/${key}`).set(true);
             database.ref(`ingredients/${snapshot.key}`).set(data.ingredients);
             database.ref(`instructions/${snapshot.key}`).set(data.instructions);
+
+            // const updateObject = {};
+            // updateObject["recipeOwner/" + uid + "/" + key] = true;
+            // updateObject["ingredients/" + key] = data.ingredients;
+            // updateObject["instructions/" + key] = data.instructions;
+            // console.log(updateObject);
+            // database.ref().set(updateObject);
+
             store.dispatch(newMessage("You have added a new recipe to the collection", "Success", 3000));
             return true;
         })

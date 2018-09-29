@@ -6,12 +6,12 @@ import RequireAuthentication from "../components/auth/RequireAuthentication";
 import Messages from "../components/messages/Messages";
 import Navigation from "../components/layout/Navigation";
 
-import DashboardPage from "../components/pages/DashboardPage";
-import NewRecepiePage from "../components/pages/NewRecepiePage";
-import EditRecepiePage from "../components/pages/EditRecepiePage";
-import LoginPage from "../components/pages/LoginPage";
-import DetailedRecepiePage from "../components/pages/DetailedRecepiePage";
-import SearchRecipePage from "../components/pages/SearchRecipePage";
+import DashboardPage from "../pages/DashboardPage";
+import NewRecepiePage from "../pages/NewRecepiePage";
+import EditRecepiePage from "../pages/EditRecepiePage";
+import LoginPage from "../pages/LoginPage";
+import DetailedRecepiePage from "../pages/DetailedRecepiePage";
+import SearchRecipePage from "../pages/SearchRecipePage";
 
 const newRecipe = RequireAuthentication(NewRecepiePage, "");
 const editRecipe = RequireAuthentication(EditRecepiePage, "");

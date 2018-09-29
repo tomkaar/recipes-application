@@ -1,9 +1,9 @@
 import React from 'react';
 import { withRouter } from "react-router-dom";
 
-import WithLoaderTwo from "../layout/withLoader";
-import { AllRecipeInfo } from "../../firebase/recipes";
-import RecipeDetails from "../recipes/RecipeDetails";
+import WithLoaderTwo from "../components/layout/withLoader";
+import { AllRecipeInfo } from "../firebase/recipes";
+import RecipeDetails from "../components/recipes/RecipeDetails";
 
 class DetailedRecepiePage extends React.Component {
 

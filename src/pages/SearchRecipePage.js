@@ -1,17 +1,17 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { database } from "../../firebase/Firebase";
+import { database } from "../firebase/Firebase";
 
-import store from "../../store/store";
-import { fetchAddRecipes, RemovedRecipes, ChangedRecipes } from "../../firebase/recipes";
-import { GetUserLikesFromFirebase } from "../../firebase/likes";
+import store from "../store/store";
+import { fetchAddRecipes, RemovedRecipes, ChangedRecipes } from "../firebase/recipes";
+import { GetUserLikesFromFirebase } from "../firebase/likes";
 
-import { AddRecipeToState, RemoveRecipeFromState, EditRecipeOnState } from "../../actions/recipes";
-import selectRecipes from "../../selectors/selectRecipes";
+import { AddRecipeToState, RemoveRecipeFromState, EditRecipeOnState } from "../actions/recipes";
+import selectRecipes from "../selectors/selectRecipes";
 
-import RecipeListFilters from "../recipes/RecipeListFilters";
-import RecipeList from "../recipes/RecipeList";
-import WithLoaderTwo from '../layout/withLoader';
+import RecipeListFilters from "../components/recipes/RecipeListFilters";
+import RecipeList from "../components/recipes/RecipeList";
+import WithLoaderTwo from '../components/layout/withLoader';
 
 class SearchRecipePage extends React.Component {
 

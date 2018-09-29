@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { AddRecipeToFirebase } from "../../firebase/recipes";
+import { AddRecipeToFirebase } from "../firebase/recipes";
 
-import RecipeForm from "../recipes/RecipeForm";
-import PageHeader from "../layout/PageHeader";
+import RecipeForm from "../components/recipes/RecipeForm";
+import PageHeader from "../components/layout/PageHeader";
 
 const NewRecepiePage = (props) => {
     const onSubmit = (recipe) => {

@@ -1,15 +1,15 @@
 import React from 'react';
 
-import { database } from "../../firebase/Firebase";
-import { fetchAddRecipes, RemovedRecipes, ChangedRecipes } from "../../firebase/recipes";
-import { AddRecipeToState, RemoveRecipeFromState, EditRecipeOnState } from "../../actions/recipes";
+import { database } from "../firebase/Firebase";
+import { fetchAddRecipes, RemovedRecipes, ChangedRecipes } from "../firebase/recipes";
+import { AddRecipeToState, RemoveRecipeFromState, EditRecipeOnState } from "../actions/recipes";
 
-import OrderByLatest from "../../selectors/orderByLatest";
+import OrderByLatest from "./../selectors/orderByLatest";
 
-import RecipeList from "../recipes/RecipeList";
-import PageHeader from "../layout/PageHeader";
+import RecipeList from "../components/recipes/RecipeList";
+import PageHeader from "../components/layout/PageHeader";
 
-import WithLoaderTwo from '../layout/withLoader';
+import WithLoaderTwo from '../components/layout/withLoader';
 
 class DashboardPage extends React.Component {
 
