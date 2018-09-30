@@ -13,8 +13,6 @@ import { GetUserLikesFromFirebase } from "./firebase/likes";
 import App from './App';
 import Loading from './components/layout/Loading';
 
-store.subscribe(() => { console.log(store.getState()); });
-
 // use Provide to access store from every component inside app
 const app = (
     <Provider store={store}>
