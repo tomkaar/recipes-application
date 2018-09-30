@@ -1,0 +1,156 @@
+.navigation{
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    height: $NavigationHeight;
+    background: white;
+    border-bottom: 1px solid $light-grey;
+}
+
+.navigation__left {
+    float: left;
+}
+.navigation__right {
+    float: right;
+}
+
+.navbar-brand{
+    height: $NavigationHeight;
+    float: left;
+    margin-left: $l-size;
+    line-height: $NavigationHeight;
+    color: $medium-grey;
+    text-decoration: none;
+}
+
+.navbar-menu-wrapper {
+    margin-left: 3.2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .navbar-auth{
+        margin-top: 2.6rem;
+        margin-right: 2rem;
+    }
+}
+
+.navbar-menu-button{
+    display: none;
+}
+
+.navbar-menu{
+    height: $NavigationHeight;
+    margin-left: $l-size;
+    float: left;
+    
+    .navbar-item {
+        display: inline-block;
+        height: $NavigationHeight;
+        margin-left: $s-size;
+        padding: 0 $s-size;
+        line-height: $NavigationHeight;
+
+        color: $medium-grey;
+        text-decoration: none;
+
+        &.active {
+            color: darken($info, 20%);
+        }
+    }
+
+    .navbar-button {
+        margin-top: $m-size * 1.8;
+        margin-right: $m-size;
+    }
+}
+
+@media (max-width: 868px) {
+
+    .navbar-menu-button {
+        position: relative;
+        appearance: none;
+        -webkit-appearance: none;
+        display: block;
+        position: fixed;
+        top: 2.5rem;
+        right: 2rem;
+        width: 45px;
+        height: 45px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+
+        span {
+            display: block;
+            margin-left: 8px;
+            width: 30px;
+            height: 2px;
+            background: black;
+        }
+
+        &.active{
+            display: block;
+
+            span{
+                position: absolute;
+                margin-top: 2.1rem;
+            }
+
+            span:nth-child(1) {
+                transform: rotate(45deg);
+            }
+            span:nth-child(2) {
+                display: none;
+            }
+            span:nth-child(3) {
+                transform: rotate(-45deg);
+            }
+        }
+    }
+    
+    .navbar-menu-wrapper{
+        position: fixed;
+        z-index: 99;
+        flex-direction: column;
+        top: $NavigationHeight;
+        left: 0;
+        margin-left: 0;
+        width: 100%;
+        background: white;
+        max-height: 0px;
+        overflow: hidden;
+
+        &.active {
+            max-height: 2000px;
+        }
+
+        .navbar-menu{
+            float: none;
+            height: auto;
+            text-align: center;
+            margin-left: 0;
+            padding: $xl-size 0 $m-size 0;
+
+            .navbar-item {
+                display: block;
+                width: 100%;
+                height: auto;
+                line-height: 2;
+                margin-left: 0;
+                padding: 0;
+            }
+        }
+        .navbar-auth {
+            text-align: center;
+            margin-top: 0;
+            margin-right: 0;
+            padding: $s-size 0 $l-size 0;
+        }
+    }
+
+}

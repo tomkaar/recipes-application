@@ -67,3 +67,16 @@
         }
     }
 }
+
+
+
+@media (max-width: 868px) {
+    .RecipeDetails-left {
+        width: 100%;
+        border-bottom: 1px solid darken($light-grey, 10%);
+    }
+
+    .RecipeDetails-right {
+        width: 100%;
+    }
+}
