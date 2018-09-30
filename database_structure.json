@@ -1,0 +1,51 @@
+{
+    "users": {
+        "$uid": {
+            "uid": "string",
+            "email": "string"
+        }
+    },
+    "recipeOwners": {
+        "$uid": {
+            "$recipe_id": "boolean"
+        }
+    },
+    "recepies": {
+        "$recepie_id": {
+            "title": "string, index",
+            "desciption": "string",
+            "ingredients": "number",
+            "instructions": "number",
+            "createdBy": "userID",
+            "timestamp": "number, index",
+            "isVegetarian": "boolean"
+        }
+    },
+    "ingredients": {
+        "$recepie_id": {
+            "ingredient": {
+                "amount": "number",
+                "measure": "string",
+                "name": "string"
+            }
+        }
+    },
+    "instructions": {
+        "$recepie_id": {
+            "instruction": {
+                "order": "number",
+                "content": "string"
+            }
+        }
+    },
+    "user_likes": {
+        "$uid": {
+            "$recipe_id": "boolean"
+        }
+    },
+    "recipe_likes": {
+        "$recipe_id": {
+            "$uid": "boolean"
+        }
+    }
+}
