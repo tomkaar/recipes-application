@@ -12,13 +12,14 @@ class Header extends React.Component {
     }
 
     handleLogout = () => { Logout(); }
-    handleLoginNavigationButton = () => {
-        console.log("OK");
-    };
-
     toggleActive = () => {
         this.setState((prevState) => ({
             active: !prevState.active
+        }))
+    }
+    closeActive = () => {
+        this.setState(() => ({
+            active: false
         }))
     }
 
@@ -33,14 +34,14 @@ class Header extends React.Component {
                     </div>
                     <div className={`navbar-menu-wrapper ${this.state.active ? "active" : ""}`}>
                         <div className="navbar-menu">
-                            <NavLink exact activeClassName="active" className="navbar-item" to="/">Home</NavLink>
-                            <NavLink exact activeClassName="active" className="navbar-item" to="/search">Search</NavLink>
-                            {this.props.user.user && <NavLink activeClassName="active" className="navbar-item" to="/new">New</NavLink>}
+                            <NavLink exact activeClassName="active" className="navbar-item" to="/" onClick={this.closeActive}>Home</NavLink>
+                            <NavLink exact activeClassName="active" className="navbar-item" to="/search" onClick={this.closeActive}>Search</NavLink>
+                            {this.props.user.user && <NavLink activeClassName="active" className="navbar-item" to="/new" onClick={this.closeActive}>New</NavLink>}
                         </div>
                         <div className="navbar-auth">
                             {this.props.user.user ?
                                 <button onClick={this.handleLogout} className="Button navbar-button">Logout</button> :
-                                <Button url="/login">Login or Register</Button>
+                                <Button url="/login" onClick={this.closeActive}>Login or Register</Button>
                             }
                         </div>
                     </div>
