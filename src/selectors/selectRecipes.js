@@ -1,7 +1,7 @@
-export default (expenses, { text, sortBy, isVegetarian }) => {
-    return expenses.filter( (expense) => {
-        const textMatch = expense.title.toLowerCase().includes(text.toLowerCase());
-        const isVegetarianMatch = expense.isVegetarian.toString() === isVegetarian.toString() || isVegetarian.toString() === "all";
+export default (recipes, { text, sortBy, isVegetarian }) => {
+    return recipes.filter( (recipe) => {
+        const textMatch = recipe.title.toLowerCase().includes(text.toLowerCase());
+        const isVegetarianMatch = recipe.isVegetarian.toString() === isVegetarian.toString() || isVegetarian.toString() === "all";
         return textMatch && isVegetarianMatch;
     })
     .sort((a, b) => {

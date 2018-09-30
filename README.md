@@ -16,7 +16,11 @@ A application that allows a users to sign up and share their recipes. Written in
 
 **components** - All the components in the Application
 
-**firebase** - Firebase Setup
+**firebase** - Firebase Setup and actions
+
+**img** - Images
+
+**pages** - The Page components 
 
 **reducers** - All the reducers for Redux, functions that update the state on our users applicatio
 
@@ -73,9 +77,8 @@ Each `page` component takes care of fetching and keeping the data relevant and u
 {
     users: {
         $uid: {
-            firstName: string,
-            lastName string,
-            username: string
+            uid: string,
+            email string
         }
     },
     recipeOwners: {
@@ -88,6 +91,7 @@ Each `page` component takes care of fetching and keeping the data relevant and u
             title: string, index
             desciption: string,
             ingredients: number,
+            instructions: number,
             createdBy: userID,
             timestamp: number, index
             isVegetarian: boolean
@@ -116,7 +120,7 @@ Each `page` component takes care of fetching and keeping the data relevant and u
     	}
     },
     recipe_likes: {
-    	recipe_id: {
+		recipe_id: {
 			user_id: boolean
     	}
     }
